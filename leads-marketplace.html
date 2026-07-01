@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse Leads - BuyIASLeads Marketplace</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --navy-dark: #0f1419;
+            --navy-light: #1a1f2e;
+            --gold: #d4a574;
+            --gold-light: #e8c9a0;
+            --cyan-light: #e8f4f8;
+            --text-primary: #f5f7fa;
+            --text-secondary: #b8c5d6;
+            --border-color: rgba(212, 165, 116, 0.15);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: var(--text-primary);
+            background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy-light) 100%);
+            line-height: 1.6;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(45deg, transparent 48%, rgba(212, 165, 116, 0.03) 49%, rgba(212, 165, 116, 0.03) 51%, transparent 52%),
+                linear-gradient(-45deg, transparent 48%, rgba(212, 165, 116, 0.03) 49%, rgba(212, 165, 116, 0.03) 51%, transparent 52%);
+            background-size: 80px 80px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: linear-gradient(180deg, rgba(15, 20, 25, 0.95) 0%, rgba(15, 20, 25, 0.7) 100%);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 20px 0;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Crimson Text', serif;
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: var(--gold);
+            text-decoration: none;
+        }
+
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin: 0 25px;
+        }
+
+        nav a:hover {
+            color: var(--gold);
+        }
+
+        main {
+            position: relative;
+            z-index: 1;
+            padding-top: 120px;
+        }
+
+        .marketplace-header {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 40px;
+            text-align: center;
+        }
+
+        .marketplace-header h1 {
+            font-family: 'Crimson Text', serif;
+            font-size: 56px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .marketplace-header p {
+            font-size: 18px;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .filters {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            background: rgba(26, 31, 46, 0.3);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .filter-group label {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--gold);
+        }
+
+        .filter-group select {
+            background: rgba(15, 20, 25, 0.5);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 10px 12px;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .filter-group select:hover {
+            border-color: var(--gold);
+        }
+
+        .leads-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .lead-card {
+            background: linear-gradient(135deg, rgba(26, 31, 46, 0.6) 0%, rgba(15, 20, 25, 0.4) 100%);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .lead-card:hover {
+            border-color: var(--gold);
+            background: rgba(26, 31, 46, 0.9);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(212, 165, 116, 0.2);
+        }
+
+        .lead-badge {
+            display: inline-block;
+            background: rgba(212, 165, 116, 0.2);
+            border: 1px solid var(--border-color);
+            color: var(--gold);
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 15px;
+            width: fit-content;
+        }
+
+        .lead-card h3 {
+            font-family: 'Crimson Text', serif;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .lead-card p {
+            color: var(--text-secondary);
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            flex-grow: 1;
+        }
+
+        .lead-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 25px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-family: 'Crimson Text', serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--gold);
+        }
+
+        .stat-label {
+            font-size: 11px;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 4px;
+        }
+
+        .lead-price {
+            font-family: 'Crimson Text', serif;
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--gold);
+            margin-bottom: 20px;
+        }
+
+        .lead-card button {
+            background: var(--gold);
+            color: var(--navy-dark);
+            padding: 14px 24px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .lead-card button:hover {
+            background: var(--gold-light);
+            transform: scale(1.02);
+        }
+
+        footer {
+            background: rgba(15, 20, 25, 0.8);
+            border-top: 1px solid var(--border-color);
+            padding: 60px 40px;
+            margin-top: 100px;
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 13px;
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                padding: 0 20px;
+            }
+
+            .leads-grid {
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+
+            .marketplace-header {
+                padding: 40px 20px;
+            }
+
+            .marketplace-header h1 {
+                font-size: 36px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <a href="index.html" class="logo">BUYIASLEADS</a>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="index.html#how-it-works">How It Works</a>
+                <a href="index.html#testimonials">Testimonials</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="marketplace-header">
+            <h1>Indexed Annuity Lead <span style="color: var(--gold);">Marketplace</span></h1>
+            <p>Browse premium pre-qualified leads. Fresh prospects actively seeking indexed annuity solutions.</p>
+        </div>
+
+        <div class="filters">
+            <div class="filter-group">
+                <label>Lead Type</label>
+                <select>
+                    <option>All Types</option>
+                    <option>Fresh Leads</option>
+                    <option>Exclusive Leads</option>
+                    <option>Live Transfers</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>Quantity</label>
+                <select>
+                    <option>50 Leads</option>
+                    <option>100 Leads</option>
+                    <option>200 Leads</option>
+                    <option>500 Leads</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>Quality Score</label>
+                <select>
+                    <option>All Tiers</option>
+                    <option>90%+ Quality</option>
+                    <option>85%+ Quality</option>
+                    <option>80%+ Quality</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>Delivery Speed</label>
+                <select>
+                    <option>Any Speed</option>
+                    <option>Instant</option>
+                    <option>Within 24 Hours</option>
+                    <option>Within 48 Hours</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="leads-grid">
+            <!-- Fresh Leads Package -->
+            <div class="lead-card">
+                <div class="lead-badge">Fresh Leads</div>
+                <h3>Fresh Prospects</h3>
+                <p>200 newly-qualified prospects actively researching indexed annuity solutions. Real-time delivery to your CRM.</p>
+                <div class="lead-stats">
+                    <div class="stat">
+                        <div class="stat-value">92%</div>
+                        <div class="stat-label">Quality</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">68%</div>
+                        <div class="stat-label">Callback</div>
+                    </div>
+                </div>
+                <div class="lead-price">$2,000</div>
+                <button onclick="alert('Lead purchase flow would integrate with payment processor')">Purchase Now</button>
+            </div>
+
+            <!-- Exclusive Leads Package -->
+            <div class="lead-card">
+                <div class="lead-badge">Exclusive</div>
+                <h3>Exclusive Prospects</h3>
+                <p>50 hand-picked, exclusive leads. You're the only agent getting these prospects. Premium quality guaranteed.</p>
+                <div class="lead-stats">
+                    <div class="stat">
+                        <div class="stat-value">96%</div>
+                        <div class="stat-label">Quality</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">75%</div>
+                        <div class="stat-label">Callback</div>
+                    </div>
+                </div>
+                <div class="lead-price">$1,500</div>
+                <button onclick="alert('Lead purchase flow would integrate with payment processor')">Purchase Now</button>
+            </div>
+
+            <!-- Live Transfers Package -->
+            <div class="lead-card">
+                <div class="lead-badge">Live Transfer</div>
+                <h3>Live Transfer Calls</h3>
+                <p>30 live phone transfers. We warm-transfer qualified prospects directly to you. Close rates 82%+.</p>
+                <div class="lead-stats">
+                    <div class="stat">
+                        <div class="stat-value">99%</div>
+                        <div class="stat-label">Quality</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">82%</div>
+                        <div class="stat-label">Callback</div>
+                    </div>
+                </div>
+                <div class="lead-price">$3,000</div>
+                <button onclick="alert('Lead purchase flow would integrate with payment processor')">Purchase Now</button>
+            </div>
+
+            <!-- Shared Leads Package -->
+            <div class="lead-card">
+                <div class="lead-badge">Shared Leads</div>
+                <h3>Shared Lead Pool</h3>
+                <p>300 leads shared among agents. Larger volume, competitive pricing. First responder advantage.</p>
+                <div class="lead-stats">
+                    <div class="stat">
+                        <div class="stat-value">88%</div>
+                        <div class="stat-label">Quality</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">62%</div>
+                        <div class="stat-label">Callback</div>
+                    </div>
+                </div>
+                <div class="lead-price">$1,200</div>
+                <button onclick="alert('Lead purchase flow would integrate with payment processor')">Purchase Now</button>
+            </div>
+
+            <!-- Appointment Leads Package -->
+            <div class="lead-card">
+                <div class="lead-badge">Appointments</div>
+                <h3>Pre-Booked Appointments</h3>
+                <p>20 pre-scheduled consultation appointments. Prospects already committed. 90%+ show rate.</p>
+                <div class="lead-stats">
+                    <div class="stat">
+                        <div class="stat-value">97%</div>
+                        <div class="stat-label">Quality</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">90%</div>
+                        <div class="stat-label">Show Rate</div>
+                    </div>
+                </div>
+                <div class="lead-price">$2,800</div>
+                <button onclick="alert('Lead purchase flow would integrate with payment processor')">Purchase Now</button>
+            </div>
+
+            <!-- Inbound Leads Package -->
+            <div class="lead-card">
+                <div class="lead-badge">Inbound</div>
+                <h3>Inbound Inquiry Leads</h3>
+                <p>150 inbound prospects who actively requested information about indexed annuities. High intent.</p>
+                <div class="lead-stats">
+                    <div class="stat">
+                        <div class="stat-value">94%</div>
+                        <div class="stat-label">Quality</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">71%</div>
+                        <div class="stat-label">Callback</div>
+                    </div>
+                </div>
+                <div class="lead-price">$1,800</div>
+                <button onclick="alert('Lead purchase flow would integrate with payment processor')">Purchase Now</button>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 BuyIASLeads. Premium Indexed Annuity Lead Marketplace. All rights reserved.</p>
+    </footer>
+</body>
+</html>

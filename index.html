@@ -3,164 +3,678 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BuyIASLeads - Indexed Annuity Leads</title>
+    <title>BuyIASLeads - Premium Indexed Annuity Leads | Financial Professionals</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Georgia', 'Times New Roman', serif; line-height: 1.6; color: #c0dce8; background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%); }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-        header { display: flex; justify-content: space-between; align-items: center; padding: 25px 60px; background: rgba(10,10,10,0.95); border-bottom: 2px solid #c9a961; position: sticky; top: 0; z-index: 100; }
-        .logo { font-size: 18px; font-weight: 800; color: #c9a961; letter-spacing: 3px; }
-        nav { display: flex; gap: 50px; align-items: center; }
-        nav a { text-decoration: none; color: #c0dce8; font-size: 13px; font-weight: 600; transition: color 0.3s; }
-        nav a:hover { color: #c9a961; }
-        .order-btn { background: #c9a961; color: #0a0a0a; padding: 12px 28px; border-radius: 25px; text-decoration: none; font-size: 12px; font-weight: 700; transition: all 0.3s; border: none; cursor: pointer; }
-        .order-btn:hover { background: #dab857; transform: scale(1.05); }
+        :root {
+            --navy-dark: #0f1419;
+            --navy-light: #1a1f2e;
+            --gold: #d4a574;
+            --gold-light: #e8c9a0;
+            --cyan-light: #e8f4f8;
+            --text-primary: #f5f7fa;
+            --text-secondary: #b8c5d6;
+            --border-color: rgba(212, 165, 116, 0.15);
+        }
 
-        .tabs-section { padding: 40px 60px; border-bottom: 2px solid rgba(201,169,97,0.2); }
-        .tabs { display: flex; gap: 60px; }
-        .tab { font-size: 15px; font-weight: 700; color: #999; text-decoration: none; border-bottom: 3px solid transparent; padding-bottom: 12px; transition: all 0.3s; cursor: pointer; }
-        .tab:hover { color: #c0dce8; }
-        .tab.active { color: #c9a961; border-bottom-color: #c9a961; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: var(--text-primary);
+            background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy-light) 100%);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
 
-        .hero { max-width: 1200px; margin: 0 auto; padding: 100px 60px; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
-        .hero h1 { font-size: 54px; font-weight: 700; margin-bottom: 20px; line-height: 1.2; color: #fff; }
-        .hero h1 .gold { color: #c9a961; }
-        .hero p { font-size: 16px; color: #c0dce8; margin-bottom: 40px; line-height: 1.7; }
-        .hero-buttons { display: flex; gap: 20px; margin-bottom: 40px; }
-        .btn-gold { background: #c9a961; color: #0a0a0a; padding: 14px 32px; border: none; border-radius: 6px; font-size: 14px; font-weight: 700; text-transform: uppercase; cursor: pointer; transition: all 0.3s; }
-        .btn-gold:hover { background: #dab857; }
-        .btn-outline { background: transparent; color: #fff; border: 2px solid #c9a961; padding: 12px 30px; border-radius: 6px; font-size: 14px; font-weight: 700; cursor: pointer; transition: all 0.3s; }
-        .btn-outline:hover { background: rgba(201,169,97,0.1); }
-        .hero-right { display: flex; justify-content: center; }
-        .book-cover { width: 100%; max-width: 300px; box-shadow: 0 20px 60px rgba(0,0,0,0.6); border-radius: 8px; }
-        .hero-stats { font-size: 13px; color: #c0dce8; }
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(45deg, transparent 48%, rgba(212, 165, 116, 0.03) 49%, rgba(212, 165, 116, 0.03) 51%, transparent 52%),
+                linear-gradient(-45deg, transparent 48%, rgba(212, 165, 116, 0.03) 49%, rgba(212, 165, 116, 0.03) 51%, transparent 52%);
+            background-size: 80px 80px;
+            background-position: 0 0;
+            pointer-events: none;
+            z-index: 0;
+        }
 
-        section { max-width: 1200px; margin: 0 auto; padding: 80px 60px; }
-        h2 { font-size: 42px; font-weight: 700; margin-bottom: 50px; text-align: center; color: #c9a961; }
-        .process-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 40px; }
-        .card { background: rgba(26,26,26,0.8); padding: 40px; border-radius: 6px; text-align: center; transition: all 0.3s; border: 2px solid rgba(201,169,97,0.2); }
-        .card:hover { border-color: #c9a961; box-shadow: 0 8px 20px rgba(201,169,97,0.2); }
-        .step-num { width: 50px; height: 50px; background: #c9a961; color: #0a0a0a; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: 800; margin: 0 auto 20px; }
-        .card h3 { font-size: 22px; font-weight: 700; margin-bottom: 16px; color: #c9a961; }
-        .card p { font-size: 14px; color: #c0dce8; line-height: 1.7; }
-        .price { font-size: 36px; font-weight: 800; color: #c9a961; margin: 16px 0; }
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: linear-gradient(180deg, rgba(15, 20, 25, 0.95) 0%, rgba(15, 20, 25, 0.7) 100%);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 20px 0;
+        }
 
-        .email-form { background: rgba(201,169,97,0.1); padding: 60px; border-radius: 6px; max-width: 600px; margin: 60px auto; border: 2px solid #c9a961; }
-        .email-form h3 { color: #c9a961; margin-bottom: 20px; font-size: 24px; text-align: center; }
-        .form-group { margin-bottom: 20px; }
-        .form-group label { display: block; color: #c0dce8; margin-bottom: 8px; font-size: 13px; font-weight: 700; }
-        .form-group input { width: 100%; padding: 12px 16px; background: rgba(10,10,10,0.7); border: 1px solid #c9a961; color: #c0dce8; border-radius: 4px; font-size: 14px; }
-        .form-group input:focus { outline: none; border-color: #dab857; }
-        .form-submit { width: 100%; background: #c9a961; color: #0a0a0a; padding: 14px; border: none; border-radius: 4px; font-size: 14px; font-weight: 700; cursor: pointer; transition: all 0.3s; text-transform: uppercase; }
-        .form-submit:hover { background: #dab857; }
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-        .demo-section { padding: 100px 60px !important; text-align: center; background: rgba(26,26,26,0.8); }
-        .demo-section h2 { color: #c9a961; }
-        .demo-section p { font-size: 16px; color: #c0dce8; max-width: 600px; margin-left: auto; margin-right: auto; }
-        .demo-link { display: inline-block; background: #c9a961; color: #0a0a0a; padding: 14px 32px; border-radius: 6px; text-decoration: none; font-size: 14px; font-weight: 700; text-transform: uppercase; margin-top: 30px; transition: all 0.2s; }
-        .demo-link:hover { background: #dab857; }
+        .logo {
+            font-family: 'Crimson Text', serif;
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: var(--gold);
+        }
 
-        .cta-dark { background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%); color: white; text-align: center; padding: 100px 60px !important; }
-        .cta-dark h2 { color: #c9a961; }
-        .cta-dark p { color: #c0dce8; }
-        footer { background: #000; color: #999; text-align: center; padding: 40px 60px; font-size: 12px; border-top: 2px solid #c9a961; }
+        nav {
+            display: flex;
+            gap: 50px;
+            align-items: center;
+        }
 
-        @media (max-width: 1024px) { .hero { grid-template-columns: 1fr; } .process-grid { grid-template-columns: 1fr; } }
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        nav a:hover {
+            color: var(--gold);
+        }
+
+        .cta-button {
+            background: var(--gold);
+            color: var(--navy-dark);
+            padding: 12px 32px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            background: var(--gold-light);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(212, 165, 116, 0.2);
+        }
+
+        main {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 120px 40px 80px;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 900px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(212, 165, 116, 0.1);
+            border: 1px solid var(--border-color);
+            color: var(--gold);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        .hero h1 {
+            font-family: 'Crimson Text', serif;
+            font-size: 72px;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+
+        .hero h1 .highlight {
+            color: var(--gold);
+        }
+
+        .hero p {
+            font-size: 20px;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            line-height: 1.6;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 60px;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: var(--gold);
+            color: var(--navy-dark);
+            padding: 16px 48px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            background: var(--gold-light);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(212, 165, 116, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            padding: 16px 48px;
+            border: 2px solid var(--gold);
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(212, 165, 116, 0.1);
+            border-color: var(--gold-light);
+            color: var(--gold);
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: 'Crimson Text', serif;
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--gold);
+        }
+
+        .stat-label {
+            font-size: 13px;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 8px;
+        }
+
+        section {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 100px 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        section h2 {
+            font-family: 'Crimson Text', serif;
+            font-size: 56px;
+            font-weight: 700;
+            margin-bottom: 50px;
+            text-align: center;
+            letter-spacing: -1px;
+        }
+
+        section h2 .gold {
+            color: var(--gold);
+        }
+
+        .how-it-works {
+            background: linear-gradient(135deg, rgba(26, 31, 46, 0.5) 0%, rgba(15, 20, 25, 0.5) 100%);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .process-card {
+            background: rgba(26, 31, 46, 0.6);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 40px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .process-card:hover {
+            border-color: var(--gold);
+            background: rgba(26, 31, 46, 0.9);
+            transform: translateY(-5px);
+        }
+
+        .process-number {
+            width: 50px;
+            height: 50px;
+            background: var(--gold);
+            color: var(--navy-dark);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Crimson Text', serif;
+            font-size: 28px;
+            font-weight: 700;
+            margin: 0 auto 20px;
+        }
+
+        .process-card h3 {
+            font-family: 'Crimson Text', serif;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--text-primary);
+        }
+
+        .process-card p {
+            color: var(--text-secondary);
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        .quality-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .quality-card {
+            background: rgba(26, 31, 46, 0.4);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 35px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .quality-card:hover {
+            border-color: var(--gold);
+            background: rgba(26, 31, 46, 0.7);
+        }
+
+        .quality-metric {
+            font-family: 'Crimson Text', serif;
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--gold);
+            margin-bottom: 10px;
+        }
+
+        .quality-label {
+            font-size: 14px;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .testimonial-card {
+            background: rgba(26, 31, 46, 0.5);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 40px;
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-card:hover {
+            border-color: var(--gold);
+            background: rgba(26, 31, 46, 0.8);
+        }
+
+        .stars {
+            color: var(--gold);
+            font-size: 14px;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+        }
+
+        .testimonial-quote {
+            font-size: 16px;
+            color: var(--text-primary);
+            margin-bottom: 25px;
+            line-height: 1.7;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-top: 1px solid var(--border-color);
+            padding-top: 20px;
+        }
+
+        .author-avatar {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--navy-dark);
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .author-info h4 {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .author-info p {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .final-cta {
+            background: linear-gradient(135deg, rgba(212, 165, 116, 0.05) 0%, rgba(26, 31, 46, 0.4) 100%);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 80px 40px;
+            text-align: center;
+        }
+
+        .final-cta h2 {
+            margin-bottom: 20px;
+        }
+
+        .final-cta p {
+            font-size: 18px;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        footer {
+            background: rgba(15, 20, 25, 0.8);
+            border-top: 1px solid var(--border-color);
+            padding: 60px 40px;
+            margin-top: 100px;
+            position: relative;
+            z-index: 1;
+        }
+
+        footer h4 {
+            font-family: 'Crimson Text', serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--gold);
+            margin-bottom: 20px;
+        }
+
+        footer a {
+            display: block;
+            font-size: 14px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            margin-bottom: 12px;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: var(--gold);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--border-color);
+            padding-top: 40px;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 13px;
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                padding: 0 20px;
+            }
+
+            nav {
+                gap: 20px;
+            }
+
+            .hero {
+                padding: 100px 20px 60px;
+            }
+
+            .hero h1 {
+                font-size: 42px;
+            }
+
+            section {
+                padding: 60px 20px;
+            }
+
+            section h2 {
+                font-size: 36px;
+            }
+        }
     </style>
 </head>
 <body>
     <header>
-        <div class="logo">BUYIASLEADS</div>
-        <nav>
-            <a href="index.html">Get Started</a>
-            <a href="how-it-works.html">How It Works</a>
-            <a href="testimonials.html">Testimonials</a>
-            <button class="order-btn">Order Now</button>
-        </nav>
+        <div class="header-content">
+            <div class="logo">BUYIASLEADS</div>
+            <nav>
+                <a href="leads-marketplace.html">Browse Leads</a>
+                <a href="#how-it-works">How It Works</a>
+                <a href="#testimonials">Testimonials</a>
+                <button class="cta-button" onclick="document.querySelector('.btn-primary').click()">Get Started</button>
+            </nav>
+        </div>
     </header>
 
-    <div class="tabs-section">
-        <div class="tabs">
-            <a href="index.html" class="tab active">Get Started</a>
-            <a href="how-it-works.html" class="tab">How It Works</a>
-            <a href="testimonials.html" class="tab">Testimonials</a>
-        </div>
-    </div>
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <div class="hero-badge">Premium Lead Marketplace</div>
+                <h1>High-Quality <span class="highlight">Indexed Annuity Leads</span> — Delivered Instantly</h1>
+                <p>Access pre-qualified prospects actively seeking indexed annuity solutions. 92% lead quality. Real results.</p>
+                
+                <div class="hero-buttons">
+                    <a href="leads-marketplace.html" class="btn-primary">Browse Leads</a>
+                    <button class="btn-secondary" onclick="document.getElementById('how-it-works').scrollIntoView({behavior:'smooth'})">See How It Works</button>
+                </div>
 
-    <section class="hero">
-        <div>
-            <h1>Get <span class="gold">200 Qualified Leads</span> Instantly</h1>
-            <p>Pre-qualified prospects actively seeking indexed annuity solutions. Delivered instantly to your CRM.</p>
-            <div class="hero-buttons">
-                <button class="btn-gold">ORDER YOUR LEADS</button>
-                <button class="btn-outline">See How It Works</button>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <div class="stat-number">92%</div>
+                        <div class="stat-label">Lead Quality</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">68%</div>
+                        <div class="stat-label">Callback Rate</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">156+</div>
+                        <div class="stat-label">Deals Closed</div>
+                    </div>
+                </div>
             </div>
-            <div class="hero-stats">
-                ⭐⭐⭐⭐⭐ 156+ Deals Closed • 92% Lead Quality
-            </div>
-        </div>
-        <div class="hero-right">
-            <img src="https://indexedannuitysecrets.com/wp-content/uploads/bb-plugin/cache/GS_Indexed-Annuity-Secrets_cov-V6-1-1024x1536-portrait-95d2808fee5ab66ba6093beb3c91b2bb-reslguxz71hd.jpg" alt="Book" class="book-cover">
-        </div>
-    </section>
+        </section>
 
-    <section>
-        <h2>How It Works</h2>
-        <div class="process-grid">
-            <div class="card">
-                <div class="step-num">1</div>
-                <h3>Order Your Leads</h3>
-                <div class="price">$2,000</div>
-                <p>200 pre-qualified indexed annuity prospects. Instant CRM delivery.</p>
+        <section class="how-it-works" id="how-it-works">
+            <h2>How <span class="gold">It Works</span></h2>
+            <div class="process-grid">
+                <div class="process-card">
+                    <div class="process-number">1</div>
+                    <h3>Browse Leads</h3>
+                    <p>Explore our marketplace. Fresh leads, exclusive leads, live transfers. All pre-qualified and verified.</p>
+                </div>
+                <div class="process-card">
+                    <div class="process-number">2</div>
+                    <h3>Submit Onboarding</h3>
+                    <p>Complete your onboarding form and payment. We verify your credentials and set up your account.</p>
+                </div>
+                <div class="process-card">
+                    <div class="process-number">3</div>
+                    <h3>Receive Leads</h3>
+                    <p>Leads arrive in real-time. Download immediately or integrate directly with your CRM.</p>
+                </div>
             </div>
-            <div class="card">
-                <div class="step-num">2</div>
-                <h3>CRM Automation</h3>
-                <div class="price">$100/mo</div>
-                <p>Optional lead nurturing system. Automated follow-up sequences.</p>
-            </div>
-            <div class="card">
-                <div class="step-num">3</div>
-                <h3>Submit Your Onboarding Form and Pay</h3>
-                <p>Complete your onboarding form and payment. Your leads deliver within 24 hours.</p>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <section>
-        <h2>Get Exclusive Access</h2>
-        <form class="email-form" action="https://docs.google.com/forms/d/e/1FAIpQLSfKc9c_YOUR_FORM_ID_HERE/formResponse" method="POST" target="_self">
-            <h3>Join Our VIP List</h3>
-            <div class="form-group">
-                <label>Your Name *</label>
-                <input type="text" name="entry.YOUR_NAME_FIELD_ID" required>
+        <section>
+            <h2>Why Our <span class="gold">Leads Convert</span></h2>
+            <p style="color: var(--text-secondary); font-size: 18px; max-width: 700px; margin: 0 auto 50px; text-align: center;">We've invested $200K+ in precision targeting. Every lead is pre-qualified. Every prospect is genuinely interested.</p>
+            
+            <div class="quality-grid">
+                <div class="quality-card">
+                    <div class="quality-metric">$200K+</div>
+                    <div class="quality-label">Pixel Training</div>
+                </div>
+                <div class="quality-card">
+                    <div class="quality-metric">92%</div>
+                    <div class="quality-label">Qualified</div>
+                </div>
+                <div class="quality-card">
+                    <div class="quality-metric">&lt; 24hrs</div>
+                    <div class="quality-label">Delivery</div>
+                </div>
             </div>
-            <div class="form-group">
-                <label>Email Address *</label>
-                <input type="email" name="entry.YOUR_EMAIL_FIELD_ID" required>
-            </div>
-            <div class="form-group">
-                <label>Phone Number</label>
-                <input type="tel" name="entry.YOUR_PHONE_FIELD_ID">
-            </div>
-            <button type="submit" class="form-submit">Get Started</button>
-        </form>
-    </section>
+        </section>
 
-    <section class="demo-section">
-        <h2>Book a Demo Call</h2>
-        <p>See exactly how BuyIASLeads transforms your lead generation. Talk to one of our specialists about your specific needs.</p>
-        <a href="https://calendly.com/gregorystevensongfia/annuity-call" class="demo-link">SCHEDULE YOUR CALL</a>
-    </section>
+        <section id="testimonials">
+            <h2>Trusted by <span class="gold">156+ Professionals</span></h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="testimonial-quote">"Closed 24 deals in the first month. These aren't tire-kickers—they're actual prospects."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">JM</div>
+                        <div class="author-info">
+                            <h4>James Martinez</h4>
+                            <p>Annuity Specialist</p>
+                        </div>
+                    </div>
+                </div>
 
-    <section class="cta-dark">
-        <h2>Ready to Scale Your Annuity Business?</h2>
-        <p>Join 156+ agents already closing deals with our pre-qualified leads</p>
-        <button class="order-btn" style="margin-top: 30px;">ORDER NOW</button>
-    </section>
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="testimonial-quote">"92% of their leads were genuinely interested. Best investment for my practice."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">LS</div>
+                        <div class="author-info">
+                            <h4>Linda Stewart</h4>
+                            <p>Insurance Broker</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="testimonial-quote">"Precision targeting is unmatched. My CRM is constantly full of real opportunities."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">RC</div>
+                        <div class="author-info">
+                            <h4>Robert Chen</h4>
+                            <p>Independent Agent</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="final-cta">
+            <h2>Ready to Scale Your <span class="gold">Lead Generation</span>?</h2>
+            <p>Join 156+ financial professionals closing more deals this week.</p>
+            <a href="leads-marketplace.html" class="btn-primary">Start Browsing Leads</a>
+        </section>
+    </main>
 
     <footer>
-        <p>&copy; 2026 BuyIASLeads. All rights reserved. | Powered by Gregory Stevenson</p>
+        <div style="max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 50px; margin-bottom: 50px;">
+            <div>
+                <h4>Product</h4>
+                <a href="leads-marketplace.html">Browse Leads</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#features">Features</a>
+            </div>
+            <div>
+                <h4>Company</h4>
+                <a href="#about">About</a>
+                <a href="#blog">Blog</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <div>
+                <h4>Legal</h4>
+                <a href="#privacy">Privacy</a>
+                <a href="#terms">Terms</a>
+                <a href="#support">Support</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 BuyIASLeads. Premium Indexed Annuity Lead Marketplace.</p>
+        </div>
     </footer>
 </body>
 </html>
