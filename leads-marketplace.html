@@ -244,7 +244,7 @@
 
         .lead-price {
             font-family: 'Crimson Text', serif;
-            font-size: 32px;
+            font-size: 48px;
             font-weight: 700;
             color: var(--gold);
             margin-bottom: 20px;
@@ -331,15 +331,6 @@
                 </select>
             </div>
             <div class="filter-group">
-                <label>Quantity</label>
-                <select>
-                    <option>50 Leads</option>
-                    <option>100 Leads</option>
-                    <option>200 Leads</option>
-                    <option>500 Leads</option>
-                </select>
-            </div>
-            <div class="filter-group">
                 <label>Quality Score</label>
                 <select>
                     <option>All Tiers</option>
@@ -360,11 +351,11 @@
         </div>
 
         <div class="leads-grid">
-            <!-- Fresh Leads Package -->
+            <!-- 100 Leads Package -->
             <div class="lead-card">
                 <div class="lead-badge">Fresh Leads</div>
-                <h3>Fresh Prospects</h3>
-                <p>200 newly-qualified prospects actively researching indexed annuity solutions. Real-time delivery to your CRM.</p>
+                <h3>100 Qualified Leads</h3>
+                <p>100 newly-qualified prospects actively researching indexed annuity solutions. Real-time delivery to your CRM.</p>
                 <div class="lead-stats">
                     <div class="stat">
                         <div class="stat-value">92%</div>
@@ -376,14 +367,52 @@
                     </div>
                 </div>
                 <div class="lead-price">$2,000</div>
-                <button onclick="alert('Lead purchase flow would integrate with payment processor')">Purchase Now</button>
+                <button onclick="alert('Purchase flow would integrate with payment processor')">Purchase Now</button>
             </div>
 
-            <!-- Exclusive Leads Package -->
+            <!-- 200 Leads Package -->
             <div class="lead-card">
-                <div class="lead-badge">Exclusive</div>
-                <h3>Exclusive Prospects</h3>
-                <p>50 hand-picked, exclusive leads. You're the only agent getting these prospects. Premium quality guaranteed.</p>
+                <div class="lead-badge">Most Popular</div>
+                <h3>200 Qualified Leads</h3>
+                <p>200 pre-qualified prospects actively seeking indexed annuity solutions. Our most popular package with immediate CRM delivery.</p>
+                <div class="lead-stats">
+                    <div class="stat">
+                        <div class="stat-value">92%</div>
+                        <div class="stat-label">Quality</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">68%</div>
+                        <div class="stat-label">Callback</div>
+                    </div>
+                </div>
+                <div class="lead-price">$3,000</div>
+                <button onclick="alert('Purchase flow would integrate with payment processor')">Purchase Now</button>
+            </div>
+
+            <!-- 400 Leads Package -->
+            <div class="lead-card">
+                <div class="lead-badge">Best Value</div>
+                <h3>400 Qualified Leads</h3>
+                <p>400 premium prospects actively interested in indexed annuities. Highest volume package with best per-lead pricing.</p>
+                <div class="lead-stats">
+                    <div class="stat">
+                        <div class="stat-value">92%</div>
+                        <div class="stat-label">Quality</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">68%</div>
+                        <div class="stat-label">Callback</div>
+                    </div>
+                </div>
+                <div class="lead-price">$4,000</div>
+                <button onclick="alert('Purchase flow would integrate with payment processor')">Purchase Now</button>
+            </div>
+
+            <!-- Exclusive Leads Add-On -->
+            <div class="lead-card">
+                <div class="lead-badge">Premium</div>
+                <h3>Exclusive 50 Leads</h3>
+                <p>50 hand-picked, exclusive leads. You're the only agent getting these prospects. Add to any package.</p>
                 <div class="lead-stats">
                     <div class="stat">
                         <div class="stat-value">96%</div>
@@ -394,15 +423,15 @@
                         <div class="stat-label">Callback</div>
                     </div>
                 </div>
-                <div class="lead-price">$1,500</div>
-                <button onclick="alert('Lead purchase flow would integrate with payment processor')">Purchase Now</button>
+                <div class="lead-price">+$1,000</div>
+                <button onclick="alert('Purchase flow would integrate with payment processor')">Add-On</button>
             </div>
 
-            <!-- Live Transfers Package -->
+            <!-- Live Transfers Add-On -->
             <div class="lead-card">
-                <div class="lead-badge">Live Transfer</div>
+                <div class="lead-badge">High Intent</div>
                 <h3>Live Transfer Calls</h3>
-                <p>30 live phone transfers. We warm-transfer qualified prospects directly to you. Close rates 82%+.</p>
+                <p>30 live phone transfers. We warm-transfer qualified prospects directly to you. Premium experience.</p>
                 <div class="lead-stats">
                     <div class="stat">
                         <div class="stat-value">99%</div>
@@ -410,37 +439,18 @@
                     </div>
                     <div class="stat">
                         <div class="stat-value">82%</div>
-                        <div class="stat-label">Callback</div>
+                        <div class="stat-label">Close Rate</div>
                     </div>
                 </div>
-                <div class="lead-price">$3,000</div>
-                <button onclick="alert('Lead purchase flow would integrate with payment processor')">Purchase Now</button>
+                <div class="lead-price">$2,800</div>
+                <button onclick="alert('Purchase flow would integrate with payment processor')">Purchase Now</button>
             </div>
 
-            <!-- Shared Leads Package -->
-            <div class="lead-card">
-                <div class="lead-badge">Shared Leads</div>
-                <h3>Shared Lead Pool</h3>
-                <p>300 leads shared among agents. Larger volume, competitive pricing. First responder advantage.</p>
-                <div class="lead-stats">
-                    <div class="stat">
-                        <div class="stat-value">88%</div>
-                        <div class="stat-label">Quality</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-value">62%</div>
-                        <div class="stat-label">Callback</div>
-                    </div>
-                </div>
-                <div class="lead-price">$1,200</div>
-                <button onclick="alert('Lead purchase flow would integrate with payment processor')">Purchase Now</button>
-            </div>
-
-            <!-- Appointment Leads Package -->
+            <!-- Pre-Booked Appointments -->
             <div class="lead-card">
                 <div class="lead-badge">Appointments</div>
-                <h3>Pre-Booked Appointments</h3>
-                <p>20 pre-scheduled consultation appointments. Prospects already committed. 90%+ show rate.</p>
+                <h3>Pre-Booked Consultations</h3>
+                <p>20 pre-scheduled consultation appointments. Prospects already committed. 90%+ show rate guaranteed.</p>
                 <div class="lead-stats">
                     <div class="stat">
                         <div class="stat-value">97%</div>
@@ -451,27 +461,8 @@
                         <div class="stat-label">Show Rate</div>
                     </div>
                 </div>
-                <div class="lead-price">$2,800</div>
-                <button onclick="alert('Lead purchase flow would integrate with payment processor')">Purchase Now</button>
-            </div>
-
-            <!-- Inbound Leads Package -->
-            <div class="lead-card">
-                <div class="lead-badge">Inbound</div>
-                <h3>Inbound Inquiry Leads</h3>
-                <p>150 inbound prospects who actively requested information about indexed annuities. High intent.</p>
-                <div class="lead-stats">
-                    <div class="stat">
-                        <div class="stat-value">94%</div>
-                        <div class="stat-label">Quality</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-value">71%</div>
-                        <div class="stat-label">Callback</div>
-                    </div>
-                </div>
                 <div class="lead-price">$1,800</div>
-                <button onclick="alert('Lead purchase flow would integrate with payment processor')">Purchase Now</button>
+                <button onclick="alert('Purchase flow would integrate with payment processor')">Purchase Now</button>
             </div>
         </div>
     </main>
