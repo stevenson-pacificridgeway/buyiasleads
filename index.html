@@ -6,47 +6,65 @@
     <title>BuyIASLeads - Indexed Annuity Leads</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; line-height: 1.6; color: #333; background: #fff; }
-        header { display: flex; justify-content: space-between; align-items: center; padding: 20px 60px; background: #fff; border-bottom: 1px solid #e5e5e5; position: sticky; top: 0; z-index: 100; }
-        .logo { font-size: 16px; font-weight: 800; color: #000; }
+        body { font-family: 'Georgia', 'Times New Roman', serif; line-height: 1.6; color: #c0dce8; background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%); }
+
+        header { display: flex; justify-content: space-between; align-items: center; padding: 25px 60px; background: rgba(10,10,10,0.95); border-bottom: 2px solid #c9a961; position: sticky; top: 0; z-index: 100; }
+        .logo { font-size: 18px; font-weight: 800; color: #c9a961; letter-spacing: 3px; }
         nav { display: flex; gap: 50px; align-items: center; }
-        nav a { text-decoration: none; color: #666; font-size: 13px; font-weight: 600; transition: color 0.2s; }
+        nav a { text-decoration: none; color: #c0dce8; font-size: 13px; font-weight: 600; transition: color 0.3s; }
         nav a:hover { color: #c9a961; }
-        .order-btn { background: #000; color: #fff; padding: 10px 24px; border-radius: 6px; text-decoration: none; font-size: 12px; font-weight: 700; transition: all 0.2s; }
-        .order-btn:hover { background: #333; }
-        .tabs-section { max-width: 1200px; margin: 0 auto; padding: 40px 60px 20px; }
-        .tabs { display: flex; gap: 60px; border-bottom: 2px solid #e5e5e5; }
-        .tab { padding-bottom: 12px; font-size: 15px; font-weight: 700; color: #999; text-decoration: none; border-bottom: 3px solid transparent; transition: all 0.2s; }
-        .tab.active { color: #000; border-bottom-color: #c9a961; }
-        .tab:hover { color: #000; }
-        .hero { background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%); color: white; padding: 100px 60px; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
-        .hero h1 { font-size: 54px; font-weight: 700; margin-bottom: 20px; line-height: 1.2; }
+        .order-btn { background: #c9a961; color: #0a0a0a; padding: 12px 28px; border-radius: 25px; text-decoration: none; font-size: 12px; font-weight: 700; transition: all 0.3s; border: none; cursor: pointer; }
+        .order-btn:hover { background: #dab857; transform: scale(1.05); }
+
+        .tabs-section { padding: 40px 60px; border-bottom: 2px solid rgba(201,169,97,0.2); }
+        .tabs { display: flex; gap: 60px; }
+        .tab { font-size: 15px; font-weight: 700; color: #999; text-decoration: none; border-bottom: 3px solid transparent; padding-bottom: 12px; transition: all 0.3s; cursor: pointer; }
+        .tab:hover { color: #c0dce8; }
+        .tab.active { color: #c9a961; border-bottom-color: #c9a961; }
+
+        .hero { max-width: 1200px; margin: 0 auto; padding: 100px 60px; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+        .hero h1 { font-size: 54px; font-weight: 700; margin-bottom: 20px; line-height: 1.2; color: #fff; }
+        .hero h1 .gold { color: #c9a961; }
         .hero p { font-size: 16px; color: #c0dce8; margin-bottom: 40px; line-height: 1.7; }
         .hero-buttons { display: flex; gap: 20px; margin-bottom: 40px; }
-        .btn-gold { background: #c9a961; color: #000; padding: 14px 32px; border: none; border-radius: 6px; font-size: 14px; font-weight: 700; text-transform: uppercase; cursor: pointer; transition: all 0.2s; }
+        .btn-gold { background: #c9a961; color: #0a0a0a; padding: 14px 32px; border: none; border-radius: 6px; font-size: 14px; font-weight: 700; text-transform: uppercase; cursor: pointer; transition: all 0.3s; }
         .btn-gold:hover { background: #dab857; }
-        .btn-outline { background: transparent; color: #fff; border: 2px solid #c9a961; padding: 12px 30px; border-radius: 6px; font-size: 14px; font-weight: 700; cursor: pointer; transition: all 0.2s; }
-        .btn-outline:hover { background: rgba(201, 169, 97, 0.1); }
+        .btn-outline { background: transparent; color: #fff; border: 2px solid #c9a961; padding: 12px 30px; border-radius: 6px; font-size: 14px; font-weight: 700; cursor: pointer; transition: all 0.3s; }
+        .btn-outline:hover { background: rgba(201,169,97,0.1); }
         .hero-right { display: flex; justify-content: center; }
-        .book-cover { width: 100%; max-width: 300px; box-shadow: 0 20px 60px rgba(0,0,0,0.4); }
+        .book-cover { width: 100%; max-width: 300px; box-shadow: 0 20px 60px rgba(0,0,0,0.6); border-radius: 8px; }
+        .hero-stats { font-size: 13px; color: #c0dce8; }
+
         section { max-width: 1200px; margin: 0 auto; padding: 80px 60px; }
-        h2 { font-size: 42px; font-weight: 700; margin-bottom: 50px; text-align: center; }
+        h2 { font-size: 42px; font-weight: 700; margin-bottom: 50px; text-align: center; color: #c9a961; }
         .process-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 40px; }
-        .card { background: #f9f9f9; padding: 40px; border-radius: 6px; text-align: center; transition: all 0.3s; border: 1px solid #e5e5e5; }
-        .card:hover { border-color: #c9a961; box-shadow: 0 8px 20px rgba(201,169,97,0.1); }
-        .step-num { width: 50px; height: 50px; background: #000; color: #c9a961; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: 800; margin: 0 auto 20px; }
-        .card h3 { font-size: 22px; font-weight: 700; margin-bottom: 16px; }
+        .card { background: rgba(26,26,26,0.8); padding: 40px; border-radius: 6px; text-align: center; transition: all 0.3s; border: 2px solid rgba(201,169,97,0.2); }
+        .card:hover { border-color: #c9a961; box-shadow: 0 8px 20px rgba(201,169,97,0.2); }
+        .step-num { width: 50px; height: 50px; background: #c9a961; color: #0a0a0a; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: 800; margin: 0 auto 20px; }
+        .card h3 { font-size: 22px; font-weight: 700; margin-bottom: 16px; color: #c9a961; }
+        .card p { font-size: 14px; color: #c0dce8; line-height: 1.7; }
         .price { font-size: 36px; font-weight: 800; color: #c9a961; margin: 16px 0; }
-        .demo-section { padding: 100px 60px !important; text-align: center; background: #f5f5f5; }
-        .demo-section h2 { color: #000; }
-        .demo-section p { font-size: 16px; color: #666; max-width: 600px; margin-left: auto; margin-right: auto; }
-        .demo-link { display: inline-block; background: #c9a961; color: #000; padding: 14px 32px; border-radius: 6px; text-decoration: none; font-size: 14px; font-weight: 700; text-transform: uppercase; margin-top: 30px; transition: all 0.2s; }
+
+        .email-form { background: rgba(201,169,97,0.1); padding: 60px; border-radius: 6px; max-width: 600px; margin: 60px auto; border: 2px solid #c9a961; }
+        .email-form h3 { color: #c9a961; margin-bottom: 20px; font-size: 24px; text-align: center; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; color: #c0dce8; margin-bottom: 8px; font-size: 13px; font-weight: 700; }
+        .form-group input { width: 100%; padding: 12px 16px; background: rgba(10,10,10,0.7); border: 1px solid #c9a961; color: #c0dce8; border-radius: 4px; font-size: 14px; }
+        .form-group input:focus { outline: none; border-color: #dab857; }
+        .form-submit { width: 100%; background: #c9a961; color: #0a0a0a; padding: 14px; border: none; border-radius: 4px; font-size: 14px; font-weight: 700; cursor: pointer; transition: all 0.3s; text-transform: uppercase; }
+        .form-submit:hover { background: #dab857; }
+
+        .demo-section { padding: 100px 60px !important; text-align: center; background: rgba(26,26,26,0.8); }
+        .demo-section h2 { color: #c9a961; }
+        .demo-section p { font-size: 16px; color: #c0dce8; max-width: 600px; margin-left: auto; margin-right: auto; }
+        .demo-link { display: inline-block; background: #c9a961; color: #0a0a0a; padding: 14px 32px; border-radius: 6px; text-decoration: none; font-size: 14px; font-weight: 700; text-transform: uppercase; margin-top: 30px; transition: all 0.2s; }
         .demo-link:hover { background: #dab857; }
-        .cta-dark { background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%); color: white; text-align: center; }
-        .cta-dark h2 { color: white; }
+
+        .cta-dark { background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%); color: white; text-align: center; padding: 100px 60px !important; }
+        .cta-dark h2 { color: #c9a961; }
         .cta-dark p { color: #c0dce8; }
-        footer { background: #000; color: #999; text-align: center; padding: 40px 60px; font-size: 12px; }
-        footer a { color: #ccc; text-decoration: none; margin: 0 12px; }
+        footer { background: #000; color: #999; text-align: center; padding: 40px 60px; font-size: 12px; border-top: 2px solid #c9a961; }
+
         @media (max-width: 1024px) { .hero { grid-template-columns: 1fr; } .process-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
@@ -57,7 +75,7 @@
             <a href="index.html">Get Started</a>
             <a href="how-it-works.html">How It Works</a>
             <a href="testimonials.html">Testimonials</a>
-            <a href="#" class="order-btn">Order Now</a>
+            <button class="order-btn">Order Now</button>
         </nav>
     </header>
 
@@ -71,13 +89,13 @@
 
     <section class="hero">
         <div>
-            <h1>Get <span style="color: #c9a961;">200 Qualified</span> Leads Instantly</h1>
+            <h1>Get <span class="gold">200 Qualified Leads</span> Instantly</h1>
             <p>Pre-qualified prospects actively seeking indexed annuity solutions. Delivered instantly to your CRM.</p>
             <div class="hero-buttons">
-                <button class="btn-gold">Order Your Leads</button>
+                <button class="btn-gold">ORDER YOUR LEADS</button>
                 <button class="btn-outline">See How It Works</button>
             </div>
-            <div style="font-size: 13px; color: #c0dce8;">
+            <div class="hero-stats">
                 ⭐⭐⭐⭐⭐ 156+ Deals Closed • 92% Lead Quality
             </div>
         </div>
@@ -91,47 +109,58 @@
         <div class="process-grid">
             <div class="card">
                 <div class="step-num">1</div>
-                <h3>Choose Budget</h3>
+                <h3>Order Your Leads</h3>
                 <div class="price">$2,000</div>
-                <p>200 Indexed Annuity Leads</p>
-                <p style="font-size: 12px; color: #999; margin-top: 20px;">✓ Verified contacts<br>✓ Instant access<br>✓ Ready to call</p>
+                <p>200 pre-qualified indexed annuity prospects. Instant CRM delivery.</p>
             </div>
             <div class="card">
                 <div class="step-num">2</div>
-                <h3>Add CRM</h3>
+                <h3>CRM Automation</h3>
                 <div class="price">$100/mo</div>
-                <p>Optional • Highly Recommended</p>
-                <p style="font-size: 12px; color: #999; margin-top: 20px;">✓ 52-week drip<br>✓ Annuity University<br>✓ Free book</p>
+                <p>Optional lead nurturing system. Automated follow-up sequences.</p>
             </div>
             <div class="card">
                 <div class="step-num">3</div>
-                <h3>Get Leads</h3>
-                <div class="price">Instant</div>
-                <p>Delivered to Dashboard</p>
-                <p style="font-size: 12px; color: #999; margin-top: 20px;">✓ Quick form<br>✓ Secure checkout<br>✓ Ready now</p>
+                <h3>Close More Deals</h3>
+                <p>92% lead quality, 68% callback rate. 156+ deals closed by our agents.</p>
             </div>
         </div>
     </section>
 
-    <div class="demo-section">
-        <h2>Want to See How It Works?</h2>
-        <p>Schedule a quick call with our team. We'll show you exactly how our Meta-targeted leads work.</p>
-        <a href="https://calendly.com/gregorystevensongfia/annuity-call" target="_blank" class="demo-link">Book a Demo Call</a>
-    </div>
+    <section>
+        <h2>Get Exclusive Access</h2>
+        <form class="email-form" action="https://docs.google.com/forms/d/e/1FAIpQLSfKc9c_YOUR_FORM_ID_HERE/formResponse" method="POST" target="_self">
+            <h3>Join Our VIP List</h3>
+            <div class="form-group">
+                <label>Your Name *</label>
+                <input type="text" name="entry.YOUR_NAME_FIELD_ID" required>
+            </div>
+            <div class="form-group">
+                <label>Email Address *</label>
+                <input type="email" name="entry.YOUR_EMAIL_FIELD_ID" required>
+            </div>
+            <div class="form-group">
+                <label>Phone Number</label>
+                <input type="tel" name="entry.YOUR_PHONE_FIELD_ID">
+            </div>
+            <button type="submit" class="form-submit">Get Started</button>
+        </form>
+    </section>
+
+    <section class="demo-section">
+        <h2>Book a Demo Call</h2>
+        <p>See exactly how BuyIASLeads transforms your lead generation. Talk to one of our specialists about your specific needs.</p>
+        <a href="https://calendly.com/gregorystevensongfia/annuity-call" class="demo-link">SCHEDULE YOUR CALL</a>
+    </section>
 
     <section class="cta-dark">
-        <h2>Ready to Close More Deals?</h2>
-        <p>Join 156+ professionals already using our leads. Start today.</p>
-        <button class="btn-gold">Order Your First Batch</button>
+        <h2>Ready to Scale Your Annuity Business?</h2>
+        <p>Join 156+ agents already closing deals with our pre-qualified leads</p>
+        <button class="order-btn" style="margin-top: 30px;">ORDER NOW</button>
     </section>
 
     <footer>
-        <p>&copy; 2026 BuyIASLeads. All rights reserved.</p>
-        <div style="margin-top: 12px;">
-            <a href="#">Privacy</a>
-            <a href="#">Terms</a>
-            <a href="mailto:stevenson@pacificridgewayinsurance.com">Contact</a>
-        </div>
+        <p>&copy; 2026 BuyIASLeads. All rights reserved. | Powered by Gregory Stevenson</p>
     </footer>
 </body>
 </html>

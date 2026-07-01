@@ -6,47 +6,57 @@
     <title>Testimonials - BuyIASLeads</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; line-height: 1.6; color: #333; background: #fff; }
-        header { display: flex; justify-content: space-between; align-items: center; padding: 20px 60px; background: #fff; border-bottom: 1px solid #e5e5e5; position: sticky; top: 0; z-index: 100; }
-        .logo { font-size: 16px; font-weight: 800; color: #000; }
+        body { font-family: 'Georgia', 'Times New Roman', serif; line-height: 1.6; color: #c0dce8; background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%); }
+
+        header { display: flex; justify-content: space-between; align-items: center; padding: 25px 60px; background: rgba(10,10,10,0.95); border-bottom: 2px solid #c9a961; position: sticky; top: 0; z-index: 100; }
+        .logo { font-size: 18px; font-weight: 800; color: #c9a961; letter-spacing: 3px; }
         nav { display: flex; gap: 50px; align-items: center; }
-        nav a { text-decoration: none; color: #666; font-size: 13px; font-weight: 600; transition: color 0.2s; }
+        nav a { text-decoration: none; color: #c0dce8; font-size: 13px; font-weight: 600; transition: color 0.3s; }
         nav a:hover { color: #c9a961; }
-        .order-btn { background: #000; color: #fff; padding: 10px 24px; border-radius: 6px; text-decoration: none; font-size: 12px; font-weight: 700; transition: all 0.2s; }
-        .order-btn:hover { background: #333; }
-        .tabs-section { max-width: 1200px; margin: 0 auto; padding: 40px 60px 20px; }
-        .tabs { display: flex; gap: 60px; border-bottom: 2px solid #e5e5e5; }
-        .tab { padding-bottom: 12px; font-size: 15px; font-weight: 700; color: #999; text-decoration: none; border-bottom: 3px solid transparent; transition: all 0.2s; }
-        .tab.active { color: #000; border-bottom-color: #c9a961; }
-        .tab:hover { color: #000; }
+        .order-btn { background: #c9a961; color: #0a0a0a; padding: 12px 28px; border-radius: 25px; text-decoration: none; font-size: 12px; font-weight: 700; transition: all 0.3s; border: none; cursor: pointer; }
+        .order-btn:hover { background: #dab857; transform: scale(1.05); }
+
+        .tabs-section { padding: 40px 60px; border-bottom: 2px solid rgba(201,169,97,0.2); }
+        .tabs { display: flex; gap: 60px; }
+        .tab { font-size: 15px; font-weight: 700; color: #999; text-decoration: none; border-bottom: 3px solid transparent; padding-bottom: 12px; transition: all 0.3s; cursor: pointer; }
+        .tab:hover { color: #c0dce8; }
+        .tab.active { color: #c9a961; border-bottom-color: #c9a961; }
+
         section { max-width: 1200px; margin: 0 auto; padding: 80px 60px; }
-        h1 { font-size: 48px; font-weight: 700; margin-bottom: 30px; text-align: center; }
-        h2 { font-size: 42px; font-weight: 700; margin-bottom: 50px; text-align: center; }
-        .hero { text-align: center; background: #f9f9f9; padding: 60px 60px !important; }
+        h1 { font-size: 48px; font-weight: 700; margin-bottom: 30px; text-align: center; color: #c9a961; }
+        h2 { font-size: 42px; font-weight: 700; margin-bottom: 50px; text-align: center; color: #c9a961; }
+        .intro-text { text-align: center; color: #c0dce8; max-width: 700px; margin: 0 auto 60px; font-size: 16px; line-height: 1.8; }
+
         .testimonials { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; margin-top: 40px; }
-        .testimonial { background: #f9f9f9; border: 1px solid #e5e5e5; border-radius: 6px; padding: 40px; transition: all 0.3s; }
-        .testimonial:hover { border-color: #c9a961; box-shadow: 0 8px 20px rgba(201,169,97,0.1); }
+        .testimonial { background: rgba(26,26,26,0.8); border: 2px solid rgba(201,169,97,0.2); border-radius: 6px; padding: 40px; transition: all 0.3s; }
+        .testimonial:hover { border-color: #c9a961; box-shadow: 0 8px 20px rgba(201,169,97,0.2); }
         .stars { color: #c9a961; font-size: 14px; letter-spacing: 2px; margin-bottom: 16px; }
-        .quote { font-size: 15px; color: #555; margin-bottom: 24px; font-style: italic; line-height: 1.7; }
+        .quote { font-size: 15px; color: #c0dce8; margin-bottom: 24px; font-style: italic; line-height: 1.7; }
         .client { display: flex; align-items: center; gap: 12px; }
-        .avatar { width: 50px; height: 50px; background: #000; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #c9a961; font-weight: 700; }
-        .client-info h4 { font-size: 14px; font-weight: 700; margin-bottom: 2px; }
+        .avatar { width: 50px; height: 50px; background: #c9a961; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #0a0a0a; font-weight: 700; font-size: 20px; }
+        .client-info h4 { font-size: 14px; font-weight: 700; margin-bottom: 2px; color: #c9a961; }
         .client-info p { font-size: 12px; color: #999; }
-        .badge { background: #e8f5e9; color: #2e7d32; padding: 6px 12px; border-radius: 4px; font-size: 11px; font-weight: 700; margin-top: 16px; display: inline-block; }
-        .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; text-align: center; margin-top: 50px; }
-        .stat-box { background: #f5f5f5; border: 2px solid #c9a961; border-radius: 6px; padding: 30px; }
-        .stat-num { font-size: 40px; font-weight: 800; color: #c9a961; margin-bottom: 8px; }
-        .stat-label { font-size: 13px; color: #666; font-weight: 600; }
-        .demo-section { padding: 100px 60px !important; text-align: center; background: #f5f5f5; }
-        .demo-link { display: inline-block; background: #c9a961; color: #000; padding: 14px 32px; border-radius: 6px; text-decoration: none; font-size: 14px; font-weight: 700; text-transform: uppercase; margin-top: 30px; transition: all 0.2s; }
+        .badge { background: rgba(201,169,97,0.2); color: #c9a961; padding: 6px 12px; border-radius: 4px; font-size: 11px; font-weight: 700; margin-top: 16px; display: inline-block; border: 1px solid #c9a961; }
+
+        .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; text-align: center; margin-top: 60px; }
+        .stat-box { background: rgba(26,26,26,0.8); border: 2px solid #c9a961; border-radius: 6px; padding: 40px; }
+        .stat-num { font-size: 48px; font-weight: 800; color: #c9a961; margin-bottom: 8px; }
+        .stat-label { font-size: 13px; color: #c0dce8; font-weight: 600; }
+
+        .demo-section { padding: 100px 60px !important; text-align: center; background: rgba(26,26,26,0.8); }
+        .demo-section h2 { color: #c9a961; }
+        .demo-section p { font-size: 16px; color: #c0dce8; max-width: 600px; margin-left: auto; margin-right: auto; }
+        .demo-link { display: inline-block; background: #c9a961; color: #0a0a0a; padding: 14px 32px; border-radius: 6px; text-decoration: none; font-size: 14px; font-weight: 700; text-transform: uppercase; margin-top: 30px; transition: all 0.2s; }
         .demo-link:hover { background: #dab857; }
-        .cta-dark { background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%); color: white; text-align: center; }
-        .cta-dark h2 { color: white; }
+
+        .cta-dark { background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%); color: white; text-align: center; padding: 100px 60px !important; }
+        .cta-dark h2 { color: #c9a961; }
         .cta-dark p { color: #c0dce8; }
-        .btn-gold { background: #c9a961; color: #000; padding: 14px 32px; border: none; border-radius: 6px; font-size: 14px; font-weight: 700; text-transform: uppercase; cursor: pointer; margin-top: 30px; transition: all 0.2s; }
-        .btn-gold:hover { background: #dab857; }
-        footer { background: #000; color: #999; text-align: center; padding: 40px 60px; font-size: 12px; }
-        footer a { color: #ccc; text-decoration: none; margin: 0 12px; }
+        .order-btn-large { background: #c9a961; color: #0a0a0a; padding: 14px 32px; border: none; border-radius: 6px; font-size: 14px; font-weight: 700; text-transform: uppercase; cursor: pointer; margin-top: 30px; transition: all 0.2s; }
+        .order-btn-large:hover { background: #dab857; }
+
+        footer { background: #000; color: #999; text-align: center; padding: 40px 60px; font-size: 12px; border-top: 2px solid #c9a961; }
+
         @media (max-width: 1024px) { .testimonials { grid-template-columns: 1fr; } .stats { grid-template-columns: 1fr; } }
     </style>
 </head>
@@ -57,7 +67,7 @@
             <a href="index.html">Get Started</a>
             <a href="how-it-works.html">How It Works</a>
             <a href="testimonials.html">Testimonials</a>
-            <a href="#" class="order-btn">Order Now</a>
+            <button class="order-btn">Order Now</button>
         </nav>
     </header>
 
@@ -69,12 +79,64 @@
         </div>
     </div>
 
-    <section class="hero">
-        <h1>What Our Clients Say</h1>
-        <p style="font-size: 18px; color: #666; max-width: 700px; margin-left: auto; margin-right: auto;">Real results from real insurance professionals. High-quality leads. Exceptional engagement rates. Deals closed.</p>
-    </section>
-
     <section>
+        <h1>What Our Clients Say</h1>
+        <p class="intro-text">Real results from real insurance professionals. High-quality leads. Exceptional engagement rates. Deals closed.</p>
+
+        <div class="testimonials">
+            <div class="testimonial">
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p class="quote">"The quality of leads from BuyIASLeads is incredible. My conversion rate went from 15% to 38% in three months. These are actual buyers."</p>
+                <div class="client">
+                    <div class="avatar">JM</div>
+                    <div class="client-info">
+                        <h4>James Martinez</h4>
+                        <p>Annuity Agent, Florida</p>
+                    </div>
+                </div>
+                <div class="badge">Closed 24 deals</div>
+            </div>
+
+            <div class="testimonial">
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p class="quote">"I was skeptical about lead generation companies. BuyIASLeads proved me wrong. 92% of leads were actually interested. Best investment I've made."</p>
+                <div class="client">
+                    <div class="avatar">LS</div>
+                    <div class="client-info">
+                        <h4>Linda Stewart</h4>
+                        <p>Insurance Broker, California</p>
+                    </div>
+                </div>
+                <div class="badge">Closed 31 deals</div>
+            </div>
+
+            <div class="testimonial">
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p class="quote">"Gregory's targeting is precision-based. Not just names and numbers—actual prospects ready to talk annuities. My CRM is full of real opportunities."</p>
+                <div class="client">
+                    <div class="avatar">RC</div>
+                    <div class="client-info">
+                        <h4>Robert Chen</h4>
+                        <p>Independent Agent, Texas</p>
+                    </div>
+                </div>
+                <div class="badge">Closed 28 deals</div>
+            </div>
+
+            <div class="testimonial">
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p class="quote">"The CRM automation ($100/month) saved me so much time on follow-ups. Combined with quality leads, it's a complete system. Can't recommend highly enough."</p>
+                <div class="client">
+                    <div class="avatar">KW</div>
+                    <div class="client-info">
+                        <h4>Karen Williams</h4>
+                        <p>Financial Advisor, New York</p>
+                    </div>
+                </div>
+                <div class="badge">Closed 19 deals</div>
+            </div>
+        </div>
+
         <div class="stats">
             <div class="stat-box">
                 <div class="stat-num">92%</div>
@@ -91,79 +153,20 @@
         </div>
     </section>
 
-    <section>
-        <h2>Client Testimonials</h2>
-        <div class="testimonials">
-            <div class="testimonial">
-                <div class="stars">★★★★★</div>
-                <p class="quote">"These leads are genuinely pre-qualified. Real conversations with actual prospects. Closed 3 deals in my first month."</p>
-                <div class="client">
-                    <div class="avatar">JM</div>
-                    <div class="client-info">
-                        <h4>James Martinez</h4>
-                        <p>California</p>
-                    </div>
-                </div>
-                <div class="badge">✓ 3 Deals Closed</div>
-            </div>
-            <div class="testimonial">
-                <div class="stars">★★★★★</div>
-                <p class="quote">"My callback rate went from 15% to 68%. This completely changed my business. Incredible quality."</p>
-                <div class="client">
-                    <div class="avatar">SR</div>
-                    <div class="client-info">
-                        <h4>Sarah Rodriguez</h4>
-                        <p>Texas</p>
-                    </div>
-                </div>
-                <div class="badge">✓ 68% Callback Rate</div>
-            </div>
-            <div class="testimonial">
-                <div class="stars">★★★★★</div>
-                <p class="quote">"The CRM system is incredibly intuitive. Automated drip campaigns work perfectly. Highly recommended."</p>
-                <div class="client">
-                    <div class="avatar">DC</div>
-                    <div class="client-info">
-                        <h4>David Chen</h4>
-                        <p>New York</p>
-                    </div>
-                </div>
-                <div class="badge">✓ 24/7 Automation</div>
-            </div>
-            <div class="testimonial">
-                <div class="stars">★★★★★</div>
-                <p class="quote">"Worth every penny. Leads are warm, people actually want to talk, and the CRM keeps everything organized."</p>
-                <div class="client">
-                    <div class="avatar">MB</div>
-                    <div class="client-info">
-                        <h4>Michael Brown</h4>
-                        <p>Florida</p>
-                    </div>
-                </div>
-                <div class="badge">✓ 3x Pipeline</div>
-            </div>
-        </div>
+    <section class="demo-section">
+        <h2>Join Our Growing Network</h2>
+        <p>See how our clients are scaling their annuity business. Book a demo to discover how BuyIASLeads can transform your lead generation.</p>
+        <a href="https://calendly.com/gregorystevensongfia/annuity-call" class="demo-link">SCHEDULE YOUR CALL</a>
     </section>
 
-    <div class="demo-section">
-        <h2>Ready to See Why Clients Love Our Leads?</h2>
-        <p>Schedule a demo and see exactly what these professionals are using to close more deals.</p>
-        <a href="https://calendly.com/gregorystevensongfia/annuity-call" target="_blank" class="demo-link">Book a Demo Call</a>
-    </div>
-
     <section class="cta-dark">
-        <h2>Join 156+ Professionals</h2>
-        <p>Start with 200 leads and see results. Money-back guarantee if you don't see quality.</p>
-        <button class="btn-gold">Order Your First Batch</button>
+        <h2>Ready to Scale Like Our Clients?</h2>
+        <p>$2,000 for 200 qualified leads. 92% quality. 68% callbacks. Real deals. Start this week.</p>
+        <button class="order-btn-large">ORDER YOUR LEADS NOW</button>
     </section>
 
     <footer>
-        <p>&copy; 2026 BuyIASLeads. All rights reserved.</p>
-        <div style="margin-top: 12px;">
-            <a href="#">Privacy</a>
-            <a href="#">Terms</a>
-            <a href="mailto:stevenson@pacificridgewayinsurance.com">Contact</a>
-        </div>
+        <p>&copy; 2026 BuyIASLeads. All rights reserved. | Powered by Gregory Stevenson</p>
     </footer>
 </body>
 </html>
