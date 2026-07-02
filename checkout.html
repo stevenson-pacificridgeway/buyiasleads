@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - BuyIASLeads</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --navy-dark: #0f1419;
+            --navy-light: #1a1f2e;
+            --gold: #d4a574;
+            --gold-light: #e8c9a0;
+            --cyan-light: #e8f4f8;
+            --text-primary: #f5f7fa;
+            --text-secondary: #b8c5d6;
+            --border-color: rgba(212, 165, 116, 0.15);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: var(--text-primary);
+            background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy-light) 100%);
+            line-height: 1.6;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                linear-gradient(45deg, transparent 48%, rgba(212, 165, 116, 0.03) 49%, rgba(212, 165, 116, 0.03) 51%, transparent 52%),
+                linear-gradient(-45deg, transparent 48%, rgba(212, 165, 116, 0.03) 49%, rgba(212, 165, 116, 0.03) 51%, transparent 52%);
+            background-size: 80px 80px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: linear-gradient(180deg, rgba(15, 20, 25, 0.95) 0%, rgba(15, 20, 25, 0.7) 100%);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 20px 0;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Crimson Text', serif;
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: var(--gold);
+            text-decoration: none;
+        }
+
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin: 0 25px;
+        }
+
+        nav a:hover {
+            color: var(--gold);
+        }
+
+        main {
+            position: relative;
+            z-index: 1;
+            padding-top: 120px;
+            padding-bottom: 60px;
+        }
+
+        .checkout-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px;
+        }
+
+        .checkout-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .checkout-header h1 {
+            font-family: 'Crimson Text', serif;
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .checkout-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .order-summary {
+            background: rgba(26, 31, 46, 0.5);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 30px;
+        }
+
+        .order-summary h3 {
+            font-family: 'Crimson Text', serif;
+            font-size: 22px;
+            margin-bottom: 25px;
+            color: var(--gold);
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .summary-item:last-child {
+            border-bottom: none;
+        }
+
+        .item-name {
+            color: var(--text-primary);
+        }
+
+        .item-price {
+            font-weight: 600;
+            color: var(--gold);
+        }
+
+        .summary-total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            margin-top: 20px;
+            border-top: 2px solid var(--gold);
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .checkout-form {
+            background: rgba(26, 31, 46, 0.5);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 30px;
+        }
+
+        .checkout-form h3 {
+            font-family: 'Crimson Text', serif;
+            font-size: 22px;
+            margin-bottom: 25px;
+            color: var(--gold);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(15, 20, 25, 0.6);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+
+        .form-group input::placeholder {
+            color: var(--text-secondary);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: var(--gold);
+            color: var(--navy-dark);
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .submit-btn:hover {
+            background: var(--gold-light);
+            transform: translateY(-2px);
+        }
+
+        .trust-notice {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            padding: 15px;
+            background: rgba(212, 165, 116, 0.1);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            margin-top: 20px;
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        .trust-notice span {
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        .success-message {
+            display: none;
+            background: rgba(52, 168, 83, 0.1);
+            border: 1px solid #34a853;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+            color: #34a853;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .checkout-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .header-content {
+                padding: 0 20px;
+            }
+
+            .checkout-container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <a href="index.html" class="logo">BUYIASLEADS</a>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="leads-marketplace.html">Leads</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="checkout-container">
+            <div class="checkout-header">
+                <h1>Complete Your Purchase</h1>
+                <p style="color: var(--text-secondary); font-size: 16px;">Secure payment • Instant access • 30-day guarantee</p>
+            </div>
+
+            <div class="success-message" id="successMessage">
+                ✓ Order processed successfully! Check your email for account details and lead access.
+            </div>
+
+            <div class="checkout-grid">
+                <div class="order-summary">
+                    <h3>Order Summary</h3>
+
+                    <div class="summary-item">
+                        <span class="item-name">Lead Package</span>
+                        <span class="item-price" id="packagePrice">—</span>
+                    </div>
+
+                    <div class="summary-item">
+                        <span class="item-name">CRM Subscription (First Month)</span>
+                        <span class="item-price">$100.00</span>
+                    </div>
+
+                    <div class="summary-item">
+                        <span class="item-name">30-Day Money-Back Guarantee</span>
+                        <span class="item-price" style="color: var(--gold);">Included</span>
+                    </div>
+
+                    <div class="summary-total">
+                        <span>Total Due Today</span>
+                        <span style="color: var(--gold);" id="totalPrice">—</span>
+                    </div>
+
+                    <p style="font-size: 12px; color: var(--text-secondary); margin-top: 20px; line-height: 1.6;">
+                        <strong>Next Steps:</strong> After purchase, you'll receive a welcome email with your CRM login and lead data within 5 minutes. Leads are delivered in real-time to your dashboard.
+                    </p>
+                </div>
+
+                <form class="checkout-form" onsubmit="handleCheckout(event)">
+                    <h3>Your Details</h3>
+
+                    <div class="form-group">
+                        <label>Lead Package *</label>
+                        <select id="package" required onchange="updatePrice()">
+                            <option value="">Select a package</option>
+                            <option value="100">100 Leads — $2,000</option>
+                            <option value="200">200 Leads — $3,000</option>
+                            <option value="400">400 Leads — $4,000</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Full Name *</label>
+                        <input type="text" placeholder="John Smith" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Email *</label>
+                        <input type="email" placeholder="john@example.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Phone *</label>
+                        <input type="tel" placeholder="(555) 123-4567" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Company *</label>
+                        <input type="text" placeholder="Your Agency Name" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>State *</label>
+                            <input type="text" placeholder="CA" required>
+                        </div>
+                        <div class="form-group">
+                            <label>License #</label>
+                            <input type="text" placeholder="Optional">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label style="display: flex; align-items: center; gap: 10px; font-weight: 400; text-transform: none;">
+                            <input type="checkbox" required style="width: auto;">
+                            I agree to the terms and 30-day money-back guarantee
+                        </label>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Complete Purchase</button>
+
+                    <div class="trust-notice">
+                        🔒 <span>Secure payment</span> processed via Stripe. Your data is encrypted and protected.
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function updatePrice() {
+            const pkg = document.getElementById('package').value;
+            const prices = { 100: 2000, 200: 3000, 400: 4000 };
+            if (pkg && prices[pkg]) {
+                const leadPrice = prices[pkg];
+                const crmPrice = 100;
+                const total = leadPrice + crmPrice;
+                document.getElementById('packagePrice').textContent = `$${leadPrice.toLocaleString()}.00`;
+                document.getElementById('totalPrice').textContent = `$${total.toLocaleString()}.00`;
+            }
+        }
+
+        function handleCheckout(e) {
+            e.preventDefault();
+            if (!document.getElementById('package').value) {
+                alert('Please select a lead package');
+                return;
+            }
+            // In production, this would integrate with Stripe
+            // For now, show success message
+            document.getElementById('successMessage').classList.add('show');
+            setTimeout(() => {
+                alert('Thank you! Redirecting to leads dashboard...');
+                window.location.href = 'index.html#how-it-works';
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

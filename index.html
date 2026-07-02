@@ -455,6 +455,193 @@
             margin-right: auto;
         }
 
+        .trust-badges {
+            display: flex;
+            gap: 40px;
+            justify-content: center;
+            align-items: center;
+            margin: 50px 0;
+            flex-wrap: wrap;
+        }
+
+        .trust-badge {
+            text-align: center;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .badge-icon {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .faq-section {
+            background: linear-gradient(135deg, rgba(26, 31, 46, 0.5) 0%, rgba(15, 20, 25, 0.5) 100%);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 40px;
+            margin-top: 40px;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid var(--border-color);
+            padding: 20px 0;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-question {
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--text-primary);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: color 0.3s ease;
+        }
+
+        .faq-question:hover {
+            color: var(--gold);
+        }
+
+        .faq-answer {
+            display: none;
+            color: var(--text-secondary);
+            margin-top: 15px;
+            line-height: 1.7;
+        }
+
+        .faq-answer.active {
+            display: block;
+        }
+
+        .email-capture {
+            background: linear-gradient(135deg, rgba(212, 165, 116, 0.1) 0%, rgba(26, 31, 46, 0.3) 100%);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 40px;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .email-capture h3 {
+            font-family: 'Crimson Text', serif;
+            font-size: 28px;
+            margin-bottom: 15px;
+            color: var(--text-primary);
+        }
+
+        .email-capture p {
+            color: var(--text-secondary);
+            margin-bottom: 25px;
+            font-size: 16px;
+        }
+
+        .email-form {
+            display: flex;
+            gap: 10px;
+            max-width: 500px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .email-form input {
+            flex: 1;
+            min-width: 250px;
+            padding: 12px 16px;
+            background: rgba(15, 20, 25, 0.6);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            color: var(--text-primary);
+            font-size: 14px;
+        }
+
+        .email-form input::placeholder {
+            color: var(--text-secondary);
+        }
+
+        .email-form button {
+            background: var(--gold);
+            color: var(--navy-dark);
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-size: 13px;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+        }
+
+        .email-form button:hover {
+            background: var(--gold-light);
+        }
+
+        .onboarding-section {
+            background: linear-gradient(135deg, rgba(26, 31, 46, 0.5) 0%, rgba(15, 20, 25, 0.5) 100%);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 40px;
+        }
+
+        .onboarding-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .onboarding-step {
+            background: rgba(26, 31, 46, 0.4);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background: var(--gold);
+            color: var(--navy-dark);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 18px;
+            margin: 0 auto 15px;
+        }
+
+        .onboarding-step h4 {
+            color: var(--text-primary);
+            margin-bottom: 10px;
+            font-family: 'Crimson Text', serif;
+            font-size: 18px;
+        }
+
+        .onboarding-step p {
+            color: var(--text-secondary);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .price-badge {
+            display: inline-block;
+            background: rgba(212, 165, 116, 0.2);
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
         footer {
             background: rgba(15, 20, 25, 0.8);
             border-top: 1px solid var(--border-color);
@@ -483,6 +670,22 @@
 
         footer a:hover {
             color: var(--gold);
+        }
+
+        .footer-contact {
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .footer-contact h4 {
+            margin-bottom: 15px;
+        }
+
+        .footer-contact p {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-bottom: 8px;
         }
 
         .footer-bottom {
@@ -540,8 +743,10 @@
                 <h1>High-Quality <span class="highlight">Indexed Annuity Leads</span> — Delivered Instantly</h1>
                 <p>Access pre-qualified prospects actively seeking indexed annuity solutions. 92% lead quality. Real results.</p>
 
+                <div class="price-badge">Starting at $2,000 for 100 leads + $100/mo CRM</div>
+
                 <div class="hero-buttons">
-                    <a href="leads-marketplace.html" class="btn-primary">Browse Leads</a>
+                    <a href="#purchase" class="btn-primary">Get Started Now</a>
                     <button class="btn-secondary" onclick="document.getElementById('how-it-works').scrollIntoView({behavior:'smooth'})">See How It Works</button>
                 </div>
 
@@ -590,15 +795,15 @@
             <div class="quality-grid">
                 <div class="quality-card">
                     <div class="quality-metric">$200K+</div>
-                    <div class="quality-label">Pixel Training</div>
+                    <div class="quality-label">Invested in Precision Targeting</div>
                 </div>
                 <div class="quality-card">
-                    <!-- 92% removed -->
-                    <div class="quality-label">Qualified</div>
+                    <div class="quality-metric">92%</div>
+                    <div class="quality-label">Pre-Qualified Leads</div>
                 </div>
                 <div class="quality-card">
                     <div class="quality-metric">&lt; 24hrs</div>
-                    <div class="quality-label">Delivery</div>
+                    <div class="quality-label">Instant Delivery</div>
                 </div>
             </div>
         </section>
@@ -644,10 +849,126 @@
             </div>
         </section>
 
+        <section>
+            <div class="trust-badges">
+                <div class="trust-badge">
+                    <div class="badge-icon">✓</div>
+                    <div>30-Day Money-Back Guarantee</div>
+                </div>
+                <div class="trust-badge">
+                    <div class="badge-icon">🔒</div>
+                    <div>Secure Payment Processing</div>
+                </div>
+                <div class="trust-badge">
+                    <div class="badge-icon">⚡</div>
+                    <div>Instant Lead Delivery</div>
+                </div>
+                <div class="trust-badge">
+                    <div class="badge-icon">📞</div>
+                    <div>Priority Support</div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Frequently Asked <span class="gold">Questions</span></h2>
+            <div class="faq-section">
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>How fast will I get my leads after purchase?</span>
+                        <span>▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        Leads are delivered in real-time within your CRM. You'll have instant access to contact information, location, and lead quality scores. Most users start calling within 30 minutes of purchase.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>What's your refund policy?</span>
+                        <span>▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        We offer a 30-day money-back guarantee. If you're not satisfied with lead quality, contact support and we'll refund your lead purchase. No questions asked. Your CRM subscription is separate and follows our standard subscription terms.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>Do leads expire or have a time limit?</span>
+                        <span>▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        Your leads don't expire. You have lifetime access to contacts in your CRM. Follow up on your own timeline. We recommend contacting leads within the first week for best conversion rates based on market data.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>What's included in the CRM subscription?</span>
+                        <span>▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        The $100/month CRM includes: Annuity University training module, AI-powered free book on annuities, 52-week automated email campaign for follow-up, priority email support, and unlimited lead storage. Annual billing discounts available.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>Can I get a demo before committing?</span>
+                        <span>▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        Yes. Email support@buyiasleads.com or book a 15-minute demo call and we'll walk you through the platform, show you real lead data (anonymized), and answer all your questions before you buy.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="purchase">
+            <div class="email-capture">
+                <h3>Ready to Close More Deals?</h3>
+                <p>Join 156+ financial professionals already using BuyIASLeads. Get started in minutes.</p>
+                <form class="email-form" onsubmit="handleEmailCapture(event)">
+                    <input type="email" placeholder="your@email.com" required>
+                    <button type="submit">Get Started</button>
+                </form>
+                <p style="font-size: 12px; margin-top: 15px; color: var(--text-secondary);">We'll send you pricing, a product demo link, and answer questions via email.</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>After You Purchase: Your <span class="gold">Onboarding</span></h2>
+            <div class="onboarding-section">
+                <div class="onboarding-steps">
+                    <div class="onboarding-step">
+                        <div class="step-number">1</div>
+                        <h4>Account Setup</h4>
+                        <p>Confirm your payment and create your CRM login. Takes 5 minutes.</p>
+                    </div>
+                    <div class="onboarding-step">
+                        <div class="step-number">2</div>
+                        <h4>Leads Delivered</h4>
+                        <p>Access your leads instantly in the CRM dashboard. Full contact details included.</p>
+                    </div>
+                    <div class="onboarding-step">
+                        <div class="step-number">3</div>
+                        <h4>Training Access</h4>
+                        <p>Unlock Annuity University modules and 52-week email campaign templates.</p>
+                    </div>
+                    <div class="onboarding-step">
+                        <div class="step-number">4</div>
+                        <h4>Start Closing</h4>
+                        <p>Begin calling leads and using our email sequences. Support available 24/7.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <section class="final-cta">
             <h2>Ready to Scale Your <span class="gold">Lead Generation</span>?</h2>
             <p>Join 156+ financial professionals closing more deals this week.</p>
-            <a href="leads-marketplace.html" class="btn-primary">Start Browsing Leads</a>
+            <a href="leads-marketplace.html" class="btn-primary">Browse Lead Packages</a>
         </section>
     </main>
 
@@ -672,9 +993,34 @@
                 <a href="#support">Support</a>
             </div>
         </div>
+        <div class="footer-contact">
+            <h4>Support & Contact</h4>
+            <p>📧 Email: support@buyiasleads.com</p>
+            <p>📞 Schedule a demo: calendly.com/buyiasleads</p>
+            <p>💬 Questions? Reply to any email or use contact form above</p>
+        </div>
         <div class="footer-bottom">
             <p>&copy; 2026 BuyIASLeads. Premium Indexed Annuity Lead Marketplace.</p>
         </div>
     </footer>
+
+    <script>
+        function toggleFaq(element) {
+            const answer = element.nextElementSibling;
+            const chevron = element.querySelector('span:last-child');
+            answer.classList.toggle('active');
+            chevron.textContent = answer.classList.contains('active') ? '▲' : '▼';
+        }
+
+        function handleEmailCapture(e) {
+            e.preventDefault();
+            const email = e.target.querySelector('input[type="email"]').value;
+            // In production, send to backend/email service
+            // For now, show success and redirect to leads page
+            alert('Thanks! Check your email for next steps. You\'ll also see pricing options below.');
+            e.target.reset();
+            document.getElementById('how-it-works').scrollIntoView({behavior: 'smooth'});
+        }
+    </script>
 </body>
 </html>
