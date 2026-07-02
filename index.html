@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BuyIASLeads - Premium Indexed Annuity Leads | Financial Professionals</title>
+    <title>BuyIASLeads - Indexed Annuity Leads</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -18,8 +18,6 @@
             --navy-dark: #0f1419;
             --navy-light: #1a1f2e;
             --gold: #d4a574;
-            --gold-light: #e8c9a0;
-            --cyan-light: #e8f4f8;
             --text-primary: #f5f7fa;
             --text-secondary: #b8c5d6;
             --border-color: rgba(212, 165, 116, 0.15);
@@ -30,23 +28,6 @@
             color: var(--text-primary);
             background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy-light) 100%);
             line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image:
-                linear-gradient(45deg, transparent 48%, rgba(212, 165, 116, 0.03) 49%, rgba(212, 165, 116, 0.03) 51%, transparent 52%),
-                linear-gradient(-45deg, transparent 48%, rgba(212, 165, 116, 0.03) 49%, rgba(212, 165, 116, 0.03) 51%, transparent 52%);
-            background-size: 80px 80px;
-            background-position: 0 0;
-            pointer-events: none;
-            z-index: 0;
         }
 
         header {
@@ -54,10 +35,10 @@
             top: 0;
             width: 100%;
             z-index: 1000;
-            background: linear-gradient(180deg, rgba(15, 20, 25, 0.95) 0%, rgba(15, 20, 25, 0.7) 100%);
-            backdrop-filter: blur(10px);
+            background: rgba(15, 20, 25, 0.95);
             border-bottom: 1px solid var(--border-color);
             padding: 20px 0;
+            backdrop-filter: blur(10px);
         }
 
         .header-content {
@@ -79,8 +60,7 @@
 
         nav {
             display: flex;
-            gap: 50px;
-            align-items: center;
+            gap: 40px;
         }
 
         nav a {
@@ -88,636 +68,119 @@
             text-decoration: none;
             font-size: 14px;
             font-weight: 500;
-            transition: color 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            transition: color 0.3s;
         }
 
         nav a:hover {
             color: var(--gold);
         }
 
-        .cta-button {
-            background: var(--gold);
-            color: var(--navy-dark);
-            padding: 12px 32px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-        }
-
-        .cta-button:hover {
-            background: var(--gold-light);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(212, 165, 116, 0.2);
-        }
-
         main {
+            padding-top: 100px;
             position: relative;
             z-index: 1;
         }
 
         .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 120px 40px 80px;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 40px;
             text-align: center;
-        }
-
-        .hero-content {
-            max-width: 900px;
-        }
-
-        .hero-badge {
-            display: inline-block;
-            background: rgba(212, 165, 116, 0.1);
-            border: 1px solid var(--border-color);
-            color: var(--gold);
-            padding: 8px 20px;
-            border-radius: 20px;
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 30px;
-            font-weight: 600;
         }
 
         .hero h1 {
             font-family: 'Crimson Text', serif;
-            font-size: 72px;
+            font-size: 56px;
             font-weight: 700;
-            line-height: 1.2;
             margin-bottom: 20px;
-            letter-spacing: -1px;
-        }
-
-        .hero h1 .highlight {
-            color: var(--gold);
         }
 
         .hero p {
-            font-size: 20px;
+            font-size: 18px;
             color: var(--text-secondary);
             margin-bottom: 40px;
-            line-height: 1.6;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
         }
 
-        .hero-buttons {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            margin-bottom: 60px;
-            flex-wrap: wrap;
-        }
-
-        .btn-primary {
-            background: var(--gold);
-            color: var(--navy-dark);
-            padding: 16px 48px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-        }
-
-        .btn-primary:hover {
-            background: var(--gold-light);
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(212, 165, 116, 0.3);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: var(--text-primary);
-            padding: 16px 48px;
-            border: 2px solid var(--gold);
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .btn-secondary:hover {
-            background: rgba(212, 165, 116, 0.1);
-            border-color: var(--gold-light);
-            color: var(--gold);
-        }
-
-        .hero-stats {
-            display: flex;
-            justify-content: center;
-            gap: 60px;
-            margin-top: 40px;
-            flex-wrap: wrap;
-        }
-
-        .stat {
-            text-align: center;
-        }
-
-        .stat-number {
-            font-family: 'Crimson Text', serif;
-            font-size: 36px;
-            font-weight: 700;
-            color: var(--gold);
-        }
-
-        .stat-label {
-            font-size: 13px;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-top: 8px;
-        }
-
-        section {
+        .leads-grid {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 100px 40px;
-            position: relative;
-            z-index: 1;
-        }
-
-        section h2 {
-            font-family: 'Crimson Text', serif;
-            font-size: 56px;
-            font-weight: 700;
-            margin-bottom: 50px;
-            text-align: center;
-            letter-spacing: -1px;
-        }
-
-        section h2 .gold {
-            color: var(--gold);
-        }
-
-        .how-it-works {
-            background: linear-gradient(135deg, rgba(26, 31, 46, 0.5) 0%, rgba(15, 20, 25, 0.5) 100%);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            overflow: hidden;
-        }
-
-        .process-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 40px;
-            margin-top: 40px;
-        }
-
-        .process-card {
-            background: rgba(26, 31, 46, 0.6);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
             padding: 40px;
-            text-align: center;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .process-card:hover {
-            border-color: var(--gold);
-            background: rgba(26, 31, 46, 0.9);
-            transform: translateY(-5px);
-        }
-
-        .process-number {
-            width: 50px;
-            height: 50px;
-            background: var(--gold);
-            color: var(--navy-dark);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Crimson Text', serif;
-            font-size: 28px;
-            font-weight: 700;
-            margin: 0 auto 20px;
-        }
-
-        .process-card h3 {
-            font-family: 'Crimson Text', serif;
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 15px;
-            color: var(--text-primary);
-        }
-
-        .process-card p {
-            color: var(--text-secondary);
-            font-size: 15px;
-            line-height: 1.7;
-        }
-
-        .quality-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-top: 50px;
-        }
-
-        .quality-card {
-            background: rgba(26, 31, 46, 0.4);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 35px;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .quality-card:hover {
-            border-color: var(--gold);
-            background: rgba(26, 31, 46, 0.7);
-        }
-
-        .quality-metric {
-            font-family: 'Crimson Text', serif;
-            font-size: 48px;
-            font-weight: 700;
-            color: var(--gold);
-            margin-bottom: 10px;
-        }
-
-        .quality-label {
-            font-size: 14px;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .testimonials-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
-            margin-top: 50px;
         }
 
-        .testimonial-card {
+        .lead-card {
             background: rgba(26, 31, 46, 0.5);
             border: 1px solid var(--border-color);
             border-radius: 12px;
-            padding: 40px;
-            transition: all 0.3s ease;
+            padding: 30px;
+            transition: all 0.3s;
         }
 
-        .testimonial-card:hover {
+        .lead-card:hover {
             border-color: var(--gold);
             background: rgba(26, 31, 46, 0.8);
         }
 
-        .stars {
-            color: var(--gold);
-            font-size: 14px;
-            margin-bottom: 15px;
-            letter-spacing: 2px;
-        }
-
-        .testimonial-quote {
-            font-size: 16px;
-            color: var(--text-primary);
-            margin-bottom: 25px;
-            line-height: 1.7;
-            font-style: italic;
-        }
-
-        .testimonial-author {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            border-top: 1px solid var(--border-color);
-            padding-top: 20px;
-        }
-
-        .author-avatar {
-            width: 48px;
-            height: 48px;
-            background: linear-gradient(135deg, var(--gold), var(--gold-light));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--navy-dark);
-            font-weight: 700;
-            font-size: 18px;
-        }
-
-        .author-info h4 {
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-
-        .author-info p {
-            font-size: 12px;
-            color: var(--text-secondary);
-        }
-
-        .final-cta {
-            background: linear-gradient(135deg, rgba(212, 165, 116, 0.05) 0%, rgba(26, 31, 46, 0.4) 100%);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 80px 40px;
-            text-align: center;
-        }
-
-        .final-cta h2 {
-            margin-bottom: 20px;
-        }
-
-        .final-cta p {
-            font-size: 18px;
-            color: var(--text-secondary);
-            margin-bottom: 40px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .trust-badges {
-            display: flex;
-            gap: 40px;
-            justify-content: center;
-            align-items: center;
-            margin: 50px 0;
-            flex-wrap: wrap;
-        }
-
-        .trust-badge {
-            text-align: center;
-            font-size: 14px;
-            color: var(--text-secondary);
-        }
-
-        .badge-icon {
-            font-size: 32px;
-            margin-bottom: 8px;
-        }
-
-        .faq-section {
-            background: linear-gradient(135deg, rgba(26, 31, 46, 0.5) 0%, rgba(15, 20, 25, 0.5) 100%);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 40px;
-            margin-top: 40px;
-        }
-
-        .faq-item {
-            border-bottom: 1px solid var(--border-color);
-            padding: 20px 0;
-        }
-
-        .faq-item:last-child {
-            border-bottom: none;
-        }
-
-        .faq-question {
-            cursor: pointer;
-            font-weight: 600;
-            color: var(--text-primary);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: color 0.3s ease;
-        }
-
-        .faq-question:hover {
-            color: var(--gold);
-        }
-
-        .faq-answer {
-            display: none;
-            color: var(--text-secondary);
-            margin-top: 15px;
-            line-height: 1.7;
-        }
-
-        .faq-answer.active {
-            display: block;
-        }
-
-        .email-capture {
-            background: linear-gradient(135deg, rgba(212, 165, 116, 0.1) 0%, rgba(26, 31, 46, 0.3) 100%);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 40px;
-            text-align: center;
-            margin-bottom: 50px;
-        }
-
-        .email-capture h3 {
+        .lead-card h3 {
             font-family: 'Crimson Text', serif;
-            font-size: 28px;
-            margin-bottom: 15px;
-            color: var(--text-primary);
-        }
-
-        .email-capture p {
-            color: var(--text-secondary);
-            margin-bottom: 25px;
-            font-size: 16px;
-        }
-
-        .email-form {
-            display: flex;
-            gap: 10px;
-            max-width: 500px;
-            margin: 0 auto;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .email-form input {
-            flex: 1;
-            min-width: 250px;
-            padding: 12px 16px;
-            background: rgba(15, 20, 25, 0.6);
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            color: var(--text-primary);
-            font-size: 14px;
-        }
-
-        .email-form input::placeholder {
-            color: var(--text-secondary);
-        }
-
-        .email-form button {
-            background: var(--gold);
-            color: var(--navy-dark);
-            padding: 12px 24px;
-            border: none;
-            border-radius: 6px;
-            font-weight: 600;
-            cursor: pointer;
-            text-transform: uppercase;
-            font-size: 13px;
-            letter-spacing: 0.5px;
-            transition: all 0.3s ease;
-        }
-
-        .email-form button:hover {
-            background: var(--gold-light);
-        }
-
-        .onboarding-section {
-            background: linear-gradient(135deg, rgba(26, 31, 46, 0.5) 0%, rgba(15, 20, 25, 0.5) 100%);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 40px;
-        }
-
-        .onboarding-steps {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 30px;
-        }
-
-        .onboarding-step {
-            background: rgba(26, 31, 46, 0.4);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 25px;
-            text-align: center;
-        }
-
-        .step-number {
-            width: 40px;
-            height: 40px;
-            background: var(--gold);
-            color: var(--navy-dark);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            font-size: 24px;
             font-weight: 700;
-            font-size: 18px;
-            margin: 0 auto 15px;
-        }
-
-        .onboarding-step h4 {
-            color: var(--text-primary);
             margin-bottom: 10px;
-            font-family: 'Crimson Text', serif;
-            font-size: 18px;
         }
 
-        .onboarding-step p {
+        .lead-card p {
             color: var(--text-secondary);
             font-size: 14px;
-            line-height: 1.6;
+            margin-bottom: 20px;
+            flex-grow: 1;
         }
 
-        .price-badge {
-            display: inline-block;
-            background: rgba(212, 165, 116, 0.2);
-            border: 1px solid var(--gold);
+        .lead-price {
+            font-family: 'Crimson Text', serif;
+            font-size: 48px;
+            font-weight: 700;
             color: var(--gold);
-            padding: 8px 16px;
-            border-radius: 6px;
-            font-size: 14px;
-            font-weight: 600;
-            margin-top: 10px;
+            margin: 20px 0;
+        }
+
+        .lead-card button {
+            background: var(--gold);
+            color: var(--navy-dark);
+            padding: 14px 24px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+        }
+
+        .lead-card button:hover {
+            background: #e8c9a0;
+            transform: scale(1.02);
         }
 
         footer {
             background: rgba(15, 20, 25, 0.8);
             border-top: 1px solid var(--border-color);
-            padding: 60px 40px;
-            margin-top: 100px;
-            position: relative;
-            z-index: 1;
-        }
-
-        footer h4 {
-            font-family: 'Crimson Text', serif;
-            font-size: 18px;
-            font-weight: 700;
-            color: var(--gold);
-            margin-bottom: 20px;
-        }
-
-        footer a {
-            display: block;
-            font-size: 14px;
-            color: var(--text-secondary);
-            text-decoration: none;
-            margin-bottom: 12px;
-            transition: color 0.3s ease;
-        }
-
-        footer a:hover {
-            color: var(--gold);
-        }
-
-        .footer-contact {
-            margin-top: 30px;
-            padding-top: 30px;
-            border-top: 1px solid var(--border-color);
-        }
-
-        .footer-contact h4 {
-            margin-bottom: 15px;
-        }
-
-        .footer-contact p {
-            color: var(--text-secondary);
-            font-size: 14px;
-            margin-bottom: 8px;
-        }
-
-        .footer-bottom {
-            border-top: 1px solid var(--border-color);
-            padding-top: 40px;
+            padding: 40px;
+            margin-top: 60px;
             text-align: center;
             color: var(--text-secondary);
             font-size: 13px;
         }
 
         @media (max-width: 768px) {
-            .header-content {
-                padding: 0 20px;
-            }
-
-            nav {
-                gap: 20px;
-            }
-
-            .hero {
-                padding: 100px 20px 60px;
+            .leads-grid {
+                grid-template-columns: 1fr;
             }
 
             .hero h1 {
-                font-size: 42px;
-            }
-
-            section {
-                padding: 60px 20px;
-            }
-
-            section h2 {
                 font-size: 36px;
             }
         }
@@ -726,301 +189,72 @@
 <body>
     <header>
         <div class="header-content">
-            <div class="logo">BUYIASLEADS</div>
+            <a href="/" class="logo">BUYIASLEADS</a>
             <nav>
-                <a href="leads-marketplace.html">Browse Leads</a>
-                <a href="#how-it-works">How It Works</a>
-                <a href="#testimonials">Testimonials</a>
-                <button class="cta-button" onclick="document.querySelector('.btn-primary').click()">Get Started</button>
+                <a href="leads-marketplace.html">Browse</a>
+                <a href="#pricing">Pricing</a>
             </nav>
         </div>
     </header>
 
     <main>
-        <section class="hero">
-            <div class="hero-content">
-                <div class="hero-badge">Premium Lead Marketplace</div>
-                <h1>High-Quality <span class="highlight">Indexed Annuity Leads</span> — Delivered Instantly</h1>
-                <p>Access pre-qualified prospects actively seeking indexed annuity solutions. 92% lead quality. Real results.</p>
+        <section class="hero" id="pricing">
+            <h1>Buy Indexed Annuity Leads</h1>
+            <p>$100/month CRM included. Leads delivered instantly.</p>
+        </section>
 
-                <div class="price-badge">Starting at $2,000 for 100 leads + $100/mo CRM</div>
+        <section class="leads-grid">
+            <div class="lead-card">
+                <h3>100 Leads</h3>
+                <p>Pre-qualified prospects seeking indexed annuity solutions.</p>
+                <div class="lead-price">$2,000</div>
+                <a href="checkout.html?package=100" style="text-decoration: none;"><button>Buy Now</button></a>
+            </div>
 
-                <div class="hero-buttons">
-                    <a href="#purchase" class="btn-primary">Get Started Now</a>
-                    <button class="btn-secondary" onclick="document.getElementById('how-it-works').scrollIntoView({behavior:'smooth'})">See How It Works</button>
-                </div>
+            <div class="lead-card">
+                <h3>200 Leads</h3>
+                <p>Pre-qualified prospects seeking indexed annuity solutions.</p>
+                <div class="lead-price">$3,000</div>
+                <a href="checkout.html?package=200" style="text-decoration: none;"><button>Buy Now</button></a>
+            </div>
 
-                <div class="hero-stats">
-                    <div class="stat">
-                        <div class="stat-number">92%</div>
-                        <div class="stat-label">Lead Quality</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-number">68%</div>
-                        <div class="stat-label">Callback Rate</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-number">156+</div>
-                        <div class="stat-label">Deals Closed</div>
-                    </div>
-                </div>
+            <div class="lead-card">
+                <h3>400 Leads</h3>
+                <p>Pre-qualified prospects seeking indexed annuity solutions.</p>
+                <div class="lead-price">$4,000</div>
+                <a href="checkout.html?package=400" style="text-decoration: none;"><button>Buy Now</button></a>
             </div>
         </section>
 
-        <section class="how-it-works" id="how-it-works">
-            <h2>How <span class="gold">It Works</span></h2>
-            <div class="process-grid">
-                <div class="process-card">
-                    <div class="process-number">1</div>
-                    <h3>Choose Your Lead Package</h3>
-                    <p>Select from 100, 200, or 400 qualified leads. Fresh prospects actively seeking indexed annuity solutions.</p>
+        <section style="max-width: 1400px; margin: 0 auto; padding: 80px 40px;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+                <div style="background: rgba(26, 31, 46, 0.5); border: 1px solid var(--border-color); border-radius: 12px; padding: 30px; transition: all 0.3s;" onmouseover="this.style.borderColor='var(--gold)';this.style.background='rgba(26, 31, 46, 0.8)'" onmouseout="this.style.borderColor='var(--border-color)';this.style.background='rgba(26, 31, 46, 0.5)'">
+                    <div style="font-family: 'Crimson Text', serif; font-size: 56px; font-weight: 700; color: var(--gold); margin-bottom: 20px;">1</div>
+                    <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 15px; color: var(--text-primary);">Select Your Package</h3>
+                    <p style="color: var(--text-secondary); font-size: 14px; line-height: 1.6;">Choose from 100, 200, or 400 pre-qualified leads. Select the package size that fits your needs and budget. Fresh prospects actively seeking indexed annuity solutions.</p>
                 </div>
-                <div class="process-card">
-                    <div class="process-number">2</div>
-                    <h3>Get Your CRM Seat</h3>
-                    <p>$100/month CRM includes Annuity University, AI free book, 52-week email campaign, and priority support.</p>
+                <div style="background: rgba(26, 31, 46, 0.5); border: 1px solid var(--border-color); border-radius: 12px; padding: 30px; transition: all 0.3s;" onmouseover="this.style.borderColor='var(--gold)';this.style.background='rgba(26, 31, 46, 0.8)'" onmouseout="this.style.borderColor='var(--border-color)';this.style.background='rgba(26, 31, 46, 0.5)'">
+                    <div style="font-family: 'Crimson Text', serif; font-size: 56px; font-weight: 700; color: var(--gold); margin-bottom: 20px;">2</div>
+                    <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 15px; color: var(--text-primary);">Purchase Your CRM Seat</h3>
+                    <p style="color: var(--text-secondary); font-size: 14px; line-height: 1.6; margin-bottom: 15px;"><strong>$100/month includes:</strong></p>
+                    <ul style="color: var(--text-secondary); font-size: 14px; line-height: 1.8; text-align: left; margin-left: 20px;">
+                        <li>Link to Annuity University</li>
+                        <li>Link to Oscar Annuity AI</li>
+                        <li>Link to free book</li>
+                        <li>52-week nurture campaign</li>
+                    </ul>
                 </div>
-                <div class="process-card">
-                    <div class="process-number">3</div>
-                    <h3>Fill Out Form, Make Payment & Get Leads</h3>
-                    <p>Complete onboarding form and process payment. Receive leads in real-time and schedule your setup call.</p>
-                </div>
-            </div>
-        </section>
-
-        <section>
-            <h2>Why Our <span class="gold">Leads Convert</span></h2>
-            <p style="color: var(--text-secondary); font-size: 18px; max-width: 700px; margin: 0 auto 50px; text-align: center;">We've invested $200K+ in precision targeting. Every lead is pre-qualified. Every prospect is genuinely interested.</p>
-
-            <div class="quality-grid">
-                <div class="quality-card">
-                    <div class="quality-metric">$200K+</div>
-                    <div class="quality-label">Invested in Precision Targeting</div>
-                </div>
-                <div class="quality-card">
-                    <div class="quality-metric">92%</div>
-                    <div class="quality-label">Pre-Qualified Leads</div>
-                </div>
-                <div class="quality-card">
-                    <div class="quality-metric">&lt; 24hrs</div>
-                    <div class="quality-label">Instant Delivery</div>
+                <div style="background: rgba(26, 31, 46, 0.5); border: 1px solid var(--border-color); border-radius: 12px; padding: 30px; transition: all 0.3s;" onmouseover="this.style.borderColor='var(--gold)';this.style.background='rgba(26, 31, 46, 0.8)'" onmouseout="this.style.borderColor='var(--border-color)';this.style.background='rgba(26, 31, 46, 0.5)'">
+                    <div style="font-family: 'Crimson Text', serif; font-size: 56px; font-weight: 700; color: var(--gold); margin-bottom: 20px;">3</div>
+                    <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 15px; color: var(--text-primary);">Fill Out Form, Make Payment</h3>
+                    <p style="color: var(--text-secondary); font-size: 14px; line-height: 1.6;">Complete your information, process payment securely, and gain instant access to your leads in the CRM dashboard. Leads delivered in real-time as they come in.</p>
                 </div>
             </div>
-        </section>
-
-        <section id="testimonials">
-            <h2>Trusted by <span class="gold">156+ Professionals</span></h2>
-            <div class="testimonials-grid">
-                <div class="testimonial-card">
-                    <div class="stars">★★★★★</div>
-                    <p class="testimonial-quote">"Two deals closed in the first month. Real prospects with genuine interest in solutions."</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">JM</div>
-                        <div class="author-info">
-                            <h4>James Martinez</h4>
-                            <p>Annuity Specialist</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="testimonial-card">
-                    <div class="stars">★★★★★</div>
-                    <p class="testimonial-quote">"I sat down with over $10 million in assets in my first week. Quality leads make all the difference."</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">LS</div>
-                        <div class="author-info">
-                            <h4>Linda Stewart</h4>
-                            <p>Insurance Broker</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="testimonial-card">
-                    <div class="stars">★★★★★</div>
-                    <p class="testimonial-quote">"The leads are really good—love the price and the quality. Solid ROI."</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">RC</div>
-                        <div class="author-info">
-                            <h4>Robert Chen</h4>
-                            <p>Independent Agent</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section>
-            <div class="trust-badges">
-                <div class="trust-badge">
-                    <div class="badge-icon">✓</div>
-                    <div>30-Day Money-Back Guarantee</div>
-                </div>
-                <div class="trust-badge">
-                    <div class="badge-icon">🔒</div>
-                    <div>Secure Payment Processing</div>
-                </div>
-                <div class="trust-badge">
-                    <div class="badge-icon">⚡</div>
-                    <div>Instant Lead Delivery</div>
-                </div>
-                <div class="trust-badge">
-                    <div class="badge-icon">📞</div>
-                    <div>Priority Support</div>
-                </div>
-            </div>
-        </section>
-
-        <section>
-            <h2>Frequently Asked <span class="gold">Questions</span></h2>
-            <div class="faq-section">
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFaq(this)">
-                        <span>How fast will I get my leads after purchase?</span>
-                        <span>▼</span>
-                    </div>
-                    <div class="faq-answer">
-                        Leads are delivered in real-time within your CRM. You'll have instant access to contact information, location, and lead quality scores. Most users start calling within 30 minutes of purchase.
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFaq(this)">
-                        <span>What's your refund policy?</span>
-                        <span>▼</span>
-                    </div>
-                    <div class="faq-answer">
-                        We offer a 30-day money-back guarantee. If you're not satisfied with lead quality, contact support and we'll refund your lead purchase. No questions asked. Your CRM subscription is separate and follows our standard subscription terms.
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFaq(this)">
-                        <span>Do leads expire or have a time limit?</span>
-                        <span>▼</span>
-                    </div>
-                    <div class="faq-answer">
-                        Your leads don't expire. You have lifetime access to contacts in your CRM. Follow up on your own timeline. We recommend contacting leads within the first week for best conversion rates based on market data.
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFaq(this)">
-                        <span>What's included in the CRM subscription?</span>
-                        <span>▼</span>
-                    </div>
-                    <div class="faq-answer">
-                        The $100/month CRM includes: Annuity University training module, AI-powered free book on annuities, 52-week automated email campaign for follow-up, priority email support, and unlimited lead storage. Annual billing discounts available.
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFaq(this)">
-                        <span>Can I get a demo before committing?</span>
-                        <span>▼</span>
-                    </div>
-                    <div class="faq-answer">
-                        Yes. Email support@buyiasleads.com or book a 15-minute demo call and we'll walk you through the platform, show you real lead data (anonymized), and answer all your questions before you buy.
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="purchase">
-            <div class="email-capture">
-                <h3>Ready to Close More Deals?</h3>
-                <p>Join 156+ financial professionals already using BuyIASLeads. Get started in minutes.</p>
-                <form class="email-form" onsubmit="handleEmailCapture(event)">
-                    <input type="email" placeholder="your@email.com" required>
-                    <button type="submit">Get Started</button>
-                </form>
-                <p style="font-size: 12px; margin-top: 15px; color: var(--text-secondary);">We'll send you pricing, a product demo link, and answer questions via email.</p>
-            </div>
-        </section>
-
-        <section>
-            <h2>After You Purchase: Your <span class="gold">Onboarding</span></h2>
-            <div class="onboarding-section">
-                <div class="onboarding-steps">
-                    <div class="onboarding-step">
-                        <div class="step-number">1</div>
-                        <h4>Account Setup</h4>
-                        <p>Confirm your payment and create your CRM login. Takes 5 minutes.</p>
-                    </div>
-                    <div class="onboarding-step">
-                        <div class="step-number">2</div>
-                        <h4>Leads Delivered</h4>
-                        <p>Access your leads instantly in the CRM dashboard. Full contact details included.</p>
-                    </div>
-                    <div class="onboarding-step">
-                        <div class="step-number">3</div>
-                        <h4>Training Access</h4>
-                        <p>Unlock Annuity University modules and 52-week email campaign templates.</p>
-                    </div>
-                    <div class="onboarding-step">
-                        <div class="step-number">4</div>
-                        <h4>Start Closing</h4>
-                        <p>Begin calling leads and using our email sequences. Support available 24/7.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="final-cta">
-            <h2>Ready to Scale Your <span class="gold">Lead Generation</span>?</h2>
-            <p>Join 156+ financial professionals closing more deals this week.</p>
-            <a href="leads-marketplace.html" class="btn-primary">Browse Lead Packages</a>
         </section>
     </main>
 
     <footer>
-        <div style="max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 50px; margin-bottom: 50px;">
-            <div>
-                <h4>Product</h4>
-                <a href="leads-marketplace.html">Browse Leads</a>
-                <a href="#pricing">Pricing</a>
-                <a href="#features">Features</a>
-            </div>
-            <div>
-                <h4>Company</h4>
-                <a href="#about">About</a>
-                <a href="#blog">Blog</a>
-                <a href="#contact">Contact</a>
-            </div>
-            <div>
-                <h4>Legal</h4>
-                <a href="#privacy">Privacy</a>
-                <a href="#terms">Terms</a>
-                <a href="#support">Support</a>
-            </div>
-        </div>
-        <div class="footer-contact">
-            <h4>Support & Contact</h4>
-            <p>📧 Email: support@buyiasleads.com</p>
-            <p>📞 Schedule a demo: calendly.com/buyiasleads</p>
-            <p>💬 Questions? Reply to any email or use contact form above</p>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 BuyIASLeads. Premium Indexed Annuity Lead Marketplace.</p>
-        </div>
+        <p>&copy; 2026 BuyIASLeads. All rights reserved.</p>
     </footer>
-
-    <script>
-        function toggleFaq(element) {
-            const answer = element.nextElementSibling;
-            const chevron = element.querySelector('span:last-child');
-            answer.classList.toggle('active');
-            chevron.textContent = answer.classList.contains('active') ? '▲' : '▼';
-        }
-
-        function handleEmailCapture(e) {
-            e.preventDefault();
-            const email = e.target.querySelector('input[type="email"]').value;
-            // In production, send to backend/email service
-            // For now, show success and redirect to leads page
-            alert('Thanks! Check your email for next steps. You\'ll also see pricing options below.');
-            e.target.reset();
-            document.getElementById('how-it-works').scrollIntoView({behavior: 'smooth'});
-        }
-    </script>
 </body>
 </html>

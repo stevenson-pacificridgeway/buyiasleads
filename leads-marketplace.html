@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Browse Leads - BuyIASLeads Marketplace</title>
+    <title>Browse Leads - BuyIASLeads</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -18,8 +18,6 @@
             --navy-dark: #0f1419;
             --navy-light: #1a1f2e;
             --gold: #d4a574;
-            --gold-light: #e8c9a0;
-            --cyan-light: #e8f4f8;
             --text-primary: #f5f7fa;
             --text-secondary: #b8c5d6;
             --border-color: rgba(212, 165, 116, 0.15);
@@ -29,22 +27,6 @@
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             color: var(--text-primary);
             background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy-light) 100%);
-            line-height: 1.6;
-        }
-
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                linear-gradient(45deg, transparent 48%, rgba(212, 165, 116, 0.03) 49%, rgba(212, 165, 116, 0.03) 51%, transparent 52%),
-                linear-gradient(-45deg, transparent 48%, rgba(212, 165, 116, 0.03) 49%, rgba(212, 165, 116, 0.03) 51%, transparent 52%);
-            background-size: 80px 80px;
-            pointer-events: none;
-            z-index: 0;
         }
 
         header {
@@ -52,10 +34,10 @@
             top: 0;
             width: 100%;
             z-index: 1000;
-            background: linear-gradient(180deg, rgba(15, 20, 25, 0.95) 0%, rgba(15, 20, 25, 0.7) 100%);
-            backdrop-filter: blur(10px);
+            background: rgba(15, 20, 25, 0.95);
             border-bottom: 1px solid var(--border-color);
             padding: 20px 0;
+            backdrop-filter: blur(10px);
         }
 
         .header-content {
@@ -73,7 +55,11 @@
             font-weight: 700;
             letter-spacing: 2px;
             color: var(--gold);
-            text-decoration: none;
+        }
+
+        nav {
+            display: flex;
+            gap: 40px;
         }
 
         nav a {
@@ -81,10 +67,7 @@
             text-decoration: none;
             font-size: 14px;
             font-weight: 500;
-            transition: color 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin: 0 25px;
+            transition: color 0.3s;
         }
 
         nav a:hover {
@@ -92,70 +75,28 @@
         }
 
         main {
+            padding-top: 100px;
             position: relative;
             z-index: 1;
-            padding-top: 120px;
         }
 
-        .marketplace-header {
+        .header-section {
             max-width: 1400px;
             margin: 0 auto;
             padding: 60px 40px;
             text-align: center;
         }
 
-        .marketplace-header h1 {
+        .header-section h1 {
             font-family: 'Crimson Text', serif;
-            font-size: 56px;
+            font-size: 48px;
             font-weight: 700;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
         }
 
-        .marketplace-header p {
-            font-size: 18px;
+        .header-section p {
             color: var(--text-secondary);
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .filters {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 40px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            background: rgba(26, 31, 46, 0.3);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-        }
-
-        .filter-group {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .filter-group label {
-            font-size: 12px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: var(--gold);
-        }
-
-        .filter-group select {
-            background: rgba(15, 20, 25, 0.5);
-            border: 1px solid var(--border-color);
-            color: var(--text-primary);
-            padding: 10px 12px;
-            border-radius: 6px;
-            font-size: 14px;
-            cursor: pointer;
-        }
-
-        .filter-group select:hover {
-            border-color: var(--gold);
+            font-size: 16px;
         }
 
         .leads-grid {
@@ -163,40 +104,23 @@
             margin: 0 auto;
             padding: 40px;
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
         }
 
         .lead-card {
-            background: linear-gradient(135deg, rgba(26, 31, 46, 0.6) 0%, rgba(15, 20, 25, 0.4) 100%);
+            background: rgba(26, 31, 46, 0.5);
             border: 1px solid var(--border-color);
             border-radius: 12px;
             padding: 30px;
-            transition: all 0.3s ease;
+            transition: all 0.3s;
             display: flex;
             flex-direction: column;
         }
 
         .lead-card:hover {
             border-color: var(--gold);
-            background: rgba(26, 31, 46, 0.9);
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(212, 165, 116, 0.2);
-        }
-
-        .lead-badge {
-            display: inline-block;
-            background: rgba(212, 165, 116, 0.2);
-            border: 1px solid var(--border-color);
-            color: var(--gold);
-            padding: 6px 12px;
-            border-radius: 6px;
-            font-size: 11px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 15px;
-            width: fit-content;
+            background: rgba(26, 31, 46, 0.8);
         }
 
         .lead-card h3 {
@@ -209,37 +133,8 @@
         .lead-card p {
             color: var(--text-secondary);
             font-size: 14px;
-            line-height: 1.6;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             flex-grow: 1;
-        }
-
-        .lead-stats {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-bottom: 25px;
-            padding-bottom: 25px;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .stat {
-            text-align: center;
-        }
-
-        .stat-value {
-            font-family: 'Crimson Text', serif;
-            font-size: 28px;
-            font-weight: 700;
-            color: var(--gold);
-        }
-
-        .stat-label {
-            font-size: 11px;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-top: 4px;
         }
 
         .lead-price {
@@ -247,7 +142,7 @@
             font-size: 48px;
             font-weight: 700;
             color: var(--gold);
-            margin-bottom: 20px;
+            margin: 20px 0;
         }
 
         .lead-card button {
@@ -261,43 +156,28 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.3s;
             width: 100%;
         }
 
         .lead-card button:hover {
-            background: var(--gold-light);
+            background: #e8c9a0;
             transform: scale(1.02);
         }
 
         footer {
             background: rgba(15, 20, 25, 0.8);
             border-top: 1px solid var(--border-color);
-            padding: 60px 40px;
-            margin-top: 100px;
-            position: relative;
-            z-index: 1;
+            padding: 40px;
+            margin-top: 60px;
             text-align: center;
             color: var(--text-secondary);
             font-size: 13px;
         }
 
         @media (max-width: 768px) {
-            .header-content {
-                padding: 0 20px;
-            }
-
             .leads-grid {
                 grid-template-columns: 1fr;
-                padding: 20px;
-            }
-
-            .marketplace-header {
-                padding: 40px 20px;
-            }
-
-            .marketplace-header h1 {
-                font-size: 36px;
             }
         }
     </style>
@@ -308,105 +188,43 @@
             <a href="index.html" class="logo">BUYIASLEADS</a>
             <nav>
                 <a href="index.html">Home</a>
-                <a href="index.html#how-it-works">How It Works</a>
-                <a href="index.html#testimonials">Testimonials</a>
+                <a href="index.html#pricing">Pricing</a>
             </nav>
         </div>
     </header>
 
     <main>
-        <div class="marketplace-header">
-            <h1>Indexed Annuity Lead <span style="color: var(--gold);">Marketplace</span></h1>
-            <p>Browse premium pre-qualified leads. Fresh prospects actively seeking indexed annuity solutions.</p>
+        <div class="header-section">
+            <h1>Lead Packages</h1>
+            <p>Fresh, pre-qualified prospects. Delivered instantly.</p>
         </div>
 
-
         <div class="leads-grid">
-            <!-- 100 Leads Package -->
             <div class="lead-card">
-                <div class="lead-badge">Fresh Leads</div>
-                <h3>100 Qualified Leads</h3>
-                <p>100 newly-qualified prospects actively researching indexed annuity solutions. Real-time delivery to your CRM.</p>
-                <div class="lead-stats">
-                    <div class="stat">
-                        <div class="stat-value">92%</div>
-                        <div class="stat-label">Quality</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-value">68%</div>
-                        <div class="stat-label">Callback</div>
-                    </div>
-                </div>
+                <h3>100 Leads</h3>
+                <p>Pre-qualified prospects actively seeking indexed annuity solutions.</p>
                 <div class="lead-price">$2,000</div>
                 <a href="checkout.html?package=100" style="text-decoration: none;"><button>Purchase Now</button></a>
             </div>
 
-            <!-- 200 Leads Package -->
             <div class="lead-card">
-                <div class="lead-badge">Most Popular</div>
-                <h3>200 Qualified Leads</h3>
-                <p>200 pre-qualified prospects actively seeking indexed annuity solutions. Our most popular package with immediate CRM delivery.</p>
-                <div class="lead-stats">
-                    <div class="stat">
-                        <div class="stat-value">92%</div>
-                        <div class="stat-label">Quality</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-value">68%</div>
-                        <div class="stat-label">Callback</div>
-                    </div>
-                </div>
+                <h3>200 Leads</h3>
+                <p>Pre-qualified prospects actively seeking indexed annuity solutions.</p>
                 <div class="lead-price">$3,000</div>
                 <a href="checkout.html?package=200" style="text-decoration: none;"><button>Purchase Now</button></a>
             </div>
 
-            <!-- 400 Leads Package -->
             <div class="lead-card">
-                <div class="lead-badge">Best Value</div>
-                <h3>400 Qualified Leads</h3>
-                <p>400 premium prospects actively interested in indexed annuities. Highest volume package with best per-lead pricing.</p>
-                <div class="lead-stats">
-                    <div class="stat">
-                        <div class="stat-value">92%</div>
-                        <div class="stat-label">Quality</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-value">68%</div>
-                        <div class="stat-label">Callback</div>
-                    </div>
-                </div>
+                <h3>400 Leads</h3>
+                <p>Pre-qualified prospects actively seeking indexed annuity solutions.</p>
                 <div class="lead-price">$4,000</div>
                 <a href="checkout.html?package=400" style="text-decoration: none;"><button>Purchase Now</button></a>
             </div>
         </div>
     </main>
 
-    <footer style="background: rgba(15, 20, 25, 0.8); border-top: 1px solid var(--border-color); padding: 60px 40px; margin-top: 100px; position: relative; z-index: 1;">
-        <div style="max-width: 1400px; margin: 0 auto;">
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 50px; margin-bottom: 50px;">
-                <div>
-                    <h4 style="font-family: 'Crimson Text', serif; font-size: 18px; font-weight: 700; color: var(--gold); margin-bottom: 20px;">Product</h4>
-                    <a href="index.html" style="display: block; font-size: 14px; color: var(--text-secondary); text-decoration: none; margin-bottom: 12px; transition: color 0.3s ease;">Home</a>
-                    <a href="#" style="display: block; font-size: 14px; color: var(--text-secondary); text-decoration: none; margin-bottom: 12px; transition: color 0.3s ease;">Pricing</a>
-                    <a href="index.html#how-it-works" style="display: block; font-size: 14px; color: var(--text-secondary); text-decoration: none; margin-bottom: 12px; transition: color 0.3s ease;">How It Works</a>
-                </div>
-                <div>
-                    <h4 style="font-family: 'Crimson Text', serif; font-size: 18px; font-weight: 700; color: var(--gold); margin-bottom: 20px;">Support</h4>
-                    <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 8px;">📧 support@buyiasleads.com</p>
-                    <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 8px;">📞 Schedule Demo</p>
-                    <p style="color: var(--text-secondary); font-size: 14px;">30-Day Money-Back Guarantee</p>
-                </div>
-                <div>
-                    <h4 style="font-family: 'Crimson Text', serif; font-size: 18px; font-weight: 700; color: var(--gold); margin-bottom: 20px;">Legal</h4>
-                    <a href="#" style="display: block; font-size: 14px; color: var(--text-secondary); text-decoration: none; margin-bottom: 12px;">Privacy Policy</a>
-                    <a href="#" style="display: block; font-size: 14px; color: var(--text-secondary); text-decoration: none; margin-bottom: 12px;">Terms of Service</a>
-                    <a href="#" style="display: block; font-size: 14px; color: var(--text-secondary); text-decoration: none;">Contact</a>
-                </div>
-            </div>
-            <div style="border-top: 1px solid var(--border-color); padding-top: 40px; text-align: center; color: var(--text-secondary); font-size: 13px;">
-                <p>&copy; 2026 BuyIASLeads. Premium Indexed Annuity Lead Marketplace. All rights reserved.</p>
-            </div>
-        </div>
+    <footer>
+        <p>&copy; 2026 BuyIASLeads. All rights reserved.</p>
     </footer>
 </body>
 </html>
