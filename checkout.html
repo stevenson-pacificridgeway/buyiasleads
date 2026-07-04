@@ -427,7 +427,7 @@
 
                     <div class="summary-item">
                         <span class="item-name">Lead Package</span>
-                        <span class="item-price" id="packagePrice">—</span>
+                        <span class="item-price" id="leadPrice">—</span>
                     </div>
 
                     <div class="summary-item">
@@ -436,8 +436,8 @@
                     </div>
 
                     <div class="summary-item">
-                        <span class="item-name">Leads Only</span>
-                        <span class="item-price" style="color: var(--gold);">3% Processing Fee</span>
+                        <span class="item-name">Stripe Processing Fee (3%)</span>
+                        <span class="item-price" id="feePrice">—</span>
                     </div>
 
                     <div class="summary-total">
@@ -560,11 +560,16 @@
 
         function updatePrice() {
             const pkg = document.getElementById('package').value;
-            const prices = { test: 104.03, 100: 2161.69, 200: 3192.59, 400: 4223.48 };
-            if (pkg && prices[pkg]) {
-                const chargeAmount = prices[pkg];
-                const total = chargeAmount + 100; // Charge + CRM subscription
-                document.getElementById('packagePrice').textContent = `$${chargeAmount.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            const basePrices = { test: 1, 100: 2000, 200: 3000, 400: 4000 };
+            if (pkg && basePrices[pkg]) {
+                const leadCost = basePrices[pkg];
+                const crmCost = 100;
+                const subtotal = leadCost + crmCost;
+                const fee = subtotal * 0.03;
+                const total = subtotal + fee;
+
+                document.getElementById('leadPrice').textContent = `$${leadCost.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+                document.getElementById('feePrice').textContent = `$${fee.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
                 document.getElementById('totalPrice').textContent = `$${total.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
             }
         }
@@ -595,9 +600,12 @@
             btn.textContent = 'Processing...';
 
             try {
-                const prices = { test: 104.03, 100: 2161.69, 200: 3192.59, 400: 4223.48 };
-                const chargeAmount = prices[packageSize];
-                const totalAmount = chargeAmount + 100; // Charge amount + CRM subscription
+                const basePrices = { test: 1, 100: 2000, 200: 3000, 400: 4000 };
+                const leadCost = basePrices[packageSize];
+                const crmCost = 100;
+                const subtotal = leadCost + crmCost;
+                const fee = subtotal * 0.03;
+                const totalAmount = subtotal + fee;
 
                 // Step 1: Create payment intent with backend
                 const paymentResponse = await fetch(`${BACKEND_URL}/create-payment-intent`, {
