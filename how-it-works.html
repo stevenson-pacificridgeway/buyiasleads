@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How It Works - BuyIASLeads</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Georgia', 'Times New Roman', serif; line-height: 1.6; color: #c0dce8; background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%); }
+
+        header { display: flex; justify-content: space-between; align-items: center; padding: 25px 60px; background: rgba(10,10,10,0.95); border-bottom: 2px solid #c9a961; position: sticky; top: 0; z-index: 100; }
+        .logo { font-size: 18px; font-weight: 800; color: #c9a961; letter-spacing: 3px; }
+        nav { display: flex; gap: 50px; align-items: center; }
+        nav a { text-decoration: none; color: #c0dce8; font-size: 13px; font-weight: 600; transition: color 0.3s; }
+        nav a:hover { color: #c9a961; }
+        .order-btn { background: #c9a961; color: #0a0a0a; padding: 12px 28px; border-radius: 25px; text-decoration: none; font-size: 12px; font-weight: 700; transition: all 0.3s; border: none; cursor: pointer; }
+        .order-btn:hover { background: #dab857; transform: scale(1.05); }
+
+        .tabs-section { padding: 40px 60px; border-bottom: 2px solid rgba(201,169,97,0.2); }
+        .tabs { display: flex; gap: 60px; }
+        .tab { font-size: 15px; font-weight: 700; color: #999; text-decoration: none; border-bottom: 3px solid transparent; padding-bottom: 12px; transition: all 0.3s; cursor: pointer; }
+        .tab:hover { color: #c0dce8; }
+        .tab.active { color: #c9a961; border-bottom-color: #c9a961; }
+
+        section { max-width: 1200px; margin: 0 auto; padding: 80px 60px; }
+        h1 { font-size: 48px; font-weight: 700; margin-bottom: 30px; text-align: center; color: #c9a961; }
+        h2 { font-size: 42px; font-weight: 700; margin-bottom: 50px; text-align: center; color: #c9a961; }
+        .intro-text { text-align: center; color: #c0dce8; max-width: 700px; margin: 0 auto 60px; font-size: 16px; line-height: 1.8; }
+
+        .funnel { display: flex; flex-direction: column; gap: 30px; margin-top: 40px; }
+        .stage { background: rgba(26,26,26,0.8); border: 2px solid rgba(201,169,97,0.2); border-radius: 6px; padding: 40px; text-align: left; transition: all 0.3s; }
+        .stage:hover { border-color: #c9a961; box-shadow: 0 8px 20px rgba(201,169,97,0.2); }
+        .stage-num { width: 45px; height: 45px; background: #c9a961; color: #0a0a0a; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 800; margin-bottom: 16px; }
+        .stage h3 { font-size: 22px; font-weight: 700; margin-bottom: 12px; color: #c9a961; }
+        .stage p { font-size: 14px; color: #c0dce8; margin-bottom: 16px; line-height: 1.7; }
+
+        .stats-section { background: rgba(26,26,26,0.8); padding: 60px; border-radius: 6px; margin-top: 60px; border: 2px solid #c9a961; }
+        .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 40px; text-align: center; }
+        .stat-box { }
+        .stat-num { font-size: 40px; font-weight: 800; color: #c9a961; margin-bottom: 8px; }
+        .stat-label { font-size: 13px; color: #c0dce8; font-weight: 600; }
+
+        .demo-section { padding: 100px 60px !important; text-align: center; background: rgba(26,26,26,0.8); }
+        .demo-section h2 { color: #c9a961; }
+        .demo-section p { font-size: 16px; color: #c0dce8; max-width: 600px; margin-left: auto; margin-right: auto; }
+        .demo-link { display: inline-block; background: #c9a961; color: #0a0a0a; padding: 14px 32px; border-radius: 6px; text-decoration: none; font-size: 14px; font-weight: 700; text-transform: uppercase; margin-top: 30px; transition: all 0.2s; }
+        .demo-link:hover { background: #dab857; }
+
+        .cta-dark { background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%); color: white; text-align: center; padding: 100px 60px !important; }
+        .cta-dark h2 { color: #c9a961; }
+        .cta-dark p { color: #c0dce8; }
+        .order-btn-large { background: #c9a961; color: #0a0a0a; padding: 14px 32px; border: none; border-radius: 6px; font-size: 14px; font-weight: 700; text-transform: uppercase; cursor: pointer; margin-top: 30px; transition: all 0.2s; }
+        .order-btn-large:hover { background: #dab857; }
+
+        footer { background: #000; color: #999; text-align: center; padding: 40px 60px; font-size: 12px; border-top: 2px solid #c9a961; }
+
+        @media (max-width: 1024px) { .stats-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">BUYIASLEADS</div>
+        <nav>
+            <a href="index.html">Get Started</a>
+            <a href="how-it-works.html">How It Works</a>
+            <a href="testimonials.html">Testimonials</a>
+            <button class="order-btn">Order Now</button>
+        </nav>
+    </header>
+
+    <div class="tabs-section">
+        <div class="tabs">
+            <a href="index.html" class="tab">Get Started</a>
+            <a href="how-it-works.html" class="tab active">How It Works</a>
+            <a href="testimonials.html" class="tab">Testimonials</a>
+        </div>
+    </div>
+
+    <section>
+        <h1>How We Generate Indexed Annuity Leads</h1>
+        <p class="intro-text">We use sophisticated Meta targeting to reach problem-aware prospects actively seeking indexed annuity solutions. This isn't spray-and-pray marketing—it's precision targeting with $200K+ in pixel training.</p>
+
+        <h2 style="margin-top: 80px;">Our Lead Generation Funnel</h2>
+        <div class="funnel">
+            <div class="stage">
+                <div class="stage-num">1</div>
+                <h3>Identify Indexed Annuity Prospects</h3>
+                <p>We target people actively searching for indexed annuities and guaranteed income on Meta platforms. Age 45-75, high income, retirement interest, US-based.</p>
+            </div>
+            <div class="stage">
+                <div class="stage-num">2</div>
+                <h3>Qualify with Precision Targeting</h3>
+                <p>Our algorithm filters for engagement signals. We reach people expressing intent, not just age groups. This creates our 92% lead quality rate.</p>
+            </div>
+            <div class="stage">
+                <div class="stage-num">3</div>
+                <h3>Deliver Instantly to Your CRM</h3>
+                <p>Real-time lead delivery. Your CRM gets contact info within minutes of qualification. No waiting, no delays, no manual processes.</p>
+            </div>
+            <div class="stage">
+                <div class="stage-num">4</div>
+                <h3>Track Results & Optimize</h3>
+                <p>We monitor callback rates, deal closes, and engagement. Our system learns and improves targeting weekly for better results over time.</p>
+            </div>
+        </div>
+
+        <div class="stats-section">
+            <h2>Proven Results</h2>
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <div class="stat-num">92%</div>
+                    <div class="stat-label">Lead Quality Rating</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-num">68%</div>
+                    <div class="stat-label">Average Callback Rate</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-num">156+</div>
+                    <div class="stat-label">Deals Closed</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="demo-section">
+        <h2>Ready to See How It Works?</h2>
+        <p>Book a demo call with one of our specialists. We'll show you exactly how our targeting works and answer all your questions.</p>
+        <a href="https://calendly.com/gregorystevensongfia/annuity-call" class="demo-link">BOOK A DEMO CALL</a>
+    </section>
+
+    <section class="cta-dark">
+        <h2>Scale Your Lead Generation Today</h2>
+        <p>$2,000 for 200 qualified leads. Instant CRM delivery. Start closing deals this week.</p>
+        <button class="order-btn-large">ORDER YOUR LEADS NOW</button>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 BuyIASLeads. All rights reserved. | Powered by Gregory Stevenson</p>
+    </footer>
+</body>
+</html>

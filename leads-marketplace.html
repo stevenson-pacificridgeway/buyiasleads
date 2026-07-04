@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse Leads - BuyIASLeads</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --navy-dark: #0f1419;
+            --navy-light: #1a1f2e;
+            --gold: #d4a574;
+            --text-primary: #f5f7fa;
+            --text-secondary: #b8c5d6;
+            --border-color: rgba(212, 165, 116, 0.15);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: var(--text-primary);
+            background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy-light) 100%);
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(15, 20, 25, 0.95);
+            border-bottom: 1px solid var(--border-color);
+            padding: 20px 0;
+            backdrop-filter: blur(10px);
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Crimson Text', serif;
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: var(--gold);
+        }
+
+        nav {
+            display: flex;
+            gap: 40px;
+        }
+
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--gold);
+        }
+
+        main {
+            padding-top: 100px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header-section {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 40px;
+            text-align: center;
+        }
+
+        .header-section h1 {
+            font-family: 'Crimson Text', serif;
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .header-section p {
+            color: var(--text-secondary);
+            font-size: 16px;
+        }
+
+        .leads-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .lead-card {
+            background: rgba(26, 31, 46, 0.5);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 30px;
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .lead-card:hover {
+            border-color: var(--gold);
+            background: rgba(26, 31, 46, 0.8);
+        }
+
+        .lead-card h3 {
+            font-family: 'Crimson Text', serif;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .lead-card p {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .lead-price {
+            font-family: 'Crimson Text', serif;
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--gold);
+            margin: 20px 0;
+        }
+
+        .lead-card button {
+            background: var(--gold);
+            color: var(--navy-dark);
+            padding: 14px 24px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+        }
+
+        .lead-card button:hover {
+            background: #e8c9a0;
+            transform: scale(1.02);
+        }
+
+        footer {
+            background: rgba(15, 20, 25, 0.8);
+            border-top: 1px solid var(--border-color);
+            padding: 40px;
+            margin-top: 60px;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 13px;
+        }
+
+        @media (max-width: 768px) {
+            .leads-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <a href="index.html" class="logo">BUYIASLEADS</a>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="index.html#pricing">Pricing</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="header-section">
+            <h1>Lead Packages</h1>
+            <p>Fresh, pre-qualified prospects. Delivered instantly.</p>
+        </div>
+
+        <div class="leads-grid">
+            <div class="lead-card">
+                <h3>100 Leads</h3>
+                <p>Pre-qualified prospects actively seeking indexed annuity solutions.</p>
+                <div class="lead-price">$2,000</div>
+                <a href="checkout.html?package=100" style="text-decoration: none;"><button>Purchase Now</button></a>
+            </div>
+
+            <div class="lead-card">
+                <h3>200 Leads</h3>
+                <p>Pre-qualified prospects actively seeking indexed annuity solutions.</p>
+                <div class="lead-price">$3,000</div>
+                <a href="checkout.html?package=200" style="text-decoration: none;"><button>Purchase Now</button></a>
+            </div>
+
+            <div class="lead-card">
+                <h3>400 Leads</h3>
+                <p>Pre-qualified prospects actively seeking indexed annuity solutions.</p>
+                <div class="lead-price">$4,000</div>
+                <a href="checkout.html?package=400" style="text-decoration: none;"><button>Purchase Now</button></a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 BuyIASLeads. All rights reserved.</p>
+    </footer>
+</body>
+</html>

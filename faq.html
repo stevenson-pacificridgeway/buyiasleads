@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - BuyIASLeads</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --navy-dark: #0f1419;
+            --navy-light: #1a1f2e;
+            --gold: #d4a574;
+            --gold-light: #e8c9a0;
+            --cyan-light: #e8f4f8;
+            --text-primary: #f5f7fa;
+            --text-secondary: #b8c5d6;
+            --border-color: rgba(212, 165, 116, 0.15);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--text-primary);
+            background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy-light) 100%);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        header {
+            padding: 30px 20px;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        h1 {
+            font-family: 'Crimson Text', serif;
+            font-size: 36px;
+            margin-bottom: 10px;
+            color: var(--gold);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .faq-section {
+            margin-bottom: 40px;
+        }
+
+        .faq-question {
+            background: rgba(26, 31, 46, 0.8);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .faq-question:hover {
+            border-color: var(--gold);
+            background: rgba(26, 31, 46, 1);
+        }
+
+        .faq-question h3 {
+            color: var(--gold);
+            font-size: 16px;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-icon {
+            font-size: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-answer {
+            display: none;
+            color: var(--text-secondary);
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid var(--border-color);
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        .faq-answer.open {
+            display: block;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--gold);
+            color: var(--navy-dark);
+            padding: 12px 30px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background: var(--gold-light);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 24px;
+            }
+
+            .faq-question {
+                padding: 15px;
+            }
+
+            .faq-question h3 {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>FAQ</h1>
+        <p style="color: var(--text-secondary);">Common questions about BuyIASLeads</p>
+    </header>
+
+    <div class="container">
+        <div class="faq-section">
+            <div class="faq-question" onclick="toggleAnswer(this)">
+                <h3>When do I receive my leads? <span class="faq-icon">+</span></h3>
+                <div class="faq-answer">
+                    Leads begin flowing to your CRM dashboard immediately after your payment processes. You'll receive your welcome email within 5 minutes with CRM login credentials. Fresh prospects are delivered in real-time as they convert, so you start reaching out right away.
+                </div>
+            </div>
+
+            <div class="faq-question" onclick="toggleAnswer(this)">
+                <h3>What if leads don't convert? <span class="faq-icon">+</span></h3>
+                <div class="faq-answer">
+                    All leads come pre-qualified and actively seeking indexed annuity solutions. We deliver the prospects—the conversion depends on your outreach and expertise. You have all the tools: CRM access, Annuity University link, Oscar Annuity AI, and a 52-week nurture campaign to support your follow-up.
+                </div>
+            </div>
+
+            <div class="faq-question" onclick="toggleAnswer(this)">
+                <h3>Can I pause or cancel my CRM subscription? <span class="faq-icon">+</span></h3>
+                <div class="faq-answer">
+                    Yes. Your $100/month CRM subscription renews automatically, but you can cancel anytime. Cancel before your next billing date to avoid renewal charges. Your leads remain accessible until cancellation takes effect.
+                </div>
+            </div>
+
+            <div class="faq-question" onclick="toggleAnswer(this)">
+                <h3>What's included in the CRM subscription? <span class="faq-icon">+</span></h3>
+                <div class="faq-answer">
+                    Your $100/month includes: access to the CRM dashboard, Annuity University link for training, Oscar Annuity AI for sales support, a free book on indexed annuities, and a 52-week automated email nurture campaign to keep leads engaged.
+                </div>
+            </div>
+
+            <div class="faq-question" onclick="toggleAnswer(this)">
+                <h3>How are leads delivered? <span class="faq-icon">+</span></h3>
+                <div class="faq-answer">
+                    Leads are delivered directly into your CRM dashboard in real-time. As prospects convert and submit their information, they appear immediately in your account so you can reach out with zero delay.
+                </div>
+            </div>
+
+            <div class="faq-question" onclick="toggleAnswer(this)">
+                <h3>What payment methods do you accept? <span class="faq-icon">+</span></h3>
+                <div class="faq-answer">
+                    We accept all major credit and debit cards (Visa, Mastercard, American Express, Discover) processed securely through Stripe. Your payment is encrypted and protected.
+                </div>
+            </div>
+
+            <div class="faq-question" onclick="toggleAnswer(this)">
+                <h3>Do you offer discounts for larger packages? <span class="faq-icon">+</span></h3>
+                <div class="faq-answer">
+                    Our pricing is straightforward: 100 leads for $2,000, 200 leads for $3,000, or 400 leads for $4,000. Choose the package that fits your capacity and budget. All include full CRM access and tools.
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 40px; padding-top: 40px; border-top: 1px solid var(--border-color);">
+            <p style="color: var(--text-secondary); margin-bottom: 20px;">Ready to start getting leads?</p>
+            <a href="index.html" class="cta-button">Back to Home</a>
+        </div>
+    </div>
+
+    <script>
+        function toggleAnswer(element) {
+            const answer = element.querySelector('.faq-answer');
+            const icon = element.querySelector('.faq-icon');
+
+            // Close all other answers
+            document.querySelectorAll('.faq-answer.open').forEach(el => {
+                if (el !== answer) {
+                    el.classList.remove('open');
+                    el.closest('.faq-question').querySelector('.faq-icon').textContent = '+';
+                }
+            });
+
+            // Toggle current answer
+            answer.classList.toggle('open');
+            icon.textContent = answer.classList.contains('open') ? '−' : '+';
+        }
+    </script>
+</body>
+</html>

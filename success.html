@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Purchase Complete - BuyIASLeads</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --navy-dark: #0f1419;
+            --navy-light: #1a1f2e;
+            --gold: #d4a574;
+            --gold-light: #e8c9a0;
+            --cyan-light: #e8f4f8;
+            --text-primary: #f5f7fa;
+            --text-secondary: #b8c5d6;
+            --border-color: rgba(212, 165, 116, 0.15);
+            --success: #10b981;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--text-primary);
+            background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy-light) 100%);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .success-container {
+            background: rgba(26, 31, 46, 0.8);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 50px 40px;
+            max-width: 600px;
+            text-align: center;
+        }
+
+        .success-icon {
+            font-size: 64px;
+            margin-bottom: 20px;
+            animation: bounce 0.6s ease;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        h1 {
+            font-family: 'Crimson Text', serif;
+            font-size: 42px;
+            color: var(--success);
+            margin-bottom: 15px;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 16px;
+            margin-bottom: 30px;
+        }
+
+        .next-steps {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 8px;
+            padding: 25px;
+            margin: 30px 0;
+            text-align: left;
+        }
+
+        .next-steps h3 {
+            color: var(--success);
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        .step {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+            align-items: flex-start;
+        }
+
+        .step-number {
+            background: var(--success);
+            color: var(--navy-dark);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .step-text {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .step-text strong {
+            color: var(--text-primary);
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 40px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: var(--gold);
+            color: var(--navy-dark);
+        }
+
+        .btn-primary:hover {
+            background: var(--gold-light);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--gold);
+            border: 1px solid var(--gold);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(212, 165, 116, 0.1);
+        }
+
+        .faq-link {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .faq-link a {
+            color: var(--gold);
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .faq-link a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 600px) {
+            .success-container {
+                padding: 30px 20px;
+            }
+
+            h1 {
+                font-size: 32px;
+            }
+
+            .success-icon {
+                font-size: 48px;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="success-container">
+        <div class="success-icon">✓</div>
+        <h1>Purchase Complete!</h1>
+        <p class="subtitle">Your leads are on the way. Here's what happens next.</p>
+
+        <div class="next-steps">
+            <h3>What to Do Now</h3>
+
+            <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-text">
+                    <strong>Check Your Email</strong>
+                    Welcome email with CRM login credentials arriving in 5 minutes
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-text">
+                    <strong>Sign Into Your CRM</strong>
+                    Access your dashboard to see leads flowing in real-time
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-text">
+                    <strong>Start Reaching Out</strong>
+                    Prospects are pre-qualified and ready to talk indexed annuities
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">4</div>
+                <div class="step-text">
+                    <strong>Use Your Tools</strong>
+                    Annuity University, Oscar AI, and 52-week nurture campaign all included
+                </div>
+            </div>
+        </div>
+
+        <p style="color: var(--text-secondary); font-size: 14px;">
+            💡 <strong>Pro Tip:</strong> Leads convert fastest with quick outreach. Fresh prospects are most responsive within the first 24 hours.
+        </p>
+
+        <div class="buttons">
+            <a href="index.html" class="btn btn-primary">Back to Home</a>
+            <a href="faq.html" class="btn btn-secondary">View FAQ</a>
+        </div>
+
+        <div class="faq-link">
+            <p style="color: var(--text-secondary); font-size: 13px;">Questions? <a href="faq.html">Check our FAQ</a> or contact support.</p>
+        </div>
+    </div>
+</body>
+</html>
