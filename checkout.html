@@ -563,7 +563,8 @@
             const basePrices = { test: 1, 100: 2000, 200: 3000, 400: 4000 };
             if (pkg && basePrices[pkg]) {
                 const leadCost = basePrices[pkg];
-                const crmCost = 100;
+                const isTest = pkg === 'test';
+                const crmCost = isTest ? 0 : 100;
                 const subtotal = leadCost + crmCost;
                 const fee = subtotal * 0.03;
                 const total = subtotal + fee;
@@ -571,6 +572,10 @@
                 document.getElementById('leadPrice').textContent = `$${leadCost.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
                 document.getElementById('feePrice').textContent = `$${fee.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
                 document.getElementById('totalPrice').textContent = `$${total.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+
+                // Show/hide CRM subscription line based on package type
+                const crmLine = document.querySelector('.summary-item:nth-child(2)');
+                crmLine.style.display = isTest ? 'none' : 'flex';
             }
         }
 
@@ -602,7 +607,8 @@
             try {
                 const basePrices = { test: 1, 100: 2000, 200: 3000, 400: 4000 };
                 const leadCost = basePrices[packageSize];
-                const crmCost = 100;
+                const isTest = packageSize === 'test';
+                const crmCost = isTest ? 0 : 100;
                 const subtotal = leadCost + crmCost;
                 const fee = subtotal * 0.03;
                 const totalAmount = subtotal + fee;
