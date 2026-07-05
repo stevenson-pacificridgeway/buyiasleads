@@ -6,14 +6,20 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 require('dotenv').config();
 
 const app = express();
+const path = require('path');
 
 // Security middleware
 app.use(helmet());
 app.use(cors({
-  origin: ['https://buyiasleads.com', 'https://www.buyiasleads.com'],
+  origin: process.env.NODE_ENV === 'production'
+    ? ['https://buyiasleads.com', 'https://www.buyiasleads.com']
+    : '*',
   credentials: true
 }));
 app.use(express.json({ limit: '1mb' }));
+
+// Serve static files (HTML, CSS, JS, images, etc.)
+app.use(express.static(path.join(__dirname, '.')));
 
 // Rate limiting - 10 requests per 15 minutes per IP
 const limiter = rateLimit({
@@ -216,9 +222,9 @@ app.use((err, req, res, next) => {
   res.status(500).json({ error: 'Internal server error' });
 });
 
-// 404 handler
+// Fallback: serve index.html for non-API routes
 app.use((req, res) => {
-  res.status(404).json({ error: 'Endpoint not found' });
+  res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 const PORT = process.env.PORT || 3000;

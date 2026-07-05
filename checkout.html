@@ -526,8 +526,8 @@
         let elements;
         let cardElement;
 
-        // Backend URL - replace with your actual backend URL
-        const BACKEND_URL = 'https://buyiasleads-production.up.railway.app'; // Update this after deploying to Railway
+        // Backend URL - using relative URL since frontend & backend are on same Railway server
+        const BACKEND_URL = '';
 
         async function initializeStripe() {
             elements = stripe.elements();
