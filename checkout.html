@@ -4,7 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Checkout - BuyIASLeads</title>
+<<<<<<< Updated upstream
         <!-- Version: 2026-07-04 Build #24 - Force retry -->
+=======
+    <!-- Build: 2026-07-04 Retry #3 -->
+>>>>>>> Stashed changes
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -575,7 +579,8 @@
                 document.getElementById('totalPrice').textContent = `$${total.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
 
                 // Show/hide CRM subscription line based on package type
-                const crmLine = document.querySelector('.summary-item:nth-child(2)');
+                const allSummaryItems = document.querySelectorAll('.summary-item');
+                const crmLine = allSummaryItems[1]; // CRM line is the 2nd summary-item
                 crmLine.style.display = isTest ? 'none' : 'flex';
             }
         }
