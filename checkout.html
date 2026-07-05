@@ -640,7 +640,7 @@
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({
                             amount: pricing.total,
-                            packageSize: parseInt(packageSize),
+                            packageSize: packageSize === 'test' ? 'test' : parseInt(packageSize),
                             customerEmail: email,
                             customerName: name
                         }),

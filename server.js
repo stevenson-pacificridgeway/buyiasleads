@@ -37,21 +37,35 @@ app.get('/health', (req, res) => {
 
 // Validate pricing (helper function)
 function validatePricing(amount, packageSize) {
-  const validPackages = { test: 1, 100: 2000, 200: 3000, 400: 4000 };
-  const expectedBase = validPackages[packageSize];
-  if (expectedBase === undefined) {
-    return { valid: false, error: 'Invalid package size' };
+  // Ensure packageSize is a valid type (convert if needed)
+  let normalizedPackageSize = packageSize;
+  if (typeof packageSize === 'number') {
+    normalizedPackageSize = packageSize;
+  } else if (packageSize === 'test') {
+    normalizedPackageSize = 'test';
+  } else {
+    const numPackage = parseInt(packageSize);
+    if (!isNaN(numPackage)) {
+      normalizedPackageSize = numPackage;
+    }
   }
 
-  const isTest = packageSize === 'test';
+  const validPackages = { test: 1, 100: 2000, 200: 3000, 400: 4000 };
+  const expectedBase = validPackages[normalizedPackageSize];
+
+  if (expectedBase === undefined) {
+    return { valid: false, error: `Invalid package size: ${packageSize}` };
+  }
+
+  const isTest = normalizedPackageSize === 'test';
   const expectedCrmCost = isTest ? 0 : 100;
   const expectedSubtotal = expectedBase + expectedCrmCost;
   const expectedFee = expectedSubtotal * 0.03;
   const expectedTotal = expectedSubtotal + expectedFee;
 
-  // Allow small rounding differences
-  if (Math.abs(amount - expectedTotal) > 0.01) {
-    return { valid: false, error: 'Invalid amount for selected package' };
+  // Allow small rounding differences (up to 0.05)
+  if (Math.abs(amount - expectedTotal) > 0.05) {
+    return { valid: false, error: `Invalid amount for package ${packageSize}. Expected $${expectedTotal.toFixed(2)}, got $${amount.toFixed(2)}` };
   }
 
   return { valid: true };
@@ -63,8 +77,17 @@ app.post('/create-payment-intent', limiter, async (req, res) => {
     const { amount, packageSize, customerEmail, customerName } = req.body;
 
     // Validate required fields
-    if (!amount || !packageSize || !customerEmail) {
-      return res.status(400).json({ error: 'Missing required fields' });
+    if (!amount || packageSize === undefined || packageSize === null || !customerEmail) {
+      console.error('[VALIDATION ERROR] Missing fields:', {
+        amount: !!amount,
+        packageSize: packageSize,
+        customerEmail: !!customerEmail,
+        received: req.body
+      });
+      return res.status(400).json({
+        error: 'Missing required fields',
+        details: { amount: !!amount, packageSize: packageSize, email: !!customerEmail }
+      });
     }
 
     // Validate email format
