@@ -4,11 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Checkout - BuyIASLeads</title>
-<<<<<<< Updated upstream
-        <!-- Version: 2026-07-04 Build #24 - Force retry -->
-=======
-    <!-- Build: 2026-07-04 Retry #3 -->
->>>>>>> Stashed changes
+    <!-- Build: 2026-07-04 v2 - Fixed merge conflict -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -462,7 +458,6 @@
                         <label>Lead Package *</label>
                         <select id="package" required onchange="updatePrice()">
                             <option value="">Select a package</option>
-                            <option value="test">Test Package — $1.00</option>
                             <option value="100">100 Leads — $2,000</option>
                             <option value="200">200 Leads — $3,000</option>
                             <option value="400">400 Leads — $4,000</option>
@@ -471,32 +466,32 @@
 
                     <div class="form-group">
                         <label>Full Name *</label>
-                        <input type="text" placeholder="John Smith" required>
+                        <input type="text" id="fullName" placeholder="John Smith" required>
                     </div>
 
                     <div class="form-group">
                         <label>Email *</label>
-                        <input type="email" placeholder="john@example.com" required>
+                        <input type="email" id="email" placeholder="john@example.com" required>
                     </div>
 
                     <div class="form-group">
                         <label>Phone *</label>
-                        <input type="tel" placeholder="(555) 123-4567" required>
+                        <input type="tel" id="phone" placeholder="(555) 123-4567" required>
                     </div>
 
                     <div class="form-group">
                         <label>Company *</label>
-                        <input type="text" placeholder="Your Agency Name" required>
+                        <input type="text" id="company" placeholder="Your Agency Name" required>
                     </div>
 
                     <div class="form-row">
                         <div class="form-group">
                             <label>State *</label>
-                            <input type="text" placeholder="CA" required>
+                            <input type="text" id="state" placeholder="CA" required>
                         </div>
                         <div class="form-group">
                             <label>License #</label>
-                            <input type="text" placeholder="Optional">
+                            <input type="text" id="license" placeholder="Optional">
                         </div>
                     </div>
 
@@ -563,25 +558,32 @@
             });
         }
 
+        // Single source of truth for pricing
+        function calculatePricing(packageSize) {
+            const basePrices = { 100: 2000, 200: 3000, 400: 4000 };
+            const leadCost = basePrices[packageSize] || 0;
+            const crmCost = 100;
+            const subtotal = leadCost + crmCost;
+            const fee = subtotal * 0.03;
+            return {
+                leadCost,
+                crmCost,
+                subtotal,
+                fee,
+                total: subtotal + fee
+            };
+        }
+
         function updatePrice() {
             const pkg = document.getElementById('package').value;
-            const basePrices = { test: 1, 100: 2000, 200: 3000, 400: 4000 };
-            if (pkg && basePrices[pkg]) {
-                const leadCost = basePrices[pkg];
-                const isTest = pkg === 'test';
-                const crmCost = isTest ? 0 : 100;
-                const subtotal = leadCost + crmCost;
-                const fee = subtotal * 0.03;
-                const total = subtotal + fee;
+            if (pkg && [100, 200, 400].includes(parseInt(pkg))) {
+                const pricing = calculatePricing(parseInt(pkg));
 
-                document.getElementById('leadPrice').textContent = `$${leadCost.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
-                document.getElementById('feePrice').textContent = `$${fee.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
-                document.getElementById('totalPrice').textContent = `$${total.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+                document.getElementById('leadPrice').textContent = `$${pricing.leadCost.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+                document.getElementById('feePrice').textContent = `$${pricing.fee.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+                document.getElementById('totalPrice').textContent = `$${pricing.total.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
 
-                // Show/hide CRM subscription line based on package type
-                const allSummaryItems = document.querySelectorAll('.summary-item');
-                const crmLine = allSummaryItems[1]; // CRM line is the 2nd summary-item
-                crmLine.style.display = isTest ? 'none' : 'flex';
+                // CRM line always shown (test package removed)
             }
         }
 
@@ -589,13 +591,14 @@
             e.preventDefault();
 
             const packageSize = document.getElementById('package').value;
-            const name = document.querySelector('input[placeholder="John Smith"]').value;
-            const email = document.querySelector('input[placeholder="john@example.com"]').value;
-            const phone = document.querySelector('input[placeholder="(555) 123-4567"]').value;
-            const company = document.querySelector('input[placeholder="Your Agency Name"]').value;
-            const state = document.querySelector('input[placeholder="CA"]').value;
-            const license = document.querySelector('input[placeholder="Optional"]').value;
+            const name = document.getElementById('fullName').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const company = document.getElementById('company').value.trim();
+            const state = document.getElementById('state').value.trim();
+            const license = document.getElementById('license').value.trim();
 
+            // Validation
             if (!packageSize) {
                 alert('Please select a lead package');
                 return;
@@ -606,33 +609,44 @@
                 return;
             }
 
+            // Email format validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert('Please enter a valid email address');
+                return;
+            }
+
             const btn = document.querySelector('.submit-btn');
             btn.disabled = true;
-            btn.textContent = 'Processing...';
+            btn.innerHTML = '<span class="spinner"></span> Processing...';
 
             try {
-                const basePrices = { test: 1, 100: 2000, 200: 3000, 400: 4000 };
-                const leadCost = basePrices[packageSize];
-                const isTest = packageSize === 'test';
-                const crmCost = isTest ? 0 : 100;
-                const subtotal = leadCost + crmCost;
-                const fee = subtotal * 0.03;
-                const totalAmount = subtotal + fee;
+                const pricing = calculatePricing(parseInt(packageSize));
 
-                // Step 1: Create payment intent with backend
-                const paymentResponse = await fetch(`${BACKEND_URL}/create-payment-intent`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        amount: totalAmount,
-                        packageSize: packageSize,
-                        customerEmail: email,
-                        customerName: name
-                    })
-                });
+                // Step 1: Create payment intent with backend (with timeout)
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 10000);
+
+                let paymentResponse;
+                try {
+                    paymentResponse = await fetch(`${BACKEND_URL}/create-payment-intent`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            amount: pricing.total,
+                            packageSize: parseInt(packageSize),
+                            customerEmail: email,
+                            customerName: name
+                        }),
+                        signal: controller.signal
+                    });
+                } finally {
+                    clearTimeout(timeoutId);
+                }
 
                 if (!paymentResponse.ok) {
-                    throw new Error('Failed to create payment intent');
+                    const errorData = await paymentResponse.json().catch(() => ({}));
+                    throw new Error(errorData.error || 'Failed to create payment intent');
                 }
 
                 const { clientSecret } = await paymentResponse.json();
