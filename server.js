@@ -102,8 +102,9 @@ app.post('/create-payment-intent', limiter, async (req, res) => {
       return res.status(400).json({ error: 'Invalid email format' });
     }
 
-    // Validate amount and package
-    const pricing = validatePricing(amount, parseInt(packageSize));
+    // Validate amount and package (handle 'test' string and numeric packages)
+    const normalizedPackageSize = packageSize === 'test' ? 'test' : parseInt(packageSize);
+    const pricing = validatePricing(amount, normalizedPackageSize);
     if (!pricing.valid) {
       return res.status(400).json({ error: pricing.error });
     }
