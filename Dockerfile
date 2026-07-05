@@ -8,7 +8,7 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install dependencies
-RUN npm install --break-system-packages
+RUN npm install
 
 # Copy all app files
 COPY . .
