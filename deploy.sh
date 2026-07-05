@@ -1,20 +1,33 @@
 #!/bin/bash
-# Deploy BuyIASLeads fixes to GitHub and Railway
+# BuyIASLeads — single deploy command.
+#
+# Pushing to GitHub main does two things at once:
+#   1. Updates the website on GitHub Pages (index.html, checkout.html, etc.)
+#   2. Triggers Railway to redeploy the backend (server.js) via its GitHub integration
+#
+# Usage:  double-click this file, or run:  bash deploy.sh
 
-cd ~/Desktop/BuyIASLeads
+set -e
+cd "$(dirname "$0")"
 
-# Clean up git lock file if it exists
-rm -f .git/index.lock
+# Clear any stale git lock
+rm -f .git/index.lock 2>/dev/null || true
 
-# Add documentation files
-git add AUDIT_REPORT.md .env.example DEPLOYMENT_FIXES.md
+echo "Staging all changes..."
+git add -A
 
-# Commit
-git commit -m "Docs: Add comprehensive audit report and deployment guide"
+if git diff --cached --quiet; then
+  echo "Nothing new to commit."
+else
+  git commit -m "Deploy: $(date '+%Y-%m-%d %H:%M:%S')"
+fi
 
-# Push to GitHub (triggers auto-deploy)
+echo "Pushing to GitHub (updates the site + backend)..."
 git push origin main
 
-echo "✅ Push complete! GitHub Actions will auto-deploy in 2-5 minutes."
-echo "   Monitor: https://github.com/stevenson-pacificridgeway/buyiasleads/actions"
-echo "   Test: https://buyiasleads.com/checkout.html"
+echo ""
+echo "Done. Live in ~2-5 minutes:"
+echo "  Site:     https://buyiasleads.com/checkout.html"
+echo "  Backend:  https://buyiasleads-production.up.railway.app/health"
+echo ""
+echo "Test with the \$1.00 TEST package before running a real card."

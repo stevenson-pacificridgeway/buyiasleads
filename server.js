@@ -4,23 +4,56 @@ const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 require('dotenv').config();
 
+// Debug startup
+console.log('[DEBUG] ========== APP STARTING ==========');
+console.log('[DEBUG] STRIPE_SECRET_KEY env var exists:', !!process.env.STRIPE_SECRET_KEY);
+if (process.env.STRIPE_SECRET_KEY) {
+  console.log('[DEBUG] STRIPE_SECRET_KEY length:', process.env.STRIPE_SECRET_KEY.length);
+  console.log('[DEBUG] STRIPE_SECRET_KEY starts with:', process.env.STRIPE_SECRET_KEY.substring(0, 8));
+}
+
 // Validate Stripe key before initializing
 if (!process.env.STRIPE_SECRET_KEY) {
   console.error('[CRITICAL ERROR] STRIPE_SECRET_KEY not configured in environment variables');
   process.exit(1);
 }
 
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+console.log('[DEBUG] Attempting to initialize Stripe...');
+const stripeKey = process.env.STRIPE_SECRET_KEY.trim();
+const keyPrefix = stripeKey.substring(0, 8);
+const keySuffix = stripeKey.substring(stripeKey.length - 4);
+console.log(`[INFO] Stripe key loaded: ${keyPrefix}...${keySuffix}`);
+
+let stripe;
+try {
+  stripe = require('stripe')(stripeKey);
+  console.log('[DEBUG] Stripe initialized successfully');
+} catch (error) {
+  console.error('[CRITICAL ERROR] Failed to initialize Stripe:', error.message);
+  process.exit(1);
+}
 
 const app = express();
 const path = require('path');
 
 // Security middleware
 app.use(helmet());
+// The website is served from GitHub Pages (buyiasleads.com) while this backend runs on
+// Railway, so checkout requests are cross-origin. Allow the site's origins explicitly
+// (regardless of NODE_ENV) plus local dev. Anything else is rejected.
+const ALLOWED_ORIGINS = [
+  'https://buyiasleads.com',
+  'https://www.buyiasleads.com',
+  'http://localhost:3000',
+  'http://127.0.0.1:3000'
+];
 app.use(cors({
-  origin: process.env.NODE_ENV === 'production'
-    ? ['https://buyiasleads.com', 'https://www.buyiasleads.com']
-    : '*',
+  origin: function (origin, callback) {
+    // Allow same-origin/non-browser requests (no Origin header) and any allowlisted origin.
+    if (!origin || ALLOWED_ORIGINS.includes(origin)) return callback(null, true);
+    console.warn(`[CORS] Blocked origin: ${origin}`);
+    return callback(null, false);
+  },
   credentials: true
 }));
 app.use(express.json({ limit: '1mb' }));
@@ -139,7 +172,13 @@ app.post('/create-payment-intent', limiter, async (req, res) => {
       paymentIntentId: paymentIntent.id
     });
   } catch (error) {
-    console.error('[ERROR] Creating payment intent:', error);
+    console.error('[ERROR] Creating payment intent:', {
+      message: error.message,
+      type: error.type,
+      code: error.code,
+      raw: error.raw,
+      fullError: error
+    });
     res.status(500).json({ error: error.message || 'Failed to create payment intent' });
   }
 });

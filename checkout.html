@@ -526,8 +526,16 @@
         let elements;
         let cardElement;
 
-        // Backend URL - using relative URL since frontend & backend are on same Railway server
-        const BACKEND_URL = '';
+        // Backend URL.
+        // The website (buyiasleads.com) is served by GitHub Pages, which is static and
+        // has NO backend. The Stripe backend lives on Railway. So when the page is served
+        // from anywhere other than Railway/localhost, send payment requests to the Railway
+        // backend. When served directly from Railway (or run locally), use a relative URL.
+        const RAILWAY_BACKEND = 'https://buyiasleads-production.up.railway.app';
+        const BACKEND_URL =
+            (/\.railway\.app$/.test(location.hostname) || location.hostname === 'localhost' || location.hostname === '127.0.0.1')
+                ? ''
+                : RAILWAY_BACKEND;
 
         async function initializeStripe() {
             elements = stripe.elements();
