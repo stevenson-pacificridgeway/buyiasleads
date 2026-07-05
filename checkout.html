@@ -458,6 +458,7 @@
                         <label>Lead Package *</label>
                         <select id="package" required onchange="updatePrice()">
                             <option value="">Select a package</option>
+                            <option value="test" style="color: #ff6b35;">🧪 TEST — $1.00 (Testing Only)</option>
                             <option value="100">100 Leads — $2,000</option>
                             <option value="200">200 Leads — $3,000</option>
                             <option value="400">400 Leads — $4,000</option>
@@ -560,9 +561,10 @@
 
         // Single source of truth for pricing
         function calculatePricing(packageSize) {
-            const basePrices = { 100: 2000, 200: 3000, 400: 4000 };
+            const basePrices = { test: 1, 100: 2000, 200: 3000, 400: 4000 };
             const leadCost = basePrices[packageSize] || 0;
-            const crmCost = 100;
+            const isTest = packageSize === 'test';
+            const crmCost = isTest ? 0 : 100;
             const subtotal = leadCost + crmCost;
             const fee = subtotal * 0.03;
             return {
@@ -570,20 +572,24 @@
                 crmCost,
                 subtotal,
                 fee,
-                total: subtotal + fee
+                total: subtotal + fee,
+                isTest
             };
         }
 
         function updatePrice() {
             const pkg = document.getElementById('package').value;
-            if (pkg && [100, 200, 400].includes(parseInt(pkg))) {
-                const pricing = calculatePricing(parseInt(pkg));
+            if (pkg && (pkg === 'test' || [100, 200, 400].includes(parseInt(pkg)))) {
+                const pricing = calculatePricing(pkg === 'test' ? 'test' : parseInt(pkg));
 
                 document.getElementById('leadPrice').textContent = `$${pricing.leadCost.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
                 document.getElementById('feePrice').textContent = `$${pricing.fee.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
                 document.getElementById('totalPrice').textContent = `$${pricing.total.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
 
-                // CRM line always shown (test package removed)
+                // Hide CRM line for test package
+                const allSummaryItems = document.querySelectorAll('.summary-item');
+                const crmLine = allSummaryItems[1];
+                crmLine.style.display = pricing.isTest ? 'none' : 'flex';
             }
         }
 
@@ -621,7 +627,7 @@
             btn.innerHTML = '<span class="spinner"></span> Processing...';
 
             try {
-                const pricing = calculatePricing(parseInt(packageSize));
+                const pricing = calculatePricing(packageSize === 'test' ? 'test' : parseInt(packageSize));
 
                 // Step 1: Create payment intent with backend (with timeout)
                 const controller = new AbortController();

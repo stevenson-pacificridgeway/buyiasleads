@@ -37,13 +37,14 @@ app.get('/health', (req, res) => {
 
 // Validate pricing (helper function)
 function validatePricing(amount, packageSize) {
-  const validPackages = { 100: 2000, 200: 3000, 400: 4000 };
+  const validPackages = { test: 1, 100: 2000, 200: 3000, 400: 4000 };
   const expectedBase = validPackages[packageSize];
-  if (!expectedBase) {
+  if (expectedBase === undefined) {
     return { valid: false, error: 'Invalid package size' };
   }
 
-  const expectedCrmCost = 100;
+  const isTest = packageSize === 'test';
+  const expectedCrmCost = isTest ? 0 : 100;
   const expectedSubtotal = expectedBase + expectedCrmCost;
   const expectedFee = expectedSubtotal * 0.03;
   const expectedTotal = expectedSubtotal + expectedFee;
