@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230f1419'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='20' font-weight='bold' text-anchor='middle' fill='%23d4a574'%3EB%3C/text%3E%3C/svg%3E">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Securely complete your BuyIASLeads purchase. Choose your indexed annuity lead package and CRM seat, pay by card via Stripe, and get instant CRM access.">
     <title>Checkout - BuyIASLeads</title>
@@ -460,7 +461,6 @@
                         <label>Lead Package *</label>
                         <select id="package" required onchange="updatePrice()">
                             <option value="">Select a package</option>
-                            <option value="test" style="color: #ff6b35;">🧪 TEST — $1.00 (Testing Only)</option>
                             <option value="100">100 Leads — $2,000</option>
                             <option value="200">200 Leads — $3,000</option>
                             <option value="400">400 Leads — $4,000</option>
@@ -690,9 +690,10 @@
                     // Optionally: Send confirmation email or store data
                     console.log('Payment successful:', paymentIntent.id);
 
-                    // Redirect after 2 seconds
+                    // Redirect after 2 seconds, carrying the package so the intake
+                    // form (and the email you receive) knows what they ordered.
                     setTimeout(() => {
-                        window.location.href = 'success.html';
+                        window.location.href = 'success.html?pkg=' + encodeURIComponent(packageSize);
                     }, 2000);
                 } else {
                     throw new Error(`Payment failed: ${paymentIntent.status}`);

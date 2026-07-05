@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230f1419'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='20' font-weight='bold' text-anchor='middle' fill='%23d4a574'%3EB%3C/text%3E%3C/svg%3E">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="New customer intake form for BuyIASLeads — tell us how to reach you and where to deliver your indexed annuity leads.">
     <title>Intake Form - BuyIASLeads</title>
@@ -189,6 +190,7 @@
         <div class="intake-header">
             <h1>New Customer Intake</h1>
             <p>Thanks for your order! Fill this out so we can get your leads set up correctly.</p>
+            <p id="orderLine" style="display:none; margin-top:10px; color: var(--gold); font-weight:600;"></p>
         </div>
 
         <div class="card">
@@ -219,11 +221,6 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Where should we deliver your leads?</label>
-                    <input type="text" id="leadDelivery" placeholder="Email address or CRM you use">
-                </div>
-
-                <div class="form-group">
                     <label>Anything else we should know?</label>
                     <textarea id="notes" placeholder="Questions, the states you want leads in, products you focus on, etc."></textarea>
                 </div>
@@ -250,6 +247,17 @@
                 ? ''
                 : RAILWAY_BACKEND;
 
+        // Which package they ordered, passed from the success page (?pkg=...).
+        const ORDER_PKG = new URLSearchParams(location.search).get('pkg') || '';
+        (function () {
+            if (ORDER_PKG) {
+                var label = (ORDER_PKG === 'test') ? 'Test order' : (ORDER_PKG + ' leads');
+                var el = document.getElementById('orderLine');
+                el.textContent = 'Your order: ' + label;
+                el.style.display = 'block';
+            }
+        })();
+
         async function handleIntake(e) {
             e.preventDefault();
             const errEl = document.getElementById('formError');
@@ -260,8 +268,8 @@
                 email: document.getElementById('email').value.trim(),
                 phone: document.getElementById('phone').value.trim(),
                 bestTime: document.getElementById('bestTime').value,
-                leadDelivery: document.getElementById('leadDelivery').value.trim(),
-                notes: document.getElementById('notes').value.trim()
+                notes: document.getElementById('notes').value.trim(),
+                leadOrder: ORDER_PKG
             };
 
             if (!payload.fullName || !payload.email || !payload.phone) {

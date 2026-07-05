@@ -220,7 +220,7 @@ app.post('/confirm-payment', limiter, async (req, res) => {
 // New-customer intake form submission. Emails the details to the owner.
 app.post('/intake', limiter, async (req, res) => {
   try {
-    const { fullName, email, phone, bestTime, leadDelivery, notes } = req.body || {};
+    const { fullName, email, phone, bestTime, notes, leadOrder } = req.body || {};
 
     if (!fullName || !email || !phone) {
       return res.status(400).json({ error: 'Please provide your name, email, and phone.' });
@@ -233,12 +233,12 @@ app.post('/intake', limiter, async (req, res) => {
     const text =
 `New customer intake form submission.
 
-Name:          ${fullName}
-Email:         ${email}
-Phone:         ${phone}
-Best time:     ${bestTime || '-'}
-Lead delivery: ${leadDelivery || '-'}
-Notes:         ${notes || '-'}`;
+Lead order: ${leadOrder ? (leadOrder === 'test' ? 'Test order' : leadOrder + ' leads') : 'Not specified'}
+Name:       ${fullName}
+Email:      ${email}
+Phone:      ${phone}
+Best time:  ${bestTime || '-'}
+Notes:      ${notes || '-'}`;
 
     console.log(`[INTAKE] ${fullName} <${email}> ${phone}`);
     const result = await sendEmail({
