@@ -162,7 +162,7 @@ app.post('/create-payment-intent', limiter, async (req, res) => {
         customerEmail: customerEmail,
         customerName: customerName || 'N/A'
       },
-      description: `BuyIASLeads - ${packageSize} leads package + CRM subscription`
+      description: `BuyIASLeads - ${packageSize} leads package + CRM access`
     });
 
     console.log(`Payment intent created: ${paymentIntent.id}`);
@@ -325,7 +325,7 @@ Thanks for your purchase! Here is what happens next:
 2. Your ${order.packageSize}-lead package is being provisioned.
 3. Leads flow into your CRM dashboard in real time as they convert.
 
-Included with your $100/month CRM seat:
+Included with your one-time $100 CRM access:
 - Annuity University (training)
 - Oscar Annuity AI (sales support)
 - Free indexed-annuity book
