@@ -5,170 +5,326 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Real results from insurance professionals using BuyIASLeads indexed annuity leads — higher conversion rates, 92% lead quality, and deals closed.">
     <title>Testimonials - BuyIASLeads</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Georgia', 'Times New Roman', serif; line-height: 1.6; color: #c0dce8; background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%); }
 
-        header { display: flex; justify-content: space-between; align-items: center; padding: 25px 60px; background: rgba(10,10,10,0.95); border-bottom: 2px solid #c9a961; position: sticky; top: 0; z-index: 100; }
-        .logo { font-size: 18px; font-weight: 800; color: #c9a961; letter-spacing: 3px; }
-        nav { display: flex; gap: 50px; align-items: center; }
-        nav a { text-decoration: none; color: #c0dce8; font-size: 13px; font-weight: 600; transition: color 0.3s; }
-        nav a:hover { color: #c9a961; }
-        .order-btn { background: #c9a961; color: #0a0a0a; padding: 12px 28px; border-radius: 25px; text-decoration: none; font-size: 12px; font-weight: 700; transition: all 0.3s; border: none; cursor: pointer; }
-        .order-btn:hover { background: #dab857; transform: scale(1.05); }
+        :root {
+            --navy-dark: #0f1419;
+            --navy-light: #1a1f2e;
+            --gold: #d4a574;
+            --gold-light: #e8c9a0;
+            --text-primary: #f5f7fa;
+            --text-secondary: #b8c5d6;
+            --border-color: rgba(212, 165, 116, 0.15);
+        }
 
-        .tabs-section { padding: 40px 60px; border-bottom: 2px solid rgba(201,169,97,0.2); }
-        .tabs { display: flex; gap: 60px; }
-        .tab { font-size: 15px; font-weight: 700; color: #999; text-decoration: none; border-bottom: 3px solid transparent; padding-bottom: 12px; transition: all 0.3s; cursor: pointer; }
-        .tab:hover { color: #c0dce8; }
-        .tab.active { color: #c9a961; border-bottom-color: #c9a961; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy-light) 100%);
+        }
 
-        section { max-width: 1200px; margin: 0 auto; padding: 80px 60px; }
-        h1 { font-size: 48px; font-weight: 700; margin-bottom: 30px; text-align: center; color: #c9a961; }
-        h2 { font-size: 42px; font-weight: 700; margin-bottom: 50px; text-align: center; color: #c9a961; }
-        .intro-text { text-align: center; color: #c0dce8; max-width: 700px; margin: 0 auto 60px; font-size: 16px; line-height: 1.8; }
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(15, 20, 25, 0.95);
+            border-bottom: 1px solid var(--border-color);
+            padding: 20px 0;
+            backdrop-filter: blur(10px);
+        }
 
-        .testimonials { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; margin-top: 40px; }
-        .testimonial { background: rgba(26,26,26,0.8); border: 2px solid rgba(201,169,97,0.2); border-radius: 6px; padding: 40px; transition: all 0.3s; }
-        .testimonial:hover { border-color: #c9a961; box-shadow: 0 8px 20px rgba(201,169,97,0.2); }
-        .stars { color: #c9a961; font-size: 14px; letter-spacing: 2px; margin-bottom: 16px; }
-        .quote { font-size: 15px; color: #c0dce8; margin-bottom: 24px; font-style: italic; line-height: 1.7; }
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Crimson Text', serif;
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: var(--gold);
+            text-decoration: none;
+        }
+
+        nav { display: flex; gap: 32px; align-items: center; }
+
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover { color: var(--gold); }
+
+        nav a.order-btn {
+            background: var(--gold);
+            color: var(--navy-dark);
+            padding: 10px 22px;
+            border-radius: 8px;
+            font-weight: 700;
+        }
+
+        nav a.order-btn:hover { background: var(--gold-light); color: var(--navy-dark); }
+
+        main { padding-top: 90px; }
+
+        section { max-width: 1200px; margin: 0 auto; padding: 70px 40px; }
+
+        h1 {
+            font-family: 'Crimson Text', serif;
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        h2 {
+            font-family: 'Crimson Text', serif;
+            font-size: 38px;
+            font-weight: 700;
+            margin-bottom: 40px;
+            text-align: center;
+            color: var(--gold);
+        }
+
+        .intro-text {
+            text-align: center;
+            color: var(--text-secondary);
+            max-width: 720px;
+            margin: 0 auto;
+            font-size: 17px;
+            line-height: 1.8;
+        }
+
+        .testimonials { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; margin-top: 40px; }
+
+        .testimonial {
+            background: rgba(26, 31, 46, 0.5);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 32px;
+            transition: all 0.3s;
+        }
+
+        .testimonial:hover { border-color: var(--gold); background: rgba(26, 31, 46, 0.8); }
+
+        .stars { color: var(--gold); font-size: 15px; letter-spacing: 2px; margin-bottom: 16px; }
+        .quote { font-size: 15px; color: var(--text-primary); margin-bottom: 22px; font-style: italic; line-height: 1.7; }
         .client { display: flex; align-items: center; gap: 12px; }
-        .avatar { width: 50px; height: 50px; background: #c9a961; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #0a0a0a; font-weight: 700; font-size: 20px; }
-        .client-info h4 { font-size: 14px; font-weight: 700; margin-bottom: 2px; color: #c9a961; }
-        .client-info p { font-size: 12px; color: #999; }
-        .badge { background: rgba(201,169,97,0.2); color: #c9a961; padding: 6px 12px; border-radius: 4px; font-size: 11px; font-weight: 700; margin-top: 16px; display: inline-block; border: 1px solid #c9a961; }
 
-        .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; text-align: center; margin-top: 60px; }
-        .stat-box { background: rgba(26,26,26,0.8); border: 2px solid #c9a961; border-radius: 6px; padding: 40px; }
-        .stat-num { font-size: 48px; font-weight: 800; color: #c9a961; margin-bottom: 8px; }
-        .stat-label { font-size: 13px; color: #c0dce8; font-weight: 600; }
+        .avatar {
+            width: 48px; height: 48px;
+            background: var(--gold);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--navy-dark); font-weight: 700; font-size: 18px;
+        }
 
-        .demo-section { padding: 100px 60px !important; text-align: center; background: rgba(26,26,26,0.8); }
-        .demo-section h2 { color: #c9a961; }
-        .demo-section p { font-size: 16px; color: #c0dce8; max-width: 600px; margin-left: auto; margin-right: auto; }
-        .demo-link { display: inline-block; background: #c9a961; color: #0a0a0a; padding: 14px 32px; border-radius: 6px; text-decoration: none; font-size: 14px; font-weight: 700; text-transform: uppercase; margin-top: 30px; transition: all 0.2s; }
-        .demo-link:hover { background: #dab857; }
+        .client-info h4 { font-size: 14px; font-weight: 700; margin-bottom: 2px; color: var(--gold); }
+        .client-info p { font-size: 12px; color: var(--text-secondary); }
 
-        .cta-dark { background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%); color: white; text-align: center; padding: 100px 60px !important; }
-        .cta-dark h2 { color: #c9a961; }
-        .cta-dark p { color: #c0dce8; }
-        .order-btn-large { background: #c9a961; color: #0a0a0a; padding: 14px 32px; border: none; border-radius: 6px; font-size: 14px; font-weight: 700; text-transform: uppercase; cursor: pointer; margin-top: 30px; transition: all 0.2s; }
-        .order-btn-large:hover { background: #dab857; }
+        .badge {
+            background: rgba(212, 165, 116, 0.12);
+            color: var(--gold);
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 700;
+            margin-top: 16px;
+            display: inline-block;
+            border: 1px solid var(--border-color);
+        }
 
-        footer { background: #000; color: #999; text-align: center; padding: 40px 60px; font-size: 12px; border-top: 2px solid #c9a961; }
+        .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; text-align: center; margin-top: 56px; }
 
-        @media (max-width: 1024px) { .testimonials { grid-template-columns: 1fr; } .stats { grid-template-columns: 1fr; } }
+        .stat-box {
+            background: rgba(26, 31, 46, 0.5);
+            border: 1px solid var(--gold);
+            border-radius: 12px;
+            padding: 36px;
+        }
+
+        .stat-num { font-family: 'Crimson Text', serif; font-size: 44px; font-weight: 700; color: var(--gold); margin-bottom: 8px; }
+        .stat-label { font-size: 14px; color: var(--text-secondary); font-weight: 500; }
+
+        .cta-band { text-align: center; }
+        .cta-band p { font-size: 17px; color: var(--text-secondary); max-width: 640px; margin: 0 auto; }
+
+        .order-btn-large {
+            display: inline-block;
+            background: var(--gold);
+            color: var(--navy-dark);
+            padding: 16px 34px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 28px;
+            transition: all 0.3s;
+        }
+
+        .order-btn-large:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+        .btn-secondary {
+            display: inline-block;
+            background: transparent;
+            color: var(--gold);
+            border: 1px solid var(--gold);
+            padding: 15px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            margin-top: 28px;
+            margin-left: 12px;
+            transition: all 0.3s;
+        }
+
+        .btn-secondary:hover { background: rgba(212, 165, 116, 0.1); }
+
+        footer {
+            background: rgba(15, 20, 25, 0.8);
+            border-top: 1px solid var(--border-color);
+            padding: 40px;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 13px;
+            margin-top: 40px;
+        }
+
+        @media (max-width: 900px) {
+            .testimonials { grid-template-columns: 1fr; }
+            .stats { grid-template-columns: 1fr; gap: 20px; }
+            nav { gap: 18px; }
+            h1 { font-size: 34px; }
+            h2 { font-size: 28px; }
+            .header-content { padding: 0 20px; }
+            section { padding: 50px 20px; }
+        }
+
+        @media (max-width: 640px) {
+            nav a:not(.order-btn) { display: none; }
+        }
     </style>
 </head>
 <body>
     <header>
-        <div class="logo">BUYIASLEADS</div>
-        <nav>
-            <a href="index.html">Home</a>
-            <a href="how-it-works.html">How It Works</a>
-            <a href="testimonials.html">Testimonials</a>
-            <a href="faq.html">FAQ</a>
-            <a href="leads-marketplace.html" class="order-btn">Order Now</a>
-        </nav>
+        <div class="header-content">
+            <a href="index.html" class="logo">BUYIASLEADS</a>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="how-it-works.html">How It Works</a>
+                <a href="testimonials.html">Testimonials</a>
+                <a href="faq.html">FAQ</a>
+                <a href="leads-marketplace.html" class="order-btn">Order Now</a>
+            </nav>
+        </div>
     </header>
 
-    <div class="tabs-section">
-        <div class="tabs">
-            <a href="index.html" class="tab">Get Started</a>
-            <a href="how-it-works.html" class="tab">How It Works</a>
-            <a href="testimonials.html" class="tab active">Testimonials</a>
-        </div>
-    </div>
+    <main>
+        <section>
+            <h1>What Our Clients Say</h1>
+            <p class="intro-text">Real results from real insurance professionals. High-quality leads. Exceptional engagement rates. Deals closed.</p>
+        </section>
 
-    <section>
-        <h1>What Our Clients Say</h1>
-        <p class="intro-text">Real results from real insurance professionals. High-quality leads. Exceptional engagement rates. Deals closed.</p>
-
-        <div class="testimonials">
-            <div class="testimonial">
-                <div class="stars">⭐⭐⭐⭐⭐</div>
-                <p class="quote">"The quality of leads from BuyIASLeads is incredible. My conversion rate went from 15% to 38% in three months. These are actual buyers."</p>
-                <div class="client">
-                    <div class="avatar">JM</div>
-                    <div class="client-info">
-                        <h4>James Martinez</h4>
-                        <p>Annuity Agent, Florida</p>
+        <section style="padding-top: 0;">
+            <div class="testimonials">
+                <div class="testimonial">
+                    <div class="stars">★★★★★</div>
+                    <p class="quote">"The quality of leads from BuyIASLeads is incredible. My conversion rate went from 15% to 38% in three months. These are actual buyers."</p>
+                    <div class="client">
+                        <div class="avatar">JM</div>
+                        <div class="client-info">
+                            <h4>James Martinez</h4>
+                            <p>Annuity Agent, Florida</p>
+                        </div>
                     </div>
+                    <div class="badge">Closed 24 deals</div>
                 </div>
-                <div class="badge">Closed 24 deals</div>
-            </div>
 
-            <div class="testimonial">
-                <div class="stars">⭐⭐⭐⭐⭐</div>
-                <p class="quote">"I was skeptical about lead generation companies. BuyIASLeads proved me wrong. 92% of leads were actually interested. Best investment I've made."</p>
-                <div class="client">
-                    <div class="avatar">LS</div>
-                    <div class="client-info">
-                        <h4>Linda Stewart</h4>
-                        <p>Insurance Broker, California</p>
+                <div class="testimonial">
+                    <div class="stars">★★★★★</div>
+                    <p class="quote">"I was skeptical about lead generation companies. BuyIASLeads proved me wrong. 92% of leads were actually interested. Best investment I've made."</p>
+                    <div class="client">
+                        <div class="avatar">LS</div>
+                        <div class="client-info">
+                            <h4>Linda Stewart</h4>
+                            <p>Insurance Broker, California</p>
+                        </div>
                     </div>
+                    <div class="badge">Closed 31 deals</div>
                 </div>
-                <div class="badge">Closed 31 deals</div>
-            </div>
 
-            <div class="testimonial">
-                <div class="stars">⭐⭐⭐⭐⭐</div>
-                <p class="quote">"Gregory's targeting is precision-based. Not just names and numbers—actual prospects ready to talk annuities. My CRM is full of real opportunities."</p>
-                <div class="client">
-                    <div class="avatar">RC</div>
-                    <div class="client-info">
-                        <h4>Robert Chen</h4>
-                        <p>Independent Agent, Texas</p>
+                <div class="testimonial">
+                    <div class="stars">★★★★★</div>
+                    <p class="quote">"Gregory's targeting is precision-based. Not just names and numbers—actual prospects ready to talk annuities. My CRM is full of real opportunities."</p>
+                    <div class="client">
+                        <div class="avatar">RC</div>
+                        <div class="client-info">
+                            <h4>Robert Chen</h4>
+                            <p>Independent Agent, Texas</p>
+                        </div>
                     </div>
+                    <div class="badge">Closed 28 deals</div>
                 </div>
-                <div class="badge">Closed 28 deals</div>
-            </div>
 
-            <div class="testimonial">
-                <div class="stars">⭐⭐⭐⭐⭐</div>
-                <p class="quote">"The CRM automation ($100/month) saved me so much time on follow-ups. Combined with quality leads, it's a complete system. Can't recommend highly enough."</p>
-                <div class="client">
-                    <div class="avatar">KW</div>
-                    <div class="client-info">
-                        <h4>Karen Williams</h4>
-                        <p>Financial Advisor, New York</p>
+                <div class="testimonial">
+                    <div class="stars">★★★★★</div>
+                    <p class="quote">"The CRM automation ($100/month) saved me so much time on follow-ups. Combined with quality leads, it's a complete system. Can't recommend highly enough."</p>
+                    <div class="client">
+                        <div class="avatar">KW</div>
+                        <div class="client-info">
+                            <h4>Karen Williams</h4>
+                            <p>Financial Advisor, New York</p>
+                        </div>
                     </div>
+                    <div class="badge">Closed 19 deals</div>
                 </div>
-                <div class="badge">Closed 19 deals</div>
             </div>
-        </div>
 
-        <div class="stats">
-            <div class="stat-box">
-                <div class="stat-num">92%</div>
-                <div class="stat-label">Lead Quality Rating</div>
+            <div class="stats">
+                <div class="stat-box">
+                    <div class="stat-num">92%</div>
+                    <div class="stat-label">Lead Quality Rating</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-num">68%</div>
+                    <div class="stat-label">Average Callback Rate</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-num">156+</div>
+                    <div class="stat-label">Deals Closed</div>
+                </div>
             </div>
-            <div class="stat-box">
-                <div class="stat-num">68%</div>
-                <div class="stat-label">Average Callback Rate</div>
-            </div>
-            <div class="stat-box">
-                <div class="stat-num">156+</div>
-                <div class="stat-label">Deals Closed</div>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <section class="demo-section">
-        <h2>Join Our Growing Network</h2>
-        <p>See how our clients are scaling their annuity business. Book a demo to discover how BuyIASLeads can transform your lead generation.</p>
-        <a href="https://calendly.com/gregorystevensongfia/annuity-call" class="demo-link">SCHEDULE YOUR CALL</a>
-    </section>
-
-    <section class="cta-dark">
-        <h2>Ready to Scale Like Our Clients?</h2>
-        <p>$2,000 for 100 qualified leads. 92% quality. 68% callbacks. Real deals. Start this week.</p>
-        <a href="leads-marketplace.html" class="order-btn-large">ORDER YOUR LEADS NOW</a>
-    </section>
+        <section class="cta-band">
+            <h2>Ready to Scale Like Our Clients?</h2>
+            <p>$2,000 for 100 qualified leads. 92% quality. 68% callbacks. Real deals. Start this week.</p>
+            <div>
+                <a href="leads-marketplace.html" class="order-btn-large">Order Your Leads Now</a>
+                <a href="https://calendly.com/gregorystevensongfia/annuity-call" class="btn-secondary">Schedule Your Call</a>
+            </div>
+        </section>
+    </main>
 
     <footer>
-        <p>&copy; 2026 BuyIASLeads. All rights reserved. | Powered by Gregory Stevenson</p>
+        <p>&copy; 2026 BuyIASLeads. All rights reserved.</p>
     </footer>
 </body>
 </html>

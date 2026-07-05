@@ -217,6 +217,118 @@ app.post('/confirm-payment', limiter, async (req, res) => {
   }
 });
 
+// ---------------------------------------------------------------------------
+// Fulfillment: what happens after a successful payment.
+// Sends a welcome email to the customer and an order notification to the owner,
+// then hits the CRM-provisioning hook. Uses SendGrid's REST API via native fetch
+// (no extra npm dependency). Everything degrades gracefully: if email isn't
+// configured, it logs a warning and keeps going instead of throwing.
+// ---------------------------------------------------------------------------
+const SENDGRID_API_KEY = process.env.SENDGRID_API_KEY;
+const SENDGRID_FROM_EMAIL = process.env.SENDGRID_FROM_EMAIL || 'noreply@buyiasleads.com';
+const OWNER_NOTIFY_EMAIL = process.env.OWNER_NOTIFY_EMAIL || 'stevenson@pacificridgewayinsurance.com';
+
+async function sendEmail({ to, subject, text }) {
+  if (!SENDGRID_API_KEY) {
+    console.warn(`[EMAIL] SENDGRID_API_KEY not set - skipping email to ${to} ("${subject}")`);
+    return { sent: false, reason: 'not_configured' };
+  }
+  try {
+    const resp = await fetch('https://api.sendgrid.com/v3/mail/send', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${SENDGRID_API_KEY}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        personalizations: [{ to: [{ email: to }] }],
+        from: { email: SENDGRID_FROM_EMAIL, name: 'BuyIASLeads' },
+        subject,
+        content: [{ type: 'text/plain', value: text || '' }]
+      })
+    });
+    if (resp.ok) {
+      console.log(`[EMAIL] Sent "${subject}" to ${to}`);
+      return { sent: true };
+    }
+    const body = await resp.text();
+    console.error(`[EMAIL] SendGrid error ${resp.status} sending to ${to}: ${body}`);
+    return { sent: false, reason: `sendgrid_${resp.status}` };
+  } catch (err) {
+    console.error(`[EMAIL] Failed sending to ${to}:`, err.message);
+    return { sent: false, reason: 'exception' };
+  }
+}
+
+function orderFromPaymentIntent(pi) {
+  const m = pi.metadata || {};
+  return {
+    id: pi.id,
+    email: m.customerEmail || '',
+    name: m.customerName || 'Customer',
+    packageSize: m.packageSize || 'N/A',
+    amount: (pi.amount_received || pi.amount || 0) / 100,
+    currency: (pi.currency || 'usd').toUpperCase()
+  };
+}
+
+async function sendWelcomeEmail(order) {
+  if (!order.email) return { sent: false, reason: 'no_email' };
+  const text =
+`Hi ${order.name},
+
+Thanks for your purchase! Here is what happens next:
+
+1. Your CRM login credentials will arrive shortly.
+2. Your ${order.packageSize}-lead package is being provisioned.
+3. Leads flow into your CRM dashboard in real time as they convert.
+
+Included with your $100/month CRM seat:
+- Annuity University (training)
+- Oscar Annuity AI (sales support)
+- Free indexed-annuity book
+- 52-week automated nurture campaign
+
+Questions? Just reply to this email.
+
+- The BuyIASLeads Team`;
+  return sendEmail({ to: order.email, subject: 'Welcome to BuyIASLeads - your leads are on the way', text });
+}
+
+async function sendOwnerNotification(order) {
+  const text =
+`New paid order received.
+
+Name:     ${order.name}
+Email:    ${order.email}
+Package:  ${order.packageSize} leads
+Amount:   $${order.amount.toFixed(2)} ${order.currency}
+Payment:  ${order.id}
+
+ACTION NEEDED: provision this customer's CRM seat and lead package.`;
+  return sendEmail({ to: OWNER_NOTIFY_EMAIL, subject: `New BuyIASLeads order: ${order.packageSize} leads - ${order.name}`, text });
+}
+
+// Hook for automated CRM seat creation. Wire this to your CRM's API when ready.
+// Until then, the owner notification above prompts manual provisioning.
+async function provisionCrmSeat(order) {
+  console.log(`[PROVISION] CRM seat pending (manual) for ${order.email} - ${order.packageSize} leads`);
+  return { provisioned: false, method: 'manual' };
+}
+
+async function handleSuccessfulPayment(paymentIntent) {
+  const order = orderFromPaymentIntent(paymentIntent);
+  console.log(`[FULFILL] Order ${order.id} for ${order.email} (${order.packageSize} leads, $${order.amount})`);
+  const results = await Promise.allSettled([
+    sendWelcomeEmail(order),
+    sendOwnerNotification(order),
+    provisionCrmSeat(order)
+  ]);
+  results.forEach((r, i) => {
+    if (r.status === 'rejected') console.error(`[FULFILL] step ${i} failed:`, r.reason);
+  });
+}
+
 // Webhook endpoint for Stripe events
 app.post('/webhook', express.raw({type: 'application/json'}), (req, res) => {
   const sig = req.headers['stripe-signature'];
@@ -236,12 +348,15 @@ app.post('/webhook', express.raw({type: 'application/json'}), (req, res) => {
     console.log(`Webhook event received: ${event.type}`);
 
     switch (event.type) {
-      case 'payment_intent.succeeded':
+      case 'payment_intent.succeeded': {
         const paymentIntent = event.data.object;
         console.log(`Payment succeeded: ${paymentIntent.id}`);
-        console.log(`Customer email: ${paymentIntent.metadata.customerEmail}`);
-        // TODO: Create CRM account, send welcome email, provision leads
+        // Acknowledge Stripe right away; run fulfillment (emails + provisioning)
+        // asynchronously so a slow email never delays the webhook response.
+        handleSuccessfulPayment(paymentIntent).catch(err =>
+          console.error('[FULFILL] Unhandled fulfillment error:', err));
         break;
+      }
 
       case 'payment_intent.payment_failed':
         const failedIntent = event.data.object;
