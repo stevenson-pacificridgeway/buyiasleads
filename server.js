@@ -217,6 +217,48 @@ app.post('/confirm-payment', limiter, async (req, res) => {
   }
 });
 
+// New-customer intake form submission. Emails the details to the owner.
+app.post('/intake', limiter, async (req, res) => {
+  try {
+    const { fullName, email, phone, bestTime, leadDelivery, notes } = req.body || {};
+
+    if (!fullName || !email || !phone) {
+      return res.status(400).json({ error: 'Please provide your name, email, and phone.' });
+    }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return res.status(400).json({ error: 'Please enter a valid email address.' });
+    }
+
+    const text =
+`New customer intake form submission.
+
+Name:          ${fullName}
+Email:         ${email}
+Phone:         ${phone}
+Best time:     ${bestTime || '-'}
+Lead delivery: ${leadDelivery || '-'}
+Notes:         ${notes || '-'}`;
+
+    console.log(`[INTAKE] ${fullName} <${email}> ${phone}`);
+    const result = await sendEmail({
+      to: OWNER_NOTIFY_EMAIL,
+      subject: `New intake form: ${fullName}`,
+      text
+    });
+    // If email isn't configured yet, still succeed for the user but log the full
+    // submission so nothing is lost.
+    if (!result.sent) {
+      console.log('[INTAKE] (email not sent, logged instead) ' + text.replace(/\n/g, ' | '));
+    }
+
+    res.json({ success: true });
+  } catch (error) {
+    console.error('[INTAKE] error:', error);
+    res.status(500).json({ error: 'Something went wrong. Please try again.' });
+  }
+});
+
 // ---------------------------------------------------------------------------
 // Fulfillment: what happens after a successful payment.
 // Sends a welcome email to the customer and an order notification to the owner,

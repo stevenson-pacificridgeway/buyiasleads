@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="New customer intake form for BuyIASLeads — tell us how to reach you and where to deliver your indexed annuity leads.">
+    <title>Intake Form - BuyIASLeads</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --navy-dark: #0f1419;
+            --navy-light: #1a1f2e;
+            --gold: #d4a574;
+            --gold-light: #e8c9a0;
+            --text-primary: #f5f7fa;
+            --text-secondary: #b8c5d6;
+            --border-color: rgba(212, 165, 116, 0.15);
+            --success: #10b981;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: var(--text-primary);
+            background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy-light) 100%);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(15, 20, 25, 0.95);
+            border-bottom: 1px solid var(--border-color);
+            padding: 20px 0;
+            backdrop-filter: blur(10px);
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Crimson Text', serif;
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: var(--gold);
+            text-decoration: none;
+        }
+
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            margin-left: 28px;
+            transition: color 0.3s;
+        }
+
+        nav a:hover { color: var(--gold); }
+
+        main { max-width: 640px; margin: 0 auto; padding: 130px 20px 60px; }
+
+        .intake-header { text-align: center; margin-bottom: 36px; }
+
+        .intake-header h1 {
+            font-family: 'Crimson Text', serif;
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .intake-header p { color: var(--text-secondary); font-size: 16px; }
+
+        .card {
+            background: rgba(26, 31, 46, 0.5);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 32px;
+        }
+
+        .form-group { margin-bottom: 20px; }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(15, 20, 25, 0.6);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group textarea { resize: vertical; min-height: 90px; }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus { outline: none; border-color: var(--gold); }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder { color: var(--text-secondary); }
+
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: var(--gold);
+            color: var(--navy-dark);
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 8px;
+        }
+
+        .submit-btn:hover { background: var(--gold-light); transform: translateY(-2px); }
+        .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+        .form-error { color: #ff6b6b; font-size: 13px; margin-top: 14px; text-align: center; min-height: 18px; }
+
+        .thankyou { display: none; text-align: center; padding: 20px 10px; }
+        .thankyou.show { display: block; }
+        .thankyou .check { font-size: 56px; color: var(--success); margin-bottom: 12px; }
+        .thankyou h2 { font-family: 'Crimson Text', serif; font-size: 32px; color: var(--success); margin-bottom: 12px; }
+        .thankyou p { color: var(--text-secondary); margin-bottom: 26px; }
+
+        .btn-primary {
+            display: inline-block;
+            background: var(--gold);
+            color: var(--navy-dark);
+            padding: 14px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+        @media (max-width: 600px) {
+            main { padding-top: 110px; }
+            .intake-header h1 { font-size: 30px; }
+            .card { padding: 22px; }
+            .header-content { padding: 0 20px; }
+            nav a:first-child { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <a href="index.html" class="logo">BUYIASLEADS</a>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="faq.html">FAQ</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="intake-header">
+            <h1>New Customer Intake</h1>
+            <p>Thanks for your order! Fill this out so we can get your leads set up correctly.</p>
+        </div>
+
+        <div class="card">
+            <form id="intakeForm" onsubmit="handleIntake(event)">
+                <div class="form-group">
+                    <label>Full Name *</label>
+                    <input type="text" id="fullName" placeholder="John Smith" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Email *</label>
+                    <input type="email" id="email" placeholder="john@example.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Phone *</label>
+                    <input type="tel" id="phone" placeholder="(555) 123-4567" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Best Time to Reach You</label>
+                    <select id="bestTime">
+                        <option value="">No preference</option>
+                        <option value="Morning">Morning</option>
+                        <option value="Afternoon">Afternoon</option>
+                        <option value="Evening">Evening</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Where should we deliver your leads?</label>
+                    <input type="text" id="leadDelivery" placeholder="Email address or CRM you use">
+                </div>
+
+                <div class="form-group">
+                    <label>Anything else we should know?</label>
+                    <textarea id="notes" placeholder="Questions, the states you want leads in, products you focus on, etc."></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">Submit</button>
+                <div class="form-error" id="formError"></div>
+            </form>
+
+            <div class="thankyou" id="thankyou">
+                <div class="check">&#10003;</div>
+                <h2>Thank You!</h2>
+                <p>We've got your information and will be in touch shortly. Next, book your onboarding call so we can get you up and running.</p>
+                <a href="https://calendly.com/gregorystevenson/1-on-1-with-gregory-stevenson-30-min" class="btn-primary">Book Your Onboarding Call</a>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // The site is served by GitHub Pages (static), while the backend runs on
+        // Railway. Post the form to the Railway backend unless we're already on it.
+        const RAILWAY_BACKEND = 'https://buyiasleads-production.up.railway.app';
+        const BACKEND_URL =
+            (/\.railway\.app$/.test(location.hostname) || location.hostname === 'localhost' || location.hostname === '127.0.0.1')
+                ? ''
+                : RAILWAY_BACKEND;
+
+        async function handleIntake(e) {
+            e.preventDefault();
+            const errEl = document.getElementById('formError');
+            errEl.textContent = '';
+
+            const payload = {
+                fullName: document.getElementById('fullName').value.trim(),
+                email: document.getElementById('email').value.trim(),
+                phone: document.getElementById('phone').value.trim(),
+                bestTime: document.getElementById('bestTime').value,
+                leadDelivery: document.getElementById('leadDelivery').value.trim(),
+                notes: document.getElementById('notes').value.trim()
+            };
+
+            if (!payload.fullName || !payload.email || !payload.phone) {
+                errEl.textContent = 'Please fill in your name, email, and phone.';
+                return;
+            }
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(payload.email)) {
+                errEl.textContent = 'Please enter a valid email address.';
+                return;
+            }
+
+            const btn = e.target.querySelector('.submit-btn');
+            btn.disabled = true;
+            btn.textContent = 'Submitting...';
+
+            try {
+                const resp = await fetch(`${BACKEND_URL}/intake`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                if (!resp.ok) {
+                    const data = await resp.json().catch(() => ({}));
+                    throw new Error(data.error || 'Submission failed. Please try again.');
+                }
+                document.getElementById('intakeForm').style.display = 'none';
+                document.getElementById('thankyou').classList.add('show');
+            } catch (err) {
+                errEl.textContent = err.message;
+                btn.disabled = false;
+                btn.textContent = 'Submit';
+            }
+        }
+    </script>
+</body>
+</html>
