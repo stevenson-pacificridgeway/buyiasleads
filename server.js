@@ -18,9 +18,6 @@ app.use(cors({
 }));
 app.use(express.json({ limit: '1mb' }));
 
-// Serve static files (HTML, CSS, JS, images, etc.)
-app.use(express.static(path.join(__dirname, '.')));
-
 // Rate limiting - 10 requests per 15 minutes per IP
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
@@ -222,6 +219,9 @@ app.use((err, req, res, next) => {
   console.error('[ERROR] Unhandled error:', err);
   res.status(500).json({ error: 'Internal server error' });
 });
+
+// Serve static files (HTML, CSS, JS, images, etc.) - AFTER API routes
+app.use(express.static(path.join(__dirname, '.')));
 
 // Fallback: serve index.html for non-API routes
 app.use((req, res) => {
