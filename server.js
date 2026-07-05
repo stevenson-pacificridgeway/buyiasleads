@@ -2,8 +2,15 @@ const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 require('dotenv').config();
+
+// Validate Stripe key before initializing
+if (!process.env.STRIPE_SECRET_KEY) {
+  console.error('[CRITICAL ERROR] STRIPE_SECRET_KEY not configured in environment variables');
+  process.exit(1);
+}
+
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 const app = express();
 const path = require('path');
