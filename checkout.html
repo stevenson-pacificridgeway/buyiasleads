@@ -436,7 +436,7 @@
 
                     <div class="summary-item">
                         <span class="item-name">CRM Seat (First Month)</span>
-                        <span class="item-price">$100.00</span>
+                        <span class="item-price" id="crmPrice">$100.00</span>
                     </div>
 
                     <div class="summary-item">
@@ -465,6 +465,7 @@
                         <label>Lead Package *</label>
                         <select id="package" required onchange="updatePrice()">
                             <option value="">Select a package</option>
+                            <option value="test" style="color: #ff6b35;">🧪 TEST — ~$2 (owner testing only)</option>
                             <option value="100">100 Leads — $2,000</option>
                             <option value="200">200 Leads — $3,000</option>
                             <option value="400">400 Leads — $4,000</option>
@@ -578,7 +579,7 @@
             const basePrices = { test: 1, 100: 2000, 200: 3000, 400: 4000 };
             const leadCost = basePrices[packageSize] || 0;
             const isTest = packageSize === 'test';
-            const crmCost = isTest ? 0 : 100;
+            const crmCost = isTest ? 1 : 100;
             const subtotal = leadCost + crmCost;
             const fee = subtotal * 0.03;
             return {
@@ -597,13 +598,9 @@
                 const pricing = calculatePricing(pkg === 'test' ? 'test' : parseInt(pkg));
 
                 document.getElementById('leadPrice').textContent = `$${pricing.leadCost.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+                document.getElementById('crmPrice').textContent = `$${pricing.crmCost.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
                 document.getElementById('feePrice').textContent = `$${pricing.fee.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
                 document.getElementById('totalPrice').textContent = `$${pricing.total.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
-
-                // Hide CRM line for test package
-                const allSummaryItems = document.querySelectorAll('.summary-item');
-                const crmLine = allSummaryItems[1];
-                crmLine.style.display = pricing.isTest ? 'none' : 'flex';
             }
         }
 

@@ -101,7 +101,8 @@ function validatePricing(amount, packageSize) {
   }
 
   const isTest = normalizedPackageSize === 'test';
-  const expectedCrmCost = isTest ? 0 : 100;
+  // Test orders exercise the full subscription flow with a $1/mo CRM seat.
+  const expectedCrmCost = isTest ? 1 : 100;
   const expectedSubtotal = expectedBase + expectedCrmCost;
   const expectedFee = expectedSubtotal * 0.03;
   const expectedTotal = expectedSubtotal + expectedFee;
@@ -210,6 +211,28 @@ async function getCrmPriceId() {
   return crmPriceIdCache;
 }
 
+// A $1/month test price so the FULL subscription flow can be verified for ~$2.
+let crmTestPriceIdCache = null;
+async function getCrmTestPriceId() {
+  if (crmTestPriceIdCache) return crmTestPriceIdCache;
+  const existing = await stripe.prices.list({ lookup_keys: ['buyiasleads_crm_test_monthly'], limit: 1 });
+  if (existing.data.length) {
+    crmTestPriceIdCache = existing.data[0].id;
+    return crmTestPriceIdCache;
+  }
+  const product = await stripe.products.create({ name: 'BuyIASLeads CRM Seat (TEST)' });
+  const price = await stripe.prices.create({
+    product: product.id,
+    unit_amount: 100, // $1.00 / month
+    currency: 'usd',
+    recurring: { interval: 'month' },
+    lookup_key: 'buyiasleads_crm_test_monthly'
+  });
+  crmTestPriceIdCache = price.id;
+  console.log(`[BILLING] Created CRM TEST price ${price.id}`);
+  return crmTestPriceIdCache;
+}
+
 // Create the order: charges leads + first month CRM + fee TODAY (one payment,
 // same total as before) AND sets up the $100/month CRM seat to auto-renew.
 app.post('/create-subscription', limiter, async (req, res) => {
@@ -224,17 +247,20 @@ app.post('/create-subscription', limiter, async (req, res) => {
       return res.status(400).json({ error: 'Invalid email format' });
     }
 
+    const isTest = String(packageSize) === 'test';
     const leadPrices = { 100: 2000, 200: 3000, 400: 4000 };
     const pkgNum = parseInt(packageSize);
-    if (!leadPrices[pkgNum]) {
+    if (!isTest && !leadPrices[pkgNum]) {
       return res.status(400).json({ error: `Invalid package size: ${packageSize}` });
     }
-    const pricing = validatePricing(amount, pkgNum);
+    const pricing = validatePricing(amount, isTest ? 'test' : pkgNum);
     if (!pricing.valid) return res.status(400).json({ error: pricing.error });
     if (amount <= 0 || amount > 10000) return res.status(400).json({ error: 'Invalid amount' });
 
-    // First invoice = $100 recurring CRM line + this one-time amount (leads + fee).
-    const oneTimeCents = Math.round((amount - 100) * 100);
+    // Recurring CRM line is $100/mo normally, $1/mo for a test order.
+    const crmMonthly = isTest ? 1 : 100;
+    // First invoice = the recurring CRM line + this one-time amount (leads + fee).
+    const oneTimeCents = Math.round((amount - crmMonthly) * 100);
 
     const customer = await stripe.customers.create({
       email: customerEmail,
@@ -242,7 +268,7 @@ app.post('/create-subscription', limiter, async (req, res) => {
       metadata: { packageSize: String(packageSize) }
     });
 
-    const priceId = await getCrmPriceId();
+    const priceId = isTest ? await getCrmTestPriceId() : await getCrmPriceId();
 
     // One-time leads + processing fee, attached to the first invoice.
     await stripe.invoiceItems.create({
