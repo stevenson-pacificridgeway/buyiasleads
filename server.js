@@ -162,7 +162,7 @@ app.post('/create-payment-intent', limiter, async (req, res) => {
         customerEmail: customerEmail,
         customerName: customerName || 'N/A'
       },
-      description: `BuyIASLeads - ${packageSize} leads package + CRM access`
+      description: `BuyIASLeads - ${packageSize} leads package + $100/mo CRM seat`
     });
 
     console.log(`Payment intent created: ${paymentIntent.id}`);
@@ -180,6 +180,104 @@ app.post('/create-payment-intent', limiter, async (req, res) => {
       fullError: error
     });
     res.status(500).json({ error: error.message || 'Failed to create payment intent' });
+  }
+});
+
+// The $100/month CRM recurring price. Created once in your Stripe account and
+// reused forever via its lookup_key (so no manual dashboard setup is needed).
+let crmPriceIdCache = null;
+async function getCrmPriceId() {
+  if (crmPriceIdCache) return crmPriceIdCache;
+  if (process.env.STRIPE_CRM_PRICE_ID) {
+    crmPriceIdCache = process.env.STRIPE_CRM_PRICE_ID;
+    return crmPriceIdCache;
+  }
+  const existing = await stripe.prices.list({ lookup_keys: ['buyiasleads_crm_monthly'], limit: 1 });
+  if (existing.data.length) {
+    crmPriceIdCache = existing.data[0].id;
+    return crmPriceIdCache;
+  }
+  const product = await stripe.products.create({ name: 'BuyIASLeads CRM Seat' });
+  const price = await stripe.prices.create({
+    product: product.id,
+    unit_amount: 10000, // $100.00 / month
+    currency: 'usd',
+    recurring: { interval: 'month' },
+    lookup_key: 'buyiasleads_crm_monthly'
+  });
+  crmPriceIdCache = price.id;
+  console.log(`[BILLING] Created CRM monthly price ${price.id}`);
+  return crmPriceIdCache;
+}
+
+// Create the order: charges leads + first month CRM + fee TODAY (one payment,
+// same total as before) AND sets up the $100/month CRM seat to auto-renew.
+app.post('/create-subscription', limiter, async (req, res) => {
+  try {
+    const { amount, packageSize, customerEmail, customerName } = req.body;
+
+    if (!amount || packageSize === undefined || packageSize === null || !customerEmail) {
+      return res.status(400).json({ error: 'Missing required fields' });
+    }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(customerEmail)) {
+      return res.status(400).json({ error: 'Invalid email format' });
+    }
+
+    const leadPrices = { 100: 2000, 200: 3000, 400: 4000 };
+    const pkgNum = parseInt(packageSize);
+    if (!leadPrices[pkgNum]) {
+      return res.status(400).json({ error: `Invalid package size: ${packageSize}` });
+    }
+    const pricing = validatePricing(amount, pkgNum);
+    if (!pricing.valid) return res.status(400).json({ error: pricing.error });
+    if (amount <= 0 || amount > 10000) return res.status(400).json({ error: 'Invalid amount' });
+
+    // First invoice = $100 recurring CRM line + this one-time amount (leads + fee).
+    const oneTimeCents = Math.round((amount - 100) * 100);
+
+    const customer = await stripe.customers.create({
+      email: customerEmail,
+      name: customerName || undefined,
+      metadata: { packageSize: String(packageSize) }
+    });
+
+    const priceId = await getCrmPriceId();
+
+    // One-time leads + processing fee, attached to the first invoice.
+    await stripe.invoiceItems.create({
+      customer: customer.id,
+      amount: oneTimeCents,
+      currency: 'usd',
+      description: `${packageSize} indexed annuity leads (one-time) + processing fee`
+    });
+
+    const subscription = await stripe.subscriptions.create({
+      customer: customer.id,
+      items: [{ price: priceId }],
+      payment_behavior: 'default_incomplete',
+      payment_settings: { save_default_payment_method: 'on_subscription' },
+      expand: ['latest_invoice.payment_intent'],
+      metadata: { packageSize: String(packageSize), customerEmail, customerName: customerName || 'N/A' }
+    });
+
+    const paymentIntent = subscription.latest_invoice.payment_intent;
+
+    // Copy order details onto the PaymentIntent so the existing webhook
+    // fulfillment (welcome + owner emails) fires unchanged on the first payment.
+    await stripe.paymentIntents.update(paymentIntent.id, {
+      metadata: { packageSize: String(packageSize), customerEmail, customerName: customerName || 'N/A' }
+    });
+
+    console.log(`[BILLING] Subscription ${subscription.id} created for ${customerEmail} (${packageSize} leads)`);
+
+    res.json({
+      clientSecret: paymentIntent.client_secret,
+      subscriptionId: subscription.id
+    });
+  } catch (error) {
+    console.error('[ERROR] Creating subscription:', error.message);
+    res.status(500).json({ error: error.message || 'Failed to start checkout' });
   }
 });
 
@@ -325,7 +423,7 @@ Thanks for your purchase! Here is what happens next:
 2. Your ${order.packageSize}-lead package is being provisioned.
 3. Leads flow into your CRM dashboard in real time as they convert.
 
-Included with your one-time $100 CRM access:
+Included with your $100/month CRM seat:
 - Annuity University (training)
 - Oscar Annuity AI (sales support)
 - Free indexed-annuity book

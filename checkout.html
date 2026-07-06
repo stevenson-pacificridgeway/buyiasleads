@@ -435,7 +435,7 @@
                     </div>
 
                     <div class="summary-item">
-                        <span class="item-name">CRM Access (One-Time)</span>
+                        <span class="item-name">CRM Seat (First Month)</span>
                         <span class="item-price">$100.00</span>
                     </div>
 
@@ -448,6 +448,10 @@
                         <span>Total Due Today</span>
                         <span style="color: var(--gold);" id="totalPrice">—</span>
                     </div>
+
+                    <p style="font-size: 12px; color: var(--text-secondary); margin-top: 14px; line-height: 1.5;">
+                        Your leads are a one-time purchase. Your $100/month CRM seat renews automatically each month and can be cancelled anytime.
+                    </p>
 
                     <p style="font-size: 12px; color: var(--text-secondary); margin-top: 20px; line-height: 1.6;">
                         <strong>✓ After Purchase:</strong> Welcome email arrives in 5 minutes with CRM login. Leads flow to your dashboard immediately—fresh prospects delivered in real-time as they convert.
@@ -645,7 +649,7 @@
 
                 let paymentResponse;
                 try {
-                    paymentResponse = await fetch(`${BACKEND_URL}/create-payment-intent`, {
+                    paymentResponse = await fetch(`${BACKEND_URL}/create-subscription`, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({
