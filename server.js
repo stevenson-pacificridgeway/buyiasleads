@@ -376,6 +376,9 @@ Notes:      ${notes || '-'}`;
       console.log('[INTAKE] (email not sent, logged instead) ' + text.replace(/\n/g, ' | '));
     }
 
+    // Text the owner too (primary notification channel).
+    await sendSms(`New intake form: ${fullName}, ${phone}, ${email}. Order: ${leadOrder ? (leadOrder === 'test' ? 'Test' : leadOrder + ' leads') : 'n/a'}. Best time: ${bestTime || '-'}`);
+
     res.json({ success: true });
   } catch (error) {
     console.error('[INTAKE] error:', error);
@@ -393,6 +396,35 @@ Notes:      ${notes || '-'}`;
 const SENDGRID_API_KEY = process.env.SENDGRID_API_KEY;
 const SENDGRID_FROM_EMAIL = process.env.SENDGRID_FROM_EMAIL || 'noreply@buyiasleads.com';
 const OWNER_NOTIFY_EMAIL = process.env.OWNER_NOTIFY_EMAIL || 'stevenson@pacificridgewayinsurance.com';
+
+// Twilio SMS notifications to the owner (new orders + intake form submissions).
+const TWILIO_ACCOUNT_SID = process.env.TWILIO_ACCOUNT_SID;
+const TWILIO_AUTH_TOKEN = process.env.TWILIO_AUTH_TOKEN;
+const TWILIO_FROM_NUMBER = process.env.TWILIO_FROM_NUMBER;
+const OWNER_NOTIFY_PHONE = process.env.OWNER_NOTIFY_PHONE;
+
+async function sendSms(body) {
+  if (!TWILIO_ACCOUNT_SID || !TWILIO_AUTH_TOKEN || !TWILIO_FROM_NUMBER || !OWNER_NOTIFY_PHONE) {
+    console.warn('[SMS] Twilio not fully configured - skipping SMS notification');
+    return { sent: false, reason: 'not_configured' };
+  }
+  try {
+    const creds = Buffer.from(`${TWILIO_ACCOUNT_SID}:${TWILIO_AUTH_TOKEN}`).toString('base64');
+    const params = new URLSearchParams({ From: TWILIO_FROM_NUMBER, To: OWNER_NOTIFY_PHONE, Body: body });
+    const resp = await fetch(`https://api.twilio.com/2010-04-01/Accounts/${TWILIO_ACCOUNT_SID}/Messages.json`, {
+      method: 'POST',
+      headers: { 'Authorization': `Basic ${creds}`, 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: params.toString()
+    });
+    if (resp.ok) { console.log('[SMS] Sent notification'); return { sent: true }; }
+    const t = await resp.text();
+    console.error(`[SMS] Twilio error ${resp.status}: ${t}`);
+    return { sent: false, reason: `twilio_${resp.status}` };
+  } catch (err) {
+    console.error('[SMS] Failed:', err.message);
+    return { sent: false, reason: 'exception' };
+  }
+}
 
 async function sendEmail({ to, subject, text }) {
   if (!SENDGRID_API_KEY) {
@@ -488,6 +520,7 @@ async function handleSuccessfulPayment(paymentIntent) {
   const results = await Promise.allSettled([
     sendWelcomeEmail(order),
     sendOwnerNotification(order),
+    sendSms(`New BuyIASLeads order: ${order.packageSize} leads - ${order.name} (${order.email}), $${order.amount.toFixed(2)}`),
     provisionCrmSeat(order)
   ]);
   results.forEach((r, i) => {
