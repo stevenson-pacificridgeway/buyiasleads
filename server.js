@@ -78,31 +78,24 @@ app.get('/health', (req, res) => {
   res.json({ status: 'ok' });
 });
 
-// Validate pricing (helper function)
+// Validate pricing (helper function).
+// Handles: 'test', '100'/'200'/'400' (new orders, include $100/mo CRM),
+// and '100-renewal'/'200-renewal'/'400-renewal' (leads only, no CRM).
 function validatePricing(amount, packageSize) {
-  // Ensure packageSize is a valid type (convert if needed)
-  let normalizedPackageSize = packageSize;
-  if (typeof packageSize === 'number') {
-    normalizedPackageSize = packageSize;
-  } else if (packageSize === 'test') {
-    normalizedPackageSize = 'test';
-  } else {
-    const numPackage = parseInt(packageSize);
-    if (!isNaN(numPackage)) {
-      normalizedPackageSize = numPackage;
-    }
-  }
+  const s = String(packageSize);
+  const isRenewal = s.endsWith('-renewal');
+  const baseKey = isRenewal ? s.slice(0, -('-renewal'.length)) : s;
 
   const validPackages = { test: 1, 100: 2000, 200: 3000, 400: 4000 };
-  const expectedBase = validPackages[normalizedPackageSize];
+  const expectedBase = validPackages[baseKey];
 
   if (expectedBase === undefined) {
     return { valid: false, error: `Invalid package size: ${packageSize}` };
   }
 
-  const isTest = normalizedPackageSize === 'test';
-  // Test orders exercise the full subscription flow with a $1/mo CRM seat.
-  const expectedCrmCost = isTest ? 1 : 100;
+  const isTest = baseKey === 'test';
+  // Renewals have no CRM seat. Test exercises the subscription flow at $1/mo.
+  const expectedCrmCost = isRenewal ? 0 : (isTest ? 1 : 100);
   const expectedSubtotal = expectedBase + expectedCrmCost;
   const expectedFee = expectedSubtotal * 0.03;
   const expectedTotal = expectedSubtotal + expectedFee;
@@ -112,7 +105,7 @@ function validatePricing(amount, packageSize) {
     return { valid: false, error: `Invalid amount for package ${packageSize}. Expected $${expectedTotal.toFixed(2)}, got $${amount.toFixed(2)}` };
   }
 
-  return { valid: true };
+  return { valid: true, isRenewal };
 }
 
 // Create payment intent
@@ -140,9 +133,8 @@ app.post('/create-payment-intent', limiter, async (req, res) => {
       return res.status(400).json({ error: 'Invalid email format' });
     }
 
-    // Validate amount and package (handle 'test' string and numeric packages)
-    const normalizedPackageSize = packageSize === 'test' ? 'test' : parseInt(packageSize);
-    const pricing = validatePricing(amount, normalizedPackageSize);
+    // Validate amount and package (handles 'test', numeric, and '-renewal' packages)
+    const pricing = validatePricing(amount, packageSize);
     if (!pricing.valid) {
       return res.status(400).json({ error: pricing.error });
     }
@@ -163,7 +155,7 @@ app.post('/create-payment-intent', limiter, async (req, res) => {
         customerEmail: customerEmail,
         customerName: customerName || 'N/A'
       },
-      description: `BuyIASLeads - ${packageSize} leads package + $100/mo CRM seat`
+      description: `BuyIASLeads - ${packageSize} leads package${pricing.isRenewal ? ' (renewal, leads only)' : ' + $100/mo CRM seat'}`
     });
 
     console.log(`Payment intent created: ${paymentIntent.id}`);

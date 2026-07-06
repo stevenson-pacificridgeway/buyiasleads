@@ -449,7 +449,7 @@
                         <span style="color: var(--gold);" id="totalPrice">—</span>
                     </div>
 
-                    <p style="font-size: 12px; color: var(--text-secondary); margin-top: 14px; line-height: 1.5;">
+                    <p id="recurringDisclosure" style="font-size: 12px; color: var(--text-secondary); margin-top: 14px; line-height: 1.5;">
                         Your leads are a one-time purchase. Your $100/month CRM seat renews automatically each month and can be cancelled anytime.
                     </p>
 
@@ -469,6 +469,9 @@
                             <option value="100">100 Leads — $2,000</option>
                             <option value="200">200 Leads — $3,000</option>
                             <option value="400">400 Leads — $4,000</option>
+                            <option value="100-renewal">100 Leads Renewal — $2,000 (no CRM)</option>
+                            <option value="200-renewal">200 Leads Renewal — $3,000 (no CRM)</option>
+                            <option value="400-renewal">400 Leads Renewal — $4,000 (no CRM)</option>
                         </select>
                     </div>
 
@@ -574,12 +577,16 @@
             });
         }
 
-        // Single source of truth for pricing
+        // Single source of truth for pricing.
+        // Renewal packages (e.g. "100-renewal") are leads-only, one-time, no CRM seat.
         function calculatePricing(packageSize) {
+            const s = String(packageSize);
+            const isRenewal = s.endsWith('-renewal');
+            const baseKey = isRenewal ? s.slice(0, -8) : s; // drop "-renewal"
             const basePrices = { test: 1, 100: 2000, 200: 3000, 400: 4000 };
-            const leadCost = basePrices[packageSize] || 0;
-            const isTest = packageSize === 'test';
-            const crmCost = isTest ? 1 : 100;
+            const leadCost = basePrices[baseKey] || 0;
+            const isTest = baseKey === 'test';
+            const crmCost = isRenewal ? 0 : (isTest ? 1 : 100);
             const subtotal = leadCost + crmCost;
             const fee = subtotal * 0.03;
             return {
@@ -588,20 +595,31 @@
                 subtotal,
                 fee,
                 total: subtotal + fee,
-                isTest
+                isTest,
+                isRenewal
             };
+        }
+
+        function fmtMoney(n) {
+            return `$${n.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
         }
 
         function updatePrice() {
             const pkg = document.getElementById('package').value;
-            if (pkg && (pkg === 'test' || [100, 200, 400].includes(parseInt(pkg)))) {
-                const pricing = calculatePricing(pkg === 'test' ? 'test' : parseInt(pkg));
+            if (!pkg) return;
+            const pricing = calculatePricing(pkg);
+            if (!pricing.leadCost) return; // unrecognized selection
 
-                document.getElementById('leadPrice').textContent = `$${pricing.leadCost.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
-                document.getElementById('crmPrice').textContent = `$${pricing.crmCost.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
-                document.getElementById('feePrice').textContent = `$${pricing.fee.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
-                document.getElementById('totalPrice').textContent = `$${pricing.total.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
-            }
+            document.getElementById('leadPrice').textContent = fmtMoney(pricing.leadCost);
+            document.getElementById('crmPrice').textContent = fmtMoney(pricing.crmCost);
+            document.getElementById('feePrice').textContent = fmtMoney(pricing.fee);
+            document.getElementById('totalPrice').textContent = fmtMoney(pricing.total);
+
+            // Renewals have no CRM seat: hide the CRM line and the recurring notice.
+            const crmLine = document.querySelectorAll('.summary-item')[1];
+            if (crmLine) crmLine.style.display = pricing.isRenewal ? 'none' : 'flex';
+            const disclosure = document.getElementById('recurringDisclosure');
+            if (disclosure) disclosure.style.display = pricing.isRenewal ? 'none' : 'block';
         }
 
         async function handleCheckout(e) {
@@ -638,20 +656,24 @@
             btn.innerHTML = '<span class="spinner"></span> Processing...';
 
             try {
-                const pricing = calculatePricing(packageSize === 'test' ? 'test' : parseInt(packageSize));
+                const pricing = calculatePricing(packageSize);
 
-                // Step 1: Create payment intent with backend (with timeout)
+                // Renewals are a one-time leads charge (no CRM subscription), so they
+                // go to /create-payment-intent. New orders + test go to /create-subscription.
+                const endpoint = pricing.isRenewal ? '/create-payment-intent' : '/create-subscription';
+
+                // Step 1: Create the charge with backend (with timeout)
                 const controller = new AbortController();
                 const timeoutId = setTimeout(() => controller.abort(), 10000);
 
                 let paymentResponse;
                 try {
-                    paymentResponse = await fetch(`${BACKEND_URL}/create-subscription`, {
+                    paymentResponse = await fetch(`${BACKEND_URL}${endpoint}`, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({
                             amount: pricing.total,
-                            packageSize: packageSize === 'test' ? 'test' : parseInt(packageSize),
+                            packageSize: packageSize,
                             customerEmail: email,
                             customerName: name
                         }),
