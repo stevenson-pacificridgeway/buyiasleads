@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%234f46e5'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='19' font-weight='bold' text-anchor='middle' fill='white'%3EB%3C/text%3E%3C/svg%3E">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Buy exclusive Fixed Indexed Annuity (FIA) leads — 200 leads for $3,000, delivered to your CRM the moment a prospect responds. Never shared, never resold.">
+    <meta name="description" content="200 exclusive Fixed Indexed Annuity (FIA) leads for $3,000 — delivered to your CRM the moment a prospect responds, introduced under your name, never shared or resold.">
     <meta property="og:title" content="Exclusive FIA Leads — BuyIASLeads">
-    <meta property="og:description" content="200 exclusive Fixed Indexed Annuity leads for $3,000, delivered to your CRM the moment they respond.">
+    <meta property="og:description" content="200 exclusive Fixed Indexed Annuity leads for $3,000, delivered to your CRM and introduced under your name the moment they respond.">
     <meta property="og:type" content="website">
     <title>Exclusive FIA Leads - BuyIASLeads</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,8 +16,8 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
             --bg: #ffffff;
-            --ink: #17163a;            /* dark navy headline text */
-            --accent: #4f46e5;         /* indigo CTA / accent */
+            --ink: #17163a;
+            --accent: #4f46e5;
             --accent-hover: #4338ca;
             --accent-glow: rgba(79, 70, 229, 0.30);
             --text-secondary: #4b5563;
@@ -29,112 +29,118 @@
             --announce-bg: #16163a;
             --announce-orange: #f2872e;
         }
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            color: var(--ink);
-            background: var(--bg);
-            line-height: 1.6;
-            min-height: 100vh;
-        }
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; color: var(--ink); background: var(--bg); line-height: 1.6; }
 
-        /* thin orange top strip + navy announcement bar */
         .top-strip { height: 4px; background: var(--announce-orange); }
-        .announcement {
-            background: var(--announce-bg);
-            color: #ffffff;
-            text-align: center;
-            font-size: 13px; font-weight: 700; letter-spacing: 0.5px;
-            text-transform: uppercase; padding: 11px 16px;
-        }
+        .announcement { background: var(--announce-bg); color: #fff; text-align: center; font-size: 13px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; padding: 11px 16px; }
         .announcement .hl { color: var(--announce-orange); }
 
-        header { border-bottom: 1px solid var(--border); padding: 18px 0; background: #fff; }
-        .header-content {
-            max-width: 1100px; margin: 0 auto; padding: 0 24px;
-            display: flex; justify-content: space-between; align-items: center;
-        }
-        .logo {
-            font-family: 'Crimson Text', serif; font-size: 26px; font-weight: 700;
-            letter-spacing: 2px; color: var(--ink); text-decoration: none;
-        }
-        nav a { color: var(--text-secondary); text-decoration: none; font-size: 14px; font-weight: 500; margin-left: 26px; }
+        header { border-bottom: 1px solid var(--border); padding: 18px 0; background: #fff; position: sticky; top: 0; z-index: 100; }
+        .header-content { max-width: 1120px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: 'Crimson Text', serif; font-size: 26px; font-weight: 700; letter-spacing: 2px; color: var(--ink); text-decoration: none; }
+        nav a { color: var(--text-secondary); text-decoration: none; font-size: 14px; font-weight: 500; margin-left: 24px; }
         nav a:hover { color: var(--accent); }
 
-        .hero { max-width: 860px; margin: 0 auto; padding: 66px 24px 40px; text-align: center; }
+        section { max-width: 1000px; margin: 0 auto; padding: 64px 24px; }
+        .narrow { max-width: 820px; }
 
-        .trust-pill {
-            display: inline-flex; align-items: center; gap: 8px;
-            background: var(--green-bg); border: 1px solid var(--green-border); color: var(--green-text);
-            padding: 8px 18px; border-radius: 999px; font-size: 14px; font-weight: 600;
-        }
+        .h2 { font-family: 'Crimson Text', serif; font-size: 40px; line-height: 1.12; text-align: center; color: var(--ink); margin-bottom: 14px; }
+        .h2 .accent { color: var(--accent); font-style: italic; }
+        .eyebrow { text-align: center; text-transform: uppercase; letter-spacing: 2px; font-size: 12px; font-weight: 700; color: var(--accent); margin-bottom: 12px; }
+        .lead { text-align: center; color: var(--text-secondary); font-size: 17px; max-width: 680px; margin: 0 auto 40px; }
+
+        .cta-btn { display: inline-block; background: var(--accent); color: #fff; font-size: 18px; font-weight: 700; padding: 18px 40px; border-radius: 12px; text-decoration: none; box-shadow: 0 14px 34px var(--accent-glow); transition: all 0.25s ease; }
+        .cta-btn:hover { background: var(--accent-hover); transform: translateY(-2px); }
+        .cta-wrap { text-align: center; }
+        .cta-note { display: block; color: var(--text-secondary); font-size: 14px; margin-top: 14px; }
+
+        /* HERO */
+        .hero { text-align: center; padding-top: 60px; padding-bottom: 30px; }
+        .trust-pill { display: inline-flex; align-items: center; gap: 8px; background: var(--green-bg); border: 1px solid var(--green-border); color: var(--green-text); padding: 8px 18px; border-radius: 999px; font-size: 14px; font-weight: 600; }
         .trust-sub { color: var(--text-secondary); font-size: 15px; margin: 16px auto 0; max-width: 640px; }
         .trust-sub strong { color: var(--ink); }
-
-        h1 {
-            font-family: 'Crimson Text', serif; font-weight: 700;
-            font-size: 68px; line-height: 1.06; margin: 46px 0 0; color: var(--ink);
-        }
+        h1 { font-family: 'Crimson Text', serif; font-weight: 700; font-size: 64px; line-height: 1.06; margin: 44px 0 0; color: var(--ink); }
         h1 .accent { color: var(--accent); font-style: italic; }
-
         .subhead { font-size: 19px; color: var(--text-secondary); max-width: 690px; margin: 26px auto 0; }
         .subhead strong { color: var(--ink); }
+        .reassure { display: inline-block; margin-top: 22px; background: var(--green-bg); border: 1px solid var(--green-border); color: var(--green-text); padding: 10px 20px; border-radius: 10px; font-size: 15px; font-weight: 500; }
+        .reassure strong { font-weight: 700; }
 
-        .cta-btn {
-            display: inline-block; margin-top: 40px;
-            background: var(--accent); color: #ffffff;
-            font-size: 19px; font-weight: 700;
-            padding: 20px 42px; border-radius: 12px; text-decoration: none;
-            box-shadow: 0 14px 34px var(--accent-glow);
-            transition: all 0.25s ease;
-        }
-        .cta-btn:hover { background: var(--accent-hover); transform: translateY(-2px); }
+        /* placeholder banner */
+        .placeholder { background: #fff8ec; border: 1px dashed var(--announce-orange); color: #92500e; border-radius: 10px; padding: 12px 16px; font-size: 13px; margin: 18px auto 0; max-width: 760px; text-align: center; }
 
-        .reassure {
-            display: inline-block; margin-top: 22px;
-            background: var(--green-bg); border: 1px solid var(--green-border); color: var(--green-text);
-            padding: 10px 20px; border-radius: 10px; font-size: 15px; font-weight: 500;
-        }
-        .reassure strong { color: var(--green-text); font-weight: 700; }
+        /* Testimonials */
+        .tgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .tcard { background: var(--card-bg); border: 1px solid var(--border); border-radius: 14px; padding: 24px; }
+        .stars { color: var(--accent); letter-spacing: 2px; font-size: 14px; margin-bottom: 12px; }
+        .tquote { font-style: italic; color: var(--ink); font-size: 15px; margin-bottom: 16px; }
+        .tname { font-weight: 700; font-size: 14px; }
+        .tmeta { color: var(--text-secondary); font-size: 13px; }
 
-        .section { max-width: 1000px; margin: 0 auto; padding: 56px 24px; }
-        .section h2 {
-            font-family: 'Crimson Text', serif; font-size: 40px; text-align: center;
-            color: var(--ink); margin-bottom: 44px;
-        }
-        .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-        .step {
-            background: var(--card-bg); border: 1px solid var(--border);
-            border-radius: 14px; padding: 30px; transition: all 0.3s;
-        }
-        .step:hover { border-color: var(--accent); box-shadow: 0 10px 26px rgba(79, 70, 229, 0.08); }
-        .step-num {
-            width: 44px; height: 44px; background: var(--accent); color: #fff;
-            border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            font-weight: 700; font-size: 20px; margin-bottom: 16px;
-        }
-        .step h3 { font-family: 'Crimson Text', serif; font-size: 22px; color: var(--ink); margin-bottom: 10px; }
-        .step p { color: var(--text-secondary); font-size: 15px; }
+        /* Steps */
+        .step { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 34px; margin-bottom: 24px; }
+        .step-tag { display: inline-block; background: var(--accent); color: #fff; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; padding: 5px 12px; border-radius: 999px; margin-bottom: 14px; }
+        .step h3 { font-family: 'Crimson Text', serif; font-size: 26px; color: var(--ink); margin-bottom: 12px; }
+        .step p { color: var(--text-secondary); margin-bottom: 12px; }
+        .step p strong { color: var(--ink); }
+        .checklist { list-style: none; margin: 12px 0; }
+        .checklist li { padding: 6px 0 6px 28px; position: relative; color: var(--text-secondary); }
+        .checklist li::before { content: '\2713'; position: absolute; left: 0; color: var(--green-text); font-weight: 700; }
+        .example { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin-top: 16px; font-size: 14px; }
+        .example .lbl { color: var(--text-secondary); font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .example .row { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid var(--border); }
+        .example .row:last-child { border-bottom: none; }
+        .email { background: #fff; border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 8px; padding: 18px; margin-top: 16px; font-size: 14px; color: var(--text-secondary); }
+        .email strong { color: var(--ink); }
 
-        .final-cta { text-align: center; padding: 20px 24px 88px; }
-        .final-cta p { color: var(--text-secondary); font-size: 18px; margin-bottom: 8px; }
+        /* Calculator */
+        .calc { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 34px; }
+        .calc-row { margin-bottom: 22px; }
+        .calc-row label { display: flex; justify-content: space-between; font-weight: 600; font-size: 15px; margin-bottom: 8px; }
+        .calc-row label span { color: var(--accent); }
+        .calc-row input[type=range] { width: 100%; accent-color: var(--accent); }
+        .calc-result { text-align: center; border-top: 1px solid var(--border); padding-top: 22px; margin-top: 6px; }
+        .calc-result .big { font-family: 'Crimson Text', serif; font-size: 46px; color: var(--accent); font-weight: 700; }
+        .calc-result .sub { color: var(--text-secondary); font-size: 15px; }
+        .disclosure { color: var(--text-secondary); font-size: 12px; margin-top: 18px; line-height: 1.6; }
 
-        footer {
-            border-top: 1px solid var(--border);
-            text-align: center; color: var(--text-secondary); font-size: 13px; padding: 34px 24px;
-        }
+        /* Compare */
+        .compare { display: grid; gap: 14px; }
+        .crow { display: grid; grid-template-columns: 200px 1fr; gap: 16px; align-items: start; background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+        .crow .name { font-weight: 700; color: var(--ink); }
+        .crow.win { border-color: var(--accent); background: rgba(79,70,229,0.05); }
+        .crow p { color: var(--text-secondary); font-size: 15px; }
+        @media (max-width: 640px) { .crow { grid-template-columns: 1fr; gap: 6px; } }
+
+        /* Included */
+        .stack { max-width: 640px; margin: 0 auto; }
+        .stack-item { display: flex; justify-content: space-between; align-items: center; padding: 18px 0; border-bottom: 1px solid var(--border); }
+        .stack-item .desc strong { display: block; color: var(--ink); }
+        .stack-item .desc span { color: var(--text-secondary); font-size: 14px; }
+        .stack-item .val { font-weight: 700; color: var(--accent); white-space: nowrap; margin-left: 16px; }
+        .stack-total { display: flex; justify-content: space-between; align-items: center; padding: 20px 0 0; font-size: 20px; font-weight: 800; }
+        .stack-total .val { color: var(--accent); }
+
+        /* FAQ */
+        .faq-q { background: var(--card-bg); border: 1px solid var(--border); border-radius: 10px; padding: 20px 22px; margin-bottom: 12px; }
+        .faq-q h4 { font-size: 16px; color: var(--ink); margin-bottom: 8px; }
+        .faq-q p { color: var(--text-secondary); font-size: 15px; }
+
+        footer { border-top: 1px solid var(--border); text-align: center; color: var(--text-secondary); font-size: 13px; padding: 40px 24px; }
         footer a { color: var(--text-secondary); text-decoration: underline; }
+        .legal { max-width: 820px; margin: 20px auto 0; font-size: 12px; color: #9aa1ac; line-height: 1.6; }
 
-        @media (max-width: 700px) {
-            h1 { font-size: 44px; }
-            .subhead { font-size: 17px; }
-            .steps { grid-template-columns: 1fr; }
+        @media (max-width: 760px) {
+            h1 { font-size: 42px; }
+            .h2 { font-size: 30px; }
+            .tgrid { grid-template-columns: 1fr; }
             nav a:not(.nav-cta) { display: none; }
         }
     </style>
 </head>
 <body>
     <div class="top-strip"></div>
-    <div class="announcement">Exclusive FIA leads &mdash; <span class="hl">delivered to your CRM the moment they respond</span></div>
+    <div class="announcement">Exclusive opportunity &mdash; <span class="hl">we&rsquo;re accepting only 50 FIA agents</span></div>
 
     <header>
         <div class="header-content">
@@ -143,54 +149,287 @@
                 <a href="index.html">Home</a>
                 <a href="how-it-works.html">How It Works</a>
                 <a href="faq.html">FAQ</a>
+                <a href="checkout.html?package=200" class="nav-cta" style="color:var(--accent);font-weight:700;">Get Leads</a>
             </nav>
         </div>
     </header>
 
+    <!-- HERO -->
     <section class="hero">
-        <span class="trust-pill">&#10003; Trusted by hundreds of FIA agents</span>
-        <p class="trust-sub">Agents from top IMOs and FMOs consistently buy our <strong>Fixed Indexed Annuity leads</strong>.</p>
+        <span class="trust-pill">&#10003; Trusted by working FIA agents nationwide</span>
+        <p class="trust-sub">Independent agents and agencies rely on our <strong>Fixed Indexed Annuity leads</strong> to keep their calendars full.</p>
 
         <h1>200 Exclusive FIA Leads<br>for <span class="accent">$3,000.</span></h1>
 
-        <p class="subhead">The moment a fixed-indexed-annuity prospect responds to our ad, we <strong>text you their name and phone number and tell them to expect your call</strong>. Every FIA lead is exclusively yours &mdash; never shared, never resold.</p>
+        <p class="subhead">The moment a fixed-indexed-annuity prospect responds to our ad, we introduce you by email <strong>under your name</strong>, drop their name and phone number into your CRM, and tell them to expect your call. Every lead is <strong>exclusively yours</strong> &mdash; never shared, never resold.</p>
 
-        <div>
+        <div class="cta-wrap" style="margin-top:38px;">
             <a href="checkout.html?package=200" class="cta-btn">Get 200 Exclusive FIA Leads for $3,000 &rarr;</a>
         </div>
-        <div>
-            <span class="reassure">One closed FIA case covers this <strong>many times over</strong>.</span>
+        <div style="margin-top:20px;">
+            <span class="reassure">One closed FIA case can cover this <strong>many times over</strong>.</span>
+        </div>
+        <div class="placeholder">Add your real proof number here (e.g., &ldquo;Trusted by 500+ FIA agents&rdquo;) and the IMOs/FMOs you actually work with once you have them.</div>
+    </section>
+
+    <!-- EXCLUSIVE OPPORTUNITY -->
+    <section class="narrow" style="text-align:center;">
+        <div class="eyebrow">An Exclusive Opportunity</div>
+        <h2 class="h2">We&rsquo;re Only Accepting <span class="accent">50 Agents.</span></h2>
+        <p class="lead">This isn&rsquo;t a volume play, and it isn&rsquo;t open to everyone. We&rsquo;re building a small group of <strong>50 FIA agents &mdash; no more, no less</strong>. We&rsquo;re looking for the right fit: agents who will actually work the leads and follow the system the way it&rsquo;s built.</p>
+        <div class="tgrid" style="text-align:left;">
+            <div class="tcard">
+                <div class="stars">&#9656;</div>
+                <p class="tquote" style="font-style:normal;">You call your leads while they&rsquo;re warm and follow the proven process &mdash; you don&rsquo;t let good prospects go cold.</p>
+            </div>
+            <div class="tcard">
+                <div class="stars">&#9656;</div>
+                <p class="tquote" style="font-style:normal;">You&rsquo;re a licensed agent who&rsquo;s serious about writing FIA business &mdash; not just &ldquo;trying leads.&rdquo;</p>
+            </div>
+            <div class="tcard">
+                <div class="stars">&#9656;</div>
+                <p class="tquote" style="font-style:normal;">You want a long-term lead partner and you&rsquo;re ready to grow &mdash; when you win, we both win.</p>
+            </div>
+        </div>
+        <div class="cta-wrap" style="margin-top:32px;">
+            <a href="checkout.html?package=200" class="cta-btn">Claim One Of The 50 Spots &rarr;</a>
+        </div>
+        <span class="cta-note">Once all 50 spots are filled, enrollment closes.</span>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section>
+        <div class="eyebrow">What Agents Are Saying</div>
+        <h2 class="h2">Real Words From <span class="accent">Real Agents.</span></h2>
+        <p class="lead">These are placeholder cards. Drop in real, verifiable customer reviews before you run traffic &mdash; never invented ones.</p>
+        <div class="tgrid">
+            <div class="tcard">
+                <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                <p class="tquote">&ldquo;[ Your customer&rsquo;s own words about the FIA leads go here. ]&rdquo;</p>
+                <div class="tname">[ First name, Last initial ]</div>
+                <div class="tmeta">[ City, State ]</div>
+            </div>
+            <div class="tcard">
+                <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                <p class="tquote">&ldquo;[ A second real review &mdash; results, exclusivity, or the follow-up system. ]&rdquo;</p>
+                <div class="tname">[ First name, Last initial ]</div>
+                <div class="tmeta">[ City, State ]</div>
+            </div>
+            <div class="tcard">
+                <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                <p class="tquote">&ldquo;[ A third real review &mdash; speed to first lead, ROI, or the CRM. ]&rdquo;</p>
+                <div class="tname">[ First name, Last initial ]</div>
+                <div class="tmeta">[ City, State ]</div>
+            </div>
         </div>
     </section>
 
-    <section class="section">
-        <h2>How It Works</h2>
-        <div class="steps">
-            <div class="step">
-                <div class="step-num">1</div>
-                <h3>We Run the Ads</h3>
-                <p>Our team targets people actively looking into fixed indexed annuities and guaranteed retirement income &mdash; problem-aware prospects, not cold names.</p>
+    <!-- HOW IT WORKS -->
+    <section>
+        <div class="eyebrow">How The Warm Follow-Up Works</div>
+        <h2 class="h2">Three Steps: We Generate. We Introduce. <span class="accent">You Sell.</span></h2>
+        <p class="lead">Not aged. Not shared. Nothing to set up. All we do is FIA leads &mdash; and we introduce you before you ever pick up the phone.</p>
+
+        <div class="step">
+            <span class="step-tag">Step 1 &mdash; We Generate</span>
+            <h3>We find the right FIA prospects</h3>
+            <p>We run the ads and do the targeting so you don&rsquo;t have to. We look for people who are actually a fit for a fixed indexed annuity &mdash; near or in retirement, with income or assets to protect &mdash; in the states you&rsquo;re licensed in.</p>
+            <p><strong>Making a qualified person interested beats making an interested person qualified.</strong> That&rsquo;s the whole game, and it&rsquo;s what we&rsquo;ve built our targeting around.</p>
+            <ul class="checklist">
+                <li>Consent captured at opt-in, with a compliance certificate on every lead.</li>
+                <li>Screened for retirement age and the ability to fund an annuity.</li>
+                <li>Generated only in the states you choose.</li>
+                <li>Exclusive to you &mdash; never resold to another agent.</li>
+            </ul>
+            <div class="example">
+                <div class="lbl">Example lead (sample data)</div>
+                <div class="row"><span>Name</span><strong>Sample Prospect</strong></div>
+                <div class="row"><span>Phone (verified)</span><strong>(555) 018-2240</strong></div>
+                <div class="row"><span>State</span><strong>Your licensed state</strong></div>
+                <div class="row"><span>Status</span><strong>Retirement age &middot; homeowner</strong></div>
+                <div class="row"><span>Opt-in</span><strong>Moments ago</strong></div>
             </div>
-            <div class="step">
-                <div class="step-num">2</div>
-                <h3>They Respond, You Get Notified</h3>
-                <p>The instant a prospect replies, we deliver their name and phone number straight to your CRM and text you so you can call while they're hot.</p>
+            <p style="margin-top:14px;font-size:14px;">First leads typically land within a few business days of signup, delivered straight into the included CRM.</p>
+        </div>
+
+        <div class="step">
+            <span class="step-tag">Step 2 &mdash; We Introduce</span>
+            <h3>We email them under your name</h3>
+            <p>The instant they opt in, we send a short introduction <strong>from you</strong> tied to an annuity angle that may fit their situation &mdash; then a fresh, helpful angle every week after that, all year. <strong>The fortune is in the follow-up, and you never lift a finger.</strong></p>
+            <div class="email">
+                <strong>From:</strong> [Your Name], Licensed Agent<br>
+                <strong>To:</strong> A new prospect<br>
+                <strong>Sent:</strong> Moments after they opt in<br><br>
+                Hi &mdash; you asked about protecting retirement income. The short version: a fixed indexed annuity can give you growth tied to a market index with a floor so you don&rsquo;t lose principal to a down year.<br><br>
+                There&rsquo;s no cost to you for my help. I&rsquo;ll send a few short notes over the next while so you can get a feel for it, and I&rsquo;ll give you a quick call to put a voice to the email.<br><br>
+                &mdash; [Your Name], [Your Number]
             </div>
-            <div class="step">
-                <div class="step-num">3</div>
-                <h3>You Call &amp; Close</h3>
-                <p>Each lead is exclusively yours. Reach out fast, book the appointment, and write the case &mdash; no competing agents on the same lead.</p>
+            <p style="margin-top:14px;">We track every open, click, and reply, so by the time they pick up you already know which angle got their attention.</p>
+        </div>
+
+        <div class="step">
+            <span class="step-tag">Step 3 &mdash; You Sell</span>
+            <h3>You make a warm call, not a cold one</h3>
+            <p>They already know your name and are expecting to hear from you. That&rsquo;s a completely different conversation than a cold dial. We hand you a proven call framework, objection handlers, and case-design help so you can move from &ldquo;hello&rdquo; to a real appointment.</p>
+            <p><strong>Every other lead company sells you a phone number. We give you a reason to call.</strong></p>
+        </div>
+    </section>
+
+    <!-- ROI CALCULATOR -->
+    <section class="narrow">
+        <div class="eyebrow">Run Your Own Numbers</div>
+        <h2 class="h2">Do The Math On <span class="accent">200 Leads.</span></h2>
+        <p class="lead">Move the sliders to your own assumptions. These are scenarios you control &mdash; not predictions or guarantees.</p>
+        <div class="calc">
+            <div class="calc-row">
+                <label>Leads <span id="vLeads">200</span></label>
+                <input type="range" id="leads" min="100" max="400" step="100" value="200" oninput="calc()">
+            </div>
+            <div class="calc-row">
+                <label>Contact rate <span id="vContact">10%</span></label>
+                <input type="range" id="contact" min="2" max="30" step="1" value="10" oninput="calc()">
+            </div>
+            <div class="calc-row">
+                <label>Close rate on conversations <span id="vClose">5%</span></label>
+                <input type="range" id="close" min="1" max="25" step="1" value="5" oninput="calc()">
+            </div>
+            <div class="calc-row">
+                <label>Average commission per FIA sale <span id="vComm">$3,000</span></label>
+                <input type="range" id="comm" min="1000" max="10000" step="500" value="3000" oninput="calc()">
+            </div>
+            <div class="calc-result">
+                <div class="big" id="totalCommission">$3,000</div>
+                <div class="sub"><span id="sales">1</span> potential sale from <span id="convos">20</span> conversations</div>
+            </div>
+            <p class="disclosure"><strong>Illustrative tool only. Results are not typical and not guaranteed.</strong> You set every assumption; the figures shown are scenarios, not predictions. Contact rates, close rates, and commissions vary widely by carrier, product, premium, market, skill, and effort. Past performance does not guarantee future results. Nothing here is a promise of income, sales, or earnings, and most agents will not produce the highest scenarios shown. Not legal, financial, tax, or insurance advice.</p>
+        </div>
+        <div class="cta-wrap" style="margin-top:30px;">
+            <a href="checkout.html?package=200" class="cta-btn">Get 200 Exclusive FIA Leads for $3,000 &rarr;</a>
+        </div>
+    </section>
+
+    <!-- COMPARE -->
+    <section>
+        <div class="eyebrow">Dare To Compare</div>
+        <h2 class="h2">Why Exclusive Beats <span class="accent">Everything Else.</span></h2>
+        <p class="lead">Most ways to get annuity leads cost more, give up exclusivity, or sell the same name to several agents at once.</p>
+        <div class="compare">
+            <div class="crow">
+                <div class="name">Aged leads</div>
+                <p>Cheap up front, but months old and already worked by every agent who bought the list before you &mdash; recycled across the same buyers again and again.</p>
+            </div>
+            <div class="crow">
+                <div class="name">Shared / social leads</div>
+                <p>Sold to multiple agents at once and often retargeted, so you&rsquo;re racing several other people to the same prospect the moment they opt in.</p>
+            </div>
+            <div class="crow">
+                <div class="name">DIY direct mail &amp; ads</div>
+                <p>You front the ad spend, build the funnel, manage the compliance, and hope it works &mdash; with none of the tracking or nurture done for you.</p>
+            </div>
+            <div class="crow win">
+                <div class="name">BuyIASLeads FIA</div>
+                <p><strong>Exclusive to one agent.</strong> Introduced under your name the moment they opt in, nurtured for you all year, delivered into your CRM. Nothing to build, nothing to share.</p>
             </div>
         </div>
     </section>
 
-    <section class="final-cta">
-        <p>Ready to fill your pipeline with exclusive FIA leads?</p>
-        <a href="checkout.html?package=200" class="cta-btn">Get 200 Exclusive FIA Leads for $3,000 &rarr;</a>
+    <!-- INCLUDED -->
+    <section class="narrow">
+        <div class="eyebrow">Everything Included</div>
+        <h2 class="h2">What You Get For <span class="accent">$3,000.</span></h2>
+        <p class="lead">Leads, the CRM, the nurture system, and the scripts &mdash; set up and running for you.</p>
+        <div class="stack">
+            <div class="stack-item">
+                <div class="desc"><strong>200 Exclusive FIA Leads</strong><span>Your choice of licensed states. Never shared or resold.</span></div>
+                <div class="val">Core offer</div>
+            </div>
+            <div class="stack-item">
+                <div class="desc"><strong>The CRM Seat</strong><span>Your leads flow in live. $100/month, first month included with your order.</span></div>
+                <div class="val">Included</div>
+            </div>
+            <div class="stack-item">
+                <div class="desc"><strong>Automated Follow-Up System</strong><span>Intro email under your name, then a fresh angle every week, all year.</span></div>
+                <div class="val">Included</div>
+            </div>
+            <div class="stack-item">
+                <div class="desc"><strong>Proven FIA Call Scripts &amp; Training</strong><span>The opener, objection handlers, and case-design help.</span></div>
+                <div class="val">Included</div>
+            </div>
+            <div class="stack-total">
+                <span>Today</span>
+                <span class="val">$3,000</span>
+            </div>
+        </div>
+        <div class="cta-wrap" style="margin-top:34px;">
+            <a href="checkout.html?package=200" class="cta-btn">Get 200 Exclusive FIA Leads for $3,000 &rarr;</a>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="narrow">
+        <div class="eyebrow">FAQ</div>
+        <h2 class="h2">Questions Before You <span class="accent">Get Started.</span></h2>
+        <div style="margin-top:36px;">
+            <div class="faq-q">
+                <h4>How fast do leads start coming in?</h4>
+                <p>Your custom FIA campaign is typically live within a few business days of signing up, and leads land in your dashboard the moment they opt in.</p>
+            </div>
+            <div class="faq-q">
+                <h4>Are the leads really exclusive?</h4>
+                <p>Yes. Each FIA lead is sold to one agent &mdash; you &mdash; and never resold or shared. You&rsquo;re not racing other agents to the same name.</p>
+            </div>
+            <div class="faq-q">
+                <h4>Do I have to set anything up?</h4>
+                <p>No. The campaign, the CRM, and the follow-up emails are installed and activated for you, ready to run on day one.</p>
+            </div>
+            <div class="faq-q">
+                <h4>Is the follow-up done for me?</h4>
+                <p>Yes. We introduce you by email under your name the moment a prospect opts in, then keep sending helpful angles every week so you&rsquo;re calling warm, not cold.</p>
+            </div>
+            <div class="faq-q">
+                <h4>How does billing work?</h4>
+                <p>The 200-lead package is a one-time $3,000 charge. The CRM seat is $100/month, with the first month included in your order and billed automatically each month after &mdash; cancel anytime.</p>
+            </div>
+            <div class="faq-q">
+                <h4>Are the leads compliant?</h4>
+                <p>Every lead includes written consent captured at opt-in with a certificate documenting it. You remain responsible for the federal and state outreach rules that apply to your business.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CLOSING -->
+    <section class="narrow" style="text-align:center;">
+        <h2 class="h2">Let&rsquo;s Grow Your Business <span class="accent">Together.</span></h2>
+        <p class="lead">200 exclusive FIA leads for $3,000, introduced under your name and delivered to your CRM. Built to be a long-term lead partner &mdash; not a one-time test.</p>
+        <div class="cta-wrap">
+            <a href="checkout.html?package=200" class="cta-btn">Get 200 Exclusive FIA Leads for $3,000 &rarr;</a>
+        </div>
     </section>
 
     <footer>
         <p>&copy; 2026 BuyIASLeads. All rights reserved. &nbsp;|&nbsp; <a href="terms.html">Terms &amp; Privacy</a></p>
+        <p class="legal">Results vary and are not typical. Any testimonials shown are placeholders to be replaced with real, verifiable customer statements. This is a lead-generation and marketing program; your results depend on your own effort, licensing, and follow-through. BuyIASLeads is not an insurance carrier, agency, or financial advisor, and nothing here is legal, financial, tax, or insurance advice.</p>
     </footer>
+
+    <script>
+        function fmt(n){ return '$' + Math.round(n).toLocaleString('en-US'); }
+        function calc(){
+            var leads = +document.getElementById('leads').value;
+            var contact = +document.getElementById('contact').value;
+            var close = +document.getElementById('close').value;
+            var comm = +document.getElementById('comm').value;
+            document.getElementById('vLeads').textContent = leads;
+            document.getElementById('vContact').textContent = contact + '%';
+            document.getElementById('vClose').textContent = close + '%';
+            document.getElementById('vComm').textContent = fmt(comm);
+            var convos = leads * (contact/100);
+            var sales = convos * (close/100);
+            var total = sales * comm;
+            document.getElementById('convos').textContent = Math.round(convos);
+            document.getElementById('sales').textContent = (Math.round(sales*10)/10);
+            document.getElementById('totalCommission').textContent = fmt(total);
+        }
+        calc();
+    </script>
 </body>
 </html>
