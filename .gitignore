@@ -3,3 +3,6 @@ node_modules/
 .env.local
 .DS_Store
 *.log
+ad-images/
+AD-IMAGE-PROMPTS-for-ChatGPT.md
+make_ads.py
