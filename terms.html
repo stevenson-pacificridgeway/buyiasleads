@@ -43,6 +43,15 @@
         p { color: var(--text-secondary); margin-bottom: 14px; font-size: 15px; }
         a { color: var(--gold); }
         .disclaimer { background: rgba(79, 70, 229, 0.08); border: 1px solid var(--border-color); border-radius: 8px; padding: 18px; font-size: 13px; color: var(--text-secondary); margin-top: 40px; }
+/* --- depth + contrast (site-wide) --- */
+header { box-shadow: 0 2px 16px rgba(23,22,58,0.06); }
+.lead-card, .testimonial, .stage, .stat-box, .faq-question, .card, .checkout-container, .success-container, .stack-item, .step, .example, .email, .tcard, .calc, .compare, .crow { box-shadow: 0 6px 22px rgba(23,22,58,0.07) !important; }
+.lead-card:hover, .testimonial:hover, .stage:hover, .faq-question:hover { box-shadow: 0 12px 30px rgba(79,70,229,0.16) !important; transform: translateY(-3px); }
+button, .cta-btn, .cta-button, .order-btn-large, .submit-btn, .btn-primary, .lead-card button, .btn-secondary { box-shadow: 0 8px 20px rgba(79,70,229,0.26); }
+body { background: linear-gradient(180deg, #ffffff 0%, #edeff7 100%) !important; overflow-x: hidden; }
+.dark-band { width: 100vw; max-width: none !important; margin-left: calc(50% - 50vw); padding-top: 48px !important; padding-bottom: 54px !important; text-align: center; background: repeating-linear-gradient(45deg, rgba(255,255,255,0.04) 0, rgba(255,255,255,0.04) 1px, transparent 1px, transparent 46px), repeating-linear-gradient(-45deg, rgba(255,255,255,0.04) 0, rgba(255,255,255,0.04) 1px, transparent 1px, transparent 46px), radial-gradient(1200px 520px at 50% -10%, #2c2770 0%, #1c1a45 55%, #131229 100%) !important; border-bottom: 1px solid #2a2860; margin-bottom: 20px; }
+.dark-band h1 { color: #ffffff !important; }
+.dark-band p, .dark-band .updated, .dark-band .subtitle { color: #cdd0ea !important; }
     </style>
 </head>
 <body>
@@ -58,8 +67,10 @@
     </header>
 
     <main>
+        <div class="dark-band">
         <h1>Terms, Refund &amp; Privacy</h1>
         <p class="updated">Last updated: July 2026</p>
+        </div>
 
         <h2>1. About BuyIASLeads</h2>
         <p>BuyIASLeads provides marketing-generated sales leads for licensed insurance and financial professionals, along with an optional $100/month customer relationship management (CRM) seat and related tools. By purchasing, you agree to these terms.</p>

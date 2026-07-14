@@ -400,6 +400,15 @@
                 font-size: 20px;
             }
         }
+/* --- depth + contrast (site-wide) --- */
+header { box-shadow: 0 2px 16px rgba(23,22,58,0.06); }
+.lead-card, .testimonial, .stage, .stat-box, .faq-question, .card, .checkout-container, .success-container, .stack-item, .step, .example, .email, .tcard, .calc, .compare, .crow { box-shadow: 0 6px 22px rgba(23,22,58,0.07) !important; }
+.lead-card:hover, .testimonial:hover, .stage:hover, .faq-question:hover { box-shadow: 0 12px 30px rgba(79,70,229,0.16) !important; transform: translateY(-3px); }
+button, .cta-btn, .cta-button, .order-btn-large, .submit-btn, .btn-primary, .lead-card button, .btn-secondary { box-shadow: 0 8px 20px rgba(79,70,229,0.26); }
+body { background: linear-gradient(180deg, #ffffff 0%, #edeff7 100%) !important; overflow-x: hidden; }
+.dark-band { width: 100vw; max-width: none !important; margin-left: calc(50% - 50vw); padding-top: 48px !important; padding-bottom: 54px !important; text-align: center; background: repeating-linear-gradient(45deg, rgba(255,255,255,0.04) 0, rgba(255,255,255,0.04) 1px, transparent 1px, transparent 46px), repeating-linear-gradient(-45deg, rgba(255,255,255,0.04) 0, rgba(255,255,255,0.04) 1px, transparent 1px, transparent 46px), radial-gradient(1200px 520px at 50% -10%, #2c2770 0%, #1c1a45 55%, #131229 100%) !important; border-bottom: 1px solid #2a2860; margin-bottom: 20px; }
+.dark-band h1 { color: #ffffff !important; }
+.dark-band p, .dark-band .updated, .dark-band .subtitle { color: #cdd0ea !important; }
     </style>
 </head>
 <body>
@@ -417,7 +426,7 @@
 
     <main>
         <div class="checkout-container">
-            <div class="checkout-header">
+            <div class="checkout-header dark-band">
                 <h1>Complete Your Purchase</h1>
                 <p style="color: var(--text-secondary); font-size: 16px;">Your exclusive leads flow into your CRM as they're generated &mdash; introduced under your name and worked for you all year.</p>
             </div>
@@ -470,12 +479,12 @@
                         <select id="package" required onchange="updatePrice()">
                             <option value="">Select a package</option>
                             <option value="test" style="color: #ff6b35;">🧪 TEST — ~$2 (owner testing only)</option>
-                            <option value="100">100 Leads — $3,000</option>
-                            <option value="200">200 Leads — $4,000</option>
-                            <option value="400">400 Leads — $5,000</option>
-                            <option value="100-renewal">100 Leads Renewal — $3,000 (no CRM)</option>
-                            <option value="200-renewal">200 Leads Renewal — $4,000 (no CRM)</option>
-                            <option value="400-renewal">400 Leads Renewal — $5,000 (no CRM)</option>
+                            <option value="100">100 Leads — $2,000</option>
+                            <option value="200">200 Leads — $3,000</option>
+                            <option value="400">400 Leads — $4,000</option>
+                            <option value="100-renewal">100 Leads Renewal — $2,000 (no CRM)</option>
+                            <option value="200-renewal">200 Leads Renewal — $3,000 (no CRM)</option>
+                            <option value="400-renewal">400 Leads Renewal — $4,000 (no CRM)</option>
                         </select>
                     </div>
 
@@ -587,7 +596,7 @@
             const s = String(packageSize);
             const isRenewal = s.endsWith('-renewal');
             const baseKey = isRenewal ? s.slice(0, -8) : s; // drop "-renewal"
-            const basePrices = { test: 1, 100: 3000, 200: 4000, 400: 5000 };
+            const basePrices = { test: 1, 100: 2000, 200: 3000, 400: 4000 };
             const leadCost = basePrices[baseKey] || 0;
             const isTest = baseKey === 'test';
             const crmCost = isRenewal ? 0 : (isTest ? 1 : 100);

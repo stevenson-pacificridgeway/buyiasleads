@@ -204,6 +204,15 @@
                 font-size: 36px;
             }
         }
+/* --- depth + contrast (site-wide) --- */
+header { box-shadow: 0 2px 16px rgba(23,22,58,0.06); }
+.lead-card, .testimonial, .stage, .stat-box, .faq-question, .card, .checkout-container, .success-container, .stack-item, .step, .example, .email, .tcard, .calc, .compare, .crow { box-shadow: 0 6px 22px rgba(23,22,58,0.07) !important; }
+.lead-card:hover, .testimonial:hover, .stage:hover, .faq-question:hover { box-shadow: 0 12px 30px rgba(79,70,229,0.16) !important; transform: translateY(-3px); }
+button, .cta-btn, .cta-button, .order-btn-large, .submit-btn, .btn-primary, .lead-card button, .btn-secondary { box-shadow: 0 8px 20px rgba(79,70,229,0.26); }
+body { background: linear-gradient(180deg, #ffffff 0%, #edeff7 100%) !important; overflow-x: hidden; }
+.dark-band { width: 100vw; max-width: none !important; margin-left: calc(50% - 50vw); padding-top: 48px !important; padding-bottom: 54px !important; text-align: center; background: repeating-linear-gradient(45deg, rgba(255,255,255,0.04) 0, rgba(255,255,255,0.04) 1px, transparent 1px, transparent 46px), repeating-linear-gradient(-45deg, rgba(255,255,255,0.04) 0, rgba(255,255,255,0.04) 1px, transparent 1px, transparent 46px), radial-gradient(1200px 520px at 50% -10%, #2c2770 0%, #1c1a45 55%, #131229 100%) !important; border-bottom: 1px solid #2a2860; margin-bottom: 20px; }
+.dark-band h1 { color: #ffffff !important; }
+.dark-band p, .dark-band .updated, .dark-band .subtitle { color: #cdd0ea !important; }
     </style>
 </head>
 <body>
@@ -235,7 +244,7 @@
             <div class="lead-card">
                 <h3>100 Leads</h3>
                 <p>Perfect for testing the system or filling a slower month. Exclusive to you and worked for you all year.</p>
-                <div class="lead-price">$3,000</div>
+                <div class="lead-price">$2,000</div>
                 <a href="checkout.html?package=100" style="text-decoration: none;"><button>Get Started</button></a>
             </div>
 
@@ -243,14 +252,14 @@
                 <div style="position:absolute; top:-12px; left:50%; transform:translateX(-50%); background:var(--gold); color:#fff; font-size:11px; font-weight:700; letter-spacing:1px; text-transform:uppercase; padding:5px 14px; border-radius:20px;">Most Popular</div>
                 <h3>200 Leads</h3>
                 <p>Our most popular package — enough volume to build real momentum and keep your pipeline full.</p>
-                <div class="lead-price">$4,000</div>
+                <div class="lead-price">$3,000</div>
                 <a href="checkout.html?package=200" style="text-decoration: none;"><button>Get Started</button></a>
             </div>
 
             <div class="lead-card">
                 <h3>400 Leads</h3>
                 <p>Best per-lead value for producers ready to scale fast and work volume with a team.</p>
-                <div class="lead-price">$5,000</div>
+                <div class="lead-price">$4,000</div>
                 <a href="checkout.html?package=400" style="text-decoration: none;"><button>Get Started</button></a>
             </div>
         </section>

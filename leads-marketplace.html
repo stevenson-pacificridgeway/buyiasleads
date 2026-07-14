@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%234f46e5'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='20' font-weight='bold' text-anchor='middle' fill='white'%3EB%3C/text%3E%3C/svg%3E">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Browse exclusive indexed annuity lead packages: 100 leads for $3,000, 200 for $4,000, or 400 for $5,000. Introduced under your name and delivered into your CRM.">
+    <meta name="description" content="Browse exclusive indexed annuity lead packages: 100 leads for $2,000, 200 for $3,000, or 400 for $4,000. Introduced under your name and delivered into your CRM.">
     <title>Browse Lead Packages — BuyIASLeads</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -182,6 +182,15 @@
                 grid-template-columns: 1fr;
             }
         }
+/* --- depth + contrast (site-wide) --- */
+header { box-shadow: 0 2px 16px rgba(23,22,58,0.06); }
+.lead-card, .testimonial, .stage, .stat-box, .faq-question, .card, .checkout-container, .success-container, .stack-item, .step, .example, .email, .tcard, .calc, .compare, .crow { box-shadow: 0 6px 22px rgba(23,22,58,0.07) !important; }
+.lead-card:hover, .testimonial:hover, .stage:hover, .faq-question:hover { box-shadow: 0 12px 30px rgba(79,70,229,0.16) !important; transform: translateY(-3px); }
+button, .cta-btn, .cta-button, .order-btn-large, .submit-btn, .btn-primary, .lead-card button, .btn-secondary { box-shadow: 0 8px 20px rgba(79,70,229,0.26); }
+body { background: linear-gradient(180deg, #ffffff 0%, #edeff7 100%) !important; overflow-x: hidden; }
+.dark-band { width: 100vw; max-width: none !important; margin-left: calc(50% - 50vw); padding-top: 48px !important; padding-bottom: 54px !important; text-align: center; background: repeating-linear-gradient(45deg, rgba(255,255,255,0.04) 0, rgba(255,255,255,0.04) 1px, transparent 1px, transparent 46px), repeating-linear-gradient(-45deg, rgba(255,255,255,0.04) 0, rgba(255,255,255,0.04) 1px, transparent 1px, transparent 46px), radial-gradient(1200px 520px at 50% -10%, #2c2770 0%, #1c1a45 55%, #131229 100%) !important; border-bottom: 1px solid #2a2860; margin-bottom: 20px; }
+.dark-band h1 { color: #ffffff !important; }
+.dark-band p, .dark-band .updated, .dark-band .subtitle { color: #cdd0ea !important; }
     </style>
 </head>
 <body>
@@ -199,7 +208,7 @@
     </header>
 
     <main>
-        <div class="header-section">
+        <div class="header-section dark-band">
             <h1>Lead Packages</h1>
             <p>Exclusive indexed annuity prospects &mdash; introduced under your name and worked for you all year.</p>
         </div>
@@ -208,21 +217,21 @@
             <div class="lead-card">
                 <h3>100 Leads</h3>
                 <p>Pre-qualified prospects actively seeking indexed annuity solutions.</p>
-                <div class="lead-price">$3,000</div>
+                <div class="lead-price">$2,000</div>
                 <a href="checkout.html?package=100" style="text-decoration: none;"><button>Purchase Now</button></a>
             </div>
 
             <div class="lead-card">
                 <h3>200 Leads</h3>
                 <p>Pre-qualified prospects actively seeking indexed annuity solutions.</p>
-                <div class="lead-price">$4,000</div>
+                <div class="lead-price">$3,000</div>
                 <a href="checkout.html?package=200" style="text-decoration: none;"><button>Purchase Now</button></a>
             </div>
 
             <div class="lead-card">
                 <h3>400 Leads</h3>
                 <p>Pre-qualified prospects actively seeking indexed annuity solutions.</p>
-                <div class="lead-price">$5,000</div>
+                <div class="lead-price">$4,000</div>
                 <a href="checkout.html?package=400" style="text-decoration: none;"><button>Purchase Now</button></a>
             </div>
         </div>
