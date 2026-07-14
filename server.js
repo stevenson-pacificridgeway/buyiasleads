@@ -150,6 +150,7 @@ app.post('/create-payment-intent', limiter, async (req, res) => {
     const paymentIntent = await stripe.paymentIntents.create({
       amount: Math.round(amount * 100), // Convert to cents
       currency: 'usd',
+      receipt_email: customerEmail, // Stripe emails the buyer an itemized receipt
       metadata: {
         packageSize: String(packageSize),
         customerEmail: customerEmail,
