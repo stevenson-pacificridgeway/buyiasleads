@@ -470,12 +470,12 @@
                         <select id="package" required onchange="updatePrice()">
                             <option value="">Select a package</option>
                             <option value="test" style="color: #ff6b35;">🧪 TEST — ~$2 (owner testing only)</option>
-                            <option value="100">100 Leads — $2,000</option>
-                            <option value="200">200 Leads — $3,000</option>
-                            <option value="400">400 Leads — $4,000</option>
-                            <option value="100-renewal">100 Leads Renewal — $2,000 (no CRM)</option>
-                            <option value="200-renewal">200 Leads Renewal — $3,000 (no CRM)</option>
-                            <option value="400-renewal">400 Leads Renewal — $4,000 (no CRM)</option>
+                            <option value="100">100 Leads — $3,000</option>
+                            <option value="200">200 Leads — $4,000</option>
+                            <option value="400">400 Leads — $5,000</option>
+                            <option value="100-renewal">100 Leads Renewal — $3,000 (no CRM)</option>
+                            <option value="200-renewal">200 Leads Renewal — $4,000 (no CRM)</option>
+                            <option value="400-renewal">400 Leads Renewal — $5,000 (no CRM)</option>
                         </select>
                     </div>
 
@@ -587,7 +587,7 @@
             const s = String(packageSize);
             const isRenewal = s.endsWith('-renewal');
             const baseKey = isRenewal ? s.slice(0, -8) : s; // drop "-renewal"
-            const basePrices = { test: 1, 100: 2000, 200: 3000, 400: 4000 };
+            const basePrices = { test: 1, 100: 3000, 200: 4000, 400: 5000 };
             const leadCost = basePrices[baseKey] || 0;
             const isTest = baseKey === 'test';
             const crmCost = isRenewal ? 0 : (isTest ? 1 : 100);

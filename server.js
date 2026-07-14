@@ -86,7 +86,7 @@ function validatePricing(amount, packageSize) {
   const isRenewal = s.endsWith('-renewal');
   const baseKey = isRenewal ? s.slice(0, -('-renewal'.length)) : s;
 
-  const validPackages = { test: 1, 100: 2000, 200: 3000, 400: 4000 };
+  const validPackages = { test: 1, 100: 3000, 200: 4000, 400: 5000 };
   const expectedBase = validPackages[baseKey];
 
   if (expectedBase === undefined) {
@@ -240,7 +240,7 @@ app.post('/create-subscription', limiter, async (req, res) => {
     }
 
     const isTest = String(packageSize) === 'test';
-    const leadPrices = { 100: 2000, 200: 3000, 400: 4000 };
+    const leadPrices = { 100: 3000, 200: 4000, 400: 5000 };
     const pkgNum = parseInt(packageSize);
     if (!isTest && !leadPrices[pkgNum]) {
       return res.status(400).json({ error: `Invalid package size: ${packageSize}` });
