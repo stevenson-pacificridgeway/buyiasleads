@@ -108,6 +108,19 @@
             margin-bottom: 40px;
         }
 
+        /* Dark textured hero band for contrast against the light page */
+        .hero-band {
+            background:
+                repeating-linear-gradient(45deg, rgba(255,255,255,0.04) 0, rgba(255,255,255,0.04) 1px, transparent 1px, transparent 46px),
+                repeating-linear-gradient(-45deg, rgba(255,255,255,0.04) 0, rgba(255,255,255,0.04) 1px, transparent 1px, transparent 46px),
+                radial-gradient(1200px 520px at 50% -10%, #2c2770 0%, #1c1a45 55%, #131229 100%);
+            border-bottom: 1px solid #2a2860;
+        }
+        .hero-band .hero h1 { color: #ffffff; }
+        .hero-band .hero p { color: #cdd0ea; }
+        .hero-band .hero .agency-line { color: #b9bce0; }
+        .hero-band .hero .agency-line a { color: #b3aef7; }
+
         .leads-grid {
             max-width: 1400px;
             margin: 0 auto;
@@ -209,11 +222,13 @@
     </header>
 
     <main>
-        <section class="hero" id="pricing">
+        <section class="hero-band">
+        <div class="hero" id="pricing">
             <h1>Exclusive Indexed Annuity Leads</h1>
             <p>Introduced under your name, nurtured for you all year, and delivered into your CRM. Never shared, never resold. $100/month CRM seat included.</p>
             <a href="leads-marketplace.html" style="display:inline-block; margin-top:24px; background:var(--gold); color:#ffffff; padding:14px 34px; border-radius:8px; text-decoration:none; font-weight:700; text-transform:uppercase; letter-spacing:1px;">View Lead Packages</a>
-            <p style="font-size:13px; margin-top:22px; color:var(--text-secondary);">Agency owner? <a href="fia-leads.html" style="color:var(--gold); font-weight:600;">See the 50-agent FIA partnership &rarr;</a></p>
+            <p class="agency-line" style="font-size:13px; margin-top:22px;">Agency owner? <a href="fia-leads.html" style="font-weight:600;">See the 50-agent FIA partnership &rarr;</a></p>
+        </div>
         </section>
 
         <section class="leads-grid">
