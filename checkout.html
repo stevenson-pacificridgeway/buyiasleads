@@ -482,6 +482,7 @@ body { background: linear-gradient(180deg, #ffffff 0%, #edeff7 100%) !important;
                             <option value="100">100 Leads — $2,000</option>
                             <option value="200">200 Leads — $3,000</option>
                             <option value="400">400 Leads — $5,000</option>
+                            <option value="crmonly">CRM Seat Only — $100/month (no leads)</option>
                             <option value="100-renewal">100 Leads Renewal — $2,000 (no CRM)</option>
                             <option value="200-renewal">200 Leads Renewal — $3,000 (no CRM)</option>
                             <option value="400-renewal">400 Leads Renewal — $5,000 (no CRM)</option>
@@ -597,6 +598,7 @@ body { background: linear-gradient(180deg, #ffffff 0%, #edeff7 100%) !important;
             const isRenewal = s.endsWith('-renewal');
             const baseKey = isRenewal ? s.slice(0, -8) : s; // drop "-renewal"
             const basePrices = { test: 1, 100: 2000, 200: 3000, 400: 5000 };
+            const isCrmOnly = baseKey === 'crmonly';
             const leadCost = basePrices[baseKey] || 0;
             const isTest = baseKey === 'test';
             const crmCost = isRenewal ? 0 : (isTest ? 1 : 100);
@@ -609,7 +611,8 @@ body { background: linear-gradient(180deg, #ffffff 0%, #edeff7 100%) !important;
                 fee,
                 total: subtotal + fee,
                 isTest,
-                isRenewal
+                isRenewal,
+                isCrmOnly
             };
         }
 
@@ -621,18 +624,25 @@ body { background: linear-gradient(180deg, #ffffff 0%, #edeff7 100%) !important;
             const pkg = document.getElementById('package').value;
             if (!pkg) return;
             const pricing = calculatePricing(pkg);
-            if (!pricing.leadCost) return; // unrecognized selection
+            if (!pricing.leadCost && !pricing.isCrmOnly) return; // unrecognized selection
 
             document.getElementById('leadPrice').textContent = fmtMoney(pricing.leadCost);
             document.getElementById('crmPrice').textContent = fmtMoney(pricing.crmCost);
             document.getElementById('feePrice').textContent = fmtMoney(pricing.fee);
             document.getElementById('totalPrice').textContent = fmtMoney(pricing.total);
 
-            // Renewals have no CRM seat: hide the CRM line and the recurring notice.
+            // Renewals have no CRM seat: hide the CRM line. CRM-only has no leads: hide the lead line.
+            const leadLine = document.querySelectorAll('.summary-item')[0];
+            if (leadLine) leadLine.style.display = pricing.isCrmOnly ? 'none' : 'flex';
             const crmLine = document.querySelectorAll('.summary-item')[1];
             if (crmLine) crmLine.style.display = pricing.isRenewal ? 'none' : 'flex';
             const disclosure = document.getElementById('recurringDisclosure');
-            if (disclosure) disclosure.style.display = pricing.isRenewal ? 'none' : 'block';
+            if (disclosure) {
+                disclosure.style.display = pricing.isRenewal ? 'none' : 'block';
+                disclosure.textContent = pricing.isCrmOnly
+                    ? 'This is a standalone CRM seat billed at $100/month. No leads are included. Cancel anytime.'
+                    : 'Your leads are a one-time purchase. Your $100/month CRM seat renews automatically each month and can be cancelled anytime.';
+            }
         }
 
         async function handleCheckout(e) {

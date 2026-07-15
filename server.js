@@ -86,7 +86,7 @@ function validatePricing(amount, packageSize) {
   const isRenewal = s.endsWith('-renewal');
   const baseKey = isRenewal ? s.slice(0, -('-renewal'.length)) : s;
 
-  const validPackages = { test: 1, 100: 2000, 200: 3000, 400: 5000 };
+  const validPackages = { test: 1, crmonly: 0, 100: 2000, 200: 3000, 400: 5000 };
   const expectedBase = validPackages[baseKey];
 
   if (expectedBase === undefined) {
@@ -241,12 +241,13 @@ app.post('/create-subscription', limiter, async (req, res) => {
     }
 
     const isTest = String(packageSize) === 'test';
+    const isCrmOnly = String(packageSize) === 'crmonly';
     const leadPrices = { 100: 2000, 200: 3000, 400: 5000 };
     const pkgNum = parseInt(packageSize);
-    if (!isTest && !leadPrices[pkgNum]) {
+    if (!isTest && !isCrmOnly && !leadPrices[pkgNum]) {
       return res.status(400).json({ error: `Invalid package size: ${packageSize}` });
     }
-    const pricing = validatePricing(amount, isTest ? 'test' : pkgNum);
+    const pricing = validatePricing(amount, isTest ? 'test' : (isCrmOnly ? 'crmonly' : pkgNum));
     if (!pricing.valid) return res.status(400).json({ error: pricing.error });
     if (amount <= 0 || amount > 10000) return res.status(400).json({ error: 'Invalid amount' });
 
@@ -268,7 +269,7 @@ app.post('/create-subscription', limiter, async (req, res) => {
       customer: customer.id,
       amount: oneTimeCents,
       currency: 'usd',
-      description: `${packageSize} indexed annuity leads (one-time) + processing fee`
+      description: isCrmOnly ? 'CRM seat — first-month processing fee' : `${packageSize} indexed annuity leads (one-time) + processing fee`
     });
 
     const subscription = await stripe.subscriptions.create({
