@@ -237,6 +237,12 @@
                 <div style="font-weight:700; color:var(--ink); margin-top:8px;">Rebekka M.</div>
                 <div style="font-size:12px; color:var(--text-secondary);">Partner Agent</div>
             </div>
+            <div class="tcard">
+                <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                <p class="tquote">&ldquo;Just got off the phone with a lead with over $2M in pre-tax assets, mapping out a plan to funnel it into tax-efficient IRAs and legacy plans for his grandkids &mdash; with principal protection, of course. Great conversations. Putting together his family plan Friday.&rdquo;</p>
+                <div style="font-weight:700; color:var(--ink); margin-top:8px;">Adam G.</div>
+                <div style="font-size:12px; color:var(--text-secondary);">Partner Agent</div>
+            </div>
         </div>
         <p class="lead" style="margin-top:0;">And the honest case for why they work:</p>
         <div class="tgrid">
@@ -279,8 +285,7 @@
                 <div class="lbl">Example lead (sample data)</div>
                 <div class="row"><span>Name</span><strong>Sample Prospect</strong></div>
                 <div class="row"><span>Phone (verified)</span><strong>(555) 018-2240</strong></div>
-                <div class="row"><span>State</span><strong>Your licensed state</strong></div>
-                <div class="row"><span>Status</span><strong>Retirement age &middot; homeowner</strong></div>
+                <div class="row"><span>Email</span><strong>sample.prospect@email.com</strong></div>
                 <div class="row"><span>Opt-in</span><strong>Requested the free annuity book</strong></div>
             </div>
             <p style="margin-top:14px;font-size:14px;">First leads typically land within a few business days of signup, delivered straight into the included CRM.</p>
@@ -342,7 +347,7 @@
             </div>
             <div class="calc-result">
                 <div class="big" id="totalCommission">$3,000</div>
-                <div class="sub"><span id="sales">1</span> potential sale from <span id="convos">20</span> conversations</div>
+                <div class="sub"><span id="sales">1</span> potential <span id="salesNoun">sale</span> from <span id="convos">20</span> conversations</div>
             </div>
             <p class="disclosure"><strong>Illustrative tool only. Results are not typical and not guaranteed.</strong> You set every assumption; the figures shown are scenarios, not predictions. Contact rates, close rates, and commissions vary widely by carrier, product, premium, market, skill, and effort. Past performance does not guarantee future results. Nothing here is a promise of income, sales, or earnings, and most agents will not produce the highest scenarios shown. Not legal, financial, tax, or insurance advice.</p>
         </div>
@@ -477,7 +482,9 @@
             var sales = convos * (close/100);
             var total = sales * comm;
             document.getElementById('convos').textContent = Math.round(convos);
-            document.getElementById('sales').textContent = (Math.round(sales*10)/10);
+            var salesRounded = Math.round(sales*10)/10;
+            document.getElementById('sales').textContent = salesRounded;
+            document.getElementById('salesNoun').textContent = (salesRounded === 1 ? 'sale' : 'sales');
             document.getElementById('totalCommission').textContent = fmt(total);
         }
         calc();
