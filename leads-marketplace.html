@@ -192,6 +192,22 @@ body { background: linear-gradient(180deg, #ffffff 0%, #edeff7 100%) !important;
 .dark-band h1 { color: #ffffff !important; }
 .dark-band p, .dark-band .updated, .dark-band .subtitle { color: #cdd0ea !important; }
     </style>
+<!-- Meta Pixel + UTM capture (BuyIASLeads) -->
+<script>
+(function(){
+  try {
+    var qs = new URLSearchParams(location.search), utm = {};
+    ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','utm_id'].forEach(function(k){ if(qs.get(k)) utm[k]=qs.get(k); });
+    if (Object.keys(utm).length) sessionStorage.setItem('bial_utm', JSON.stringify(utm));
+  } catch(e){}
+  window.BIAL_PIXEL_ID = 'REPLACE_WITH_META_PIXEL_ID';
+  if (window.BIAL_PIXEL_ID && window.BIAL_PIXEL_ID.indexOf('REPLACE') === -1) {
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', window.BIAL_PIXEL_ID);
+    fbq('track', 'PageView');
+  }
+})();
+</script>
 </head>
 <body>
     <header>

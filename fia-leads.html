@@ -59,6 +59,7 @@
         .trust-pill { display: inline-flex; align-items: center; gap: 8px; background: var(--green-bg); border: 1px solid var(--green-border); color: var(--green-text); padding: 8px 18px; border-radius: 999px; font-size: 14px; font-weight: 600; }
         .trust-sub { color: var(--text-secondary); font-size: 15px; margin: 16px auto 0; max-width: 640px; }
         .trust-sub strong { color: var(--ink); }
+        .fchip { display:inline-block; margin:4px 5px; padding:5px 13px; border-radius:999px; font-size:12.5px; font-weight:600; background:#e7f7ee; color:#0f7a4d; border:1px solid #b7e4c7; }
         h1 { font-family: 'Crimson Text', serif; font-weight: 700; font-size: 64px; line-height: 1.06; margin: 44px 0 0; color: var(--ink); }
         h1 .accent { color: var(--accent); font-style: italic; }
         .subhead { font-size: 19px; color: var(--text-secondary); max-width: 690px; margin: 26px auto 0; }
@@ -137,6 +138,22 @@
             nav a:not(.nav-cta) { display: none; }
         }
     </style>
+<!-- Meta Pixel + UTM capture (BuyIASLeads) -->
+<script>
+(function(){
+  try {
+    var qs = new URLSearchParams(location.search), utm = {};
+    ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','utm_id'].forEach(function(k){ if(qs.get(k)) utm[k]=qs.get(k); });
+    if (Object.keys(utm).length) sessionStorage.setItem('bial_utm', JSON.stringify(utm));
+  } catch(e){}
+  window.BIAL_PIXEL_ID = 'REPLACE_WITH_META_PIXEL_ID';
+  if (window.BIAL_PIXEL_ID && window.BIAL_PIXEL_ID.indexOf('REPLACE') === -1) {
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', window.BIAL_PIXEL_ID);
+    fbq('track', 'PageView');
+  }
+})();
+</script>
 </head>
 <body>
     <div class="top-strip"></div>
@@ -158,6 +175,11 @@
     <section class="hero">
         <span class="trust-pill">&#10003; Trusted by working FIA agents nationwide</span>
         <p class="trust-sub">Independent agents and agencies rely on our <strong>Fixed Indexed Annuity leads</strong> to keep their calendars full.</p>
+        <div style="margin:14px auto 0; max-width:720px; text-align:center;">
+            <span class="fchip">&#10003; Exclusive to one agent</span>
+            <span class="fchip">&#10003; Introduced under your name</span>
+            <span class="fchip">&#10003; 52-week nurture included</span>
+        </div>
 
         <h1>200 Exclusive FIA Leads<br>for <span class="accent">$3,000.</span></h1>
 
@@ -200,8 +222,23 @@
     <!-- WHY AGENTS CHOOSE US -->
     <section>
         <div class="eyebrow">Why Agents Partner With Us</div>
-        <h2 class="h2">Straight Talk, <span class="accent">No Fake Reviews.</span></h2>
-        <p class="lead">We won't invent testimonials to sell you leads. Here's the honest case &mdash; and verified agent reviews will be published here as our partners give permission to share them.</p>
+        <h2 class="h2">Real Wins, <span class="accent">No Fake Reviews.</span></h2>
+        <p class="lead">We won't invent testimonials &mdash; these are real, unedited messages from agents working these leads, shared with permission.</p>
+        <div class="tgrid" style="margin-bottom:22px;">
+            <div class="tcard">
+                <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                <p class="tquote">&ldquo;Just spoke to a lead for a $350k rollover &mdash; she wants to roll an IRA into a Roth, plus a $250k term with living benefits.&rdquo;</p>
+                <div style="font-weight:700; color:var(--ink); margin-top:8px;">Tom H.</div>
+                <div style="font-size:12px; color:var(--text-secondary);">Partner Agent</div>
+            </div>
+            <div class="tcard">
+                <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                <p class="tquote">&ldquo;4th call of the day &mdash; a couple in Florida looking to roll over $175&ndash;400k. Confident I can show them things to enhance their plans. Booked a 2nd appointment Thursday.&rdquo;</p>
+                <div style="font-weight:700; color:var(--ink); margin-top:8px;">Rebekka M.</div>
+                <div style="font-size:12px; color:var(--text-secondary);">Partner Agent</div>
+            </div>
+        </div>
+        <p class="lead" style="margin-top:0;">And the honest case for why they work:</p>
         <div class="tgrid">
             <div class="tcard">
                 <div class="stars">&#9656;</div>

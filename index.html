@@ -120,6 +120,7 @@
         .hero-band .hero p { color: #cdd0ea; }
         .hero-band .hero .agency-line { color: #b9bce0; }
         .hero-band .hero .agency-line a { color: #b3aef7; }
+        .hchip { display:inline-block; margin:4px 5px; padding:6px 14px; border-radius:999px; font-size:13px; font-weight:600; background:rgba(120,220,170,0.14); color:#bff0d6; border:1px solid rgba(120,220,170,0.30); }
 
         .leads-grid {
             max-width: 1400px;
@@ -214,6 +215,22 @@ body { background: linear-gradient(180deg, #ffffff 0%, #edeff7 100%) !important;
 .dark-band h1 { color: #ffffff !important; }
 .dark-band p, .dark-band .updated, .dark-band .subtitle { color: #cdd0ea !important; }
     </style>
+<!-- Meta Pixel + UTM capture (BuyIASLeads) -->
+<script>
+(function(){
+  try {
+    var qs = new URLSearchParams(location.search), utm = {};
+    ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','utm_id'].forEach(function(k){ if(qs.get(k)) utm[k]=qs.get(k); });
+    if (Object.keys(utm).length) sessionStorage.setItem('bial_utm', JSON.stringify(utm));
+  } catch(e){}
+  window.BIAL_PIXEL_ID = 'REPLACE_WITH_META_PIXEL_ID';
+  if (window.BIAL_PIXEL_ID && window.BIAL_PIXEL_ID.indexOf('REPLACE') === -1) {
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', window.BIAL_PIXEL_ID);
+    fbq('track', 'PageView');
+  }
+})();
+</script>
 </head>
 <body>
     <header>
@@ -234,9 +251,15 @@ body { background: linear-gradient(180deg, #ffffff 0%, #edeff7 100%) !important;
         <section class="hero-band">
         <div class="hero" id="pricing">
             <h1>Exclusive Indexed Annuity Leads</h1>
-            <p>Introduced under your name, nurtured for you all year, and delivered into your CRM. Never shared, never resold. $100/month CRM seat included.</p>
-            <a href="leads-marketplace.html" style="display:inline-block; margin-top:24px; background:var(--gold); color:#ffffff; padding:14px 34px; border-radius:8px; text-decoration:none; font-weight:700; text-transform:uppercase; letter-spacing:1px;">View Lead Packages</a>
-            <p class="agency-line" style="font-size:13px; margin-top:22px;">Agency owner? <a href="fia-leads.html" style="font-weight:600;">See the 50-agent FIA partnership &rarr;</a></p>
+            <p>Introduced under your name the moment they opt in, nurtured for you all year, and delivered into your CRM. Truly exclusive &mdash; never shared, never resold.</p>
+            <div style="margin:22px 0 6px; line-height:2.4;">
+                <span class="hchip">&#10003; Exclusive to one agent</span>
+                <span class="hchip">&#10003; Introduced under your name</span>
+                <span class="hchip">&#10003; Built by a licensed FIA agent</span>
+            </div>
+            <a href="leads-marketplace.html" style="display:inline-block; margin-top:18px; background:var(--gold); color:#ffffff; padding:14px 34px; border-radius:8px; text-decoration:none; font-weight:700; text-transform:uppercase; letter-spacing:1px;">Get Exclusive Annuity Leads &rarr;</a>
+            <div style="margin-top:16px;"><span class="hchip" style="background:rgba(45,212,150,0.18);">One annuity case can pay for this several times over.</span></div>
+            <p class="agency-line" style="font-size:13px; margin-top:20px;">Agency owner? <a href="fia-leads.html" style="font-weight:600;">See the 50-agent FIA partnership &rarr;</a></p>
         </div>
         </section>
 
@@ -296,6 +319,26 @@ body { background: linear-gradient(180deg, #ffffff 0%, #edeff7 100%) !important;
             <h2 style="font-family: 'Crimson Text', serif; font-size: 34px; margin-bottom: 18px; color: var(--text-primary);">Built by an agent who closes these leads himself.</h2>
             <p style="font-size: 16px; color: var(--text-secondary); max-width: 760px; margin: 0 auto 16px;">BuyIASLeads was created by <strong>Gregory Stevenson</strong>, author of <em>Indexed Annuity Secrets</em>. He doesn't just sell leads &mdash; he generates and closes indexed annuity leads in his own agency every week, using the exact system you get here: exclusive leads, a done-for-you nurture engine, and the scripts to convert them.</p>
             <p style="font-size: 16px; color: var(--text-secondary); max-width: 760px; margin: 0 auto;">Most lead vendors have never sold a policy in their life. This one has &mdash; and now he's handing you the same machine.</p>
+        </section>
+        <!-- REAL TESTIMONIALS -->
+        <section style="max-width:1000px; margin:0 auto; padding:20px 40px 50px; text-align:center;">
+            <div style="font-size:13px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--gold); margin-bottom:10px;">What Agents Are Saying</div>
+            <h2 style="font-family:'Crimson Text',serif; font-size:32px; margin-bottom:26px; color:var(--text-primary);">Real wins from agents working these leads.</h2>
+            <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px; text-align:left;">
+                <div style="background:#f8f9fb; border:1px solid var(--border-color); border-radius:12px; padding:26px;">
+                    <div style="color:var(--gold); letter-spacing:2px; margin-bottom:12px;">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <p style="font-style:italic; color:var(--text-primary); margin-bottom:16px; line-height:1.7;">&ldquo;Just spoke to a lead for a $350k rollover &mdash; she wants to roll an IRA into a Roth, plus a $250k term with living benefits.&rdquo;</p>
+                    <div style="font-weight:700; color:var(--gold);">Tom H.</div>
+                    <div style="font-size:12px; color:var(--text-secondary);">Partner Agent</div>
+                </div>
+                <div style="background:#f8f9fb; border:1px solid var(--border-color); border-radius:12px; padding:26px;">
+                    <div style="color:var(--gold); letter-spacing:2px; margin-bottom:12px;">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <p style="font-style:italic; color:var(--text-primary); margin-bottom:16px; line-height:1.7;">&ldquo;4th call of the day &mdash; a couple in Florida looking to roll over $175&ndash;400k. Confident I can show them things to enhance their plans. Booked a 2nd appointment Thursday.&rdquo;</p>
+                    <div style="font-weight:700; color:var(--gold);">Rebekka M.</div>
+                    <div style="font-size:12px; color:var(--text-secondary);">Partner Agent</div>
+                </div>
+            </div>
+            <p style="margin-top:18px; font-size:13px; color:var(--text-secondary);">Real messages from agents working these leads, shared with permission.</p>
         </section>
     </main>
 
