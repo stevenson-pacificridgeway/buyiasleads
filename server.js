@@ -56,7 +56,12 @@ app.use(cors({
   },
   credentials: true
 }));
-app.use(express.json({ limit: '1mb' }));
+// Parse JSON for every route EXCEPT the Stripe webhook, which needs the raw
+// request body intact for signature verification (express.raw runs on that route).
+app.use((req, res, next) => {
+  if (req.originalUrl === '/webhook') return next();
+  return express.json({ limit: '1mb' })(req, res, next);
+});
 
 // Rate limiting - 10 requests per 15 minutes per IP
 const limiter = rateLimit({
