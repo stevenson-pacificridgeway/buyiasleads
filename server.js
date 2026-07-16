@@ -527,6 +527,21 @@ async function handleSuccessfulPayment(paymentIntent) {
   });
 }
 
+// A payment attempt failed (declined card, etc.). Text the owner so a hot lead
+// can be personally recovered. Stripe separately emails the customer a retry link.
+async function handleFailedPayment(paymentIntent) {
+  const order = orderFromPaymentIntent(paymentIntent);
+  const err = paymentIntent.last_payment_error || {};
+  const reason = err.decline_code || err.code || err.message || 'unknown';
+  const amount = ((paymentIntent.amount || 0) / 100).toFixed(2);
+  console.log(`[FAILED] Payment failed for ${order.email} ($${amount}) - ${reason}`);
+  try {
+    await sendSms(`⚠️ FAILED payment: ${order.name} (${order.email}) — ${order.packageSize} pkg, $${amount}. Reason: ${reason}. Follow up to recover the sale.`);
+  } catch (e) {
+    console.error('[FAILED] owner SMS error:', e.message);
+  }
+}
+
 // Webhook endpoint for Stripe events
 app.post('/webhook', express.raw({type: 'application/json'}), (req, res) => {
   const sig = req.headers['stripe-signature'];
@@ -556,11 +571,13 @@ app.post('/webhook', express.raw({type: 'application/json'}), (req, res) => {
         break;
       }
 
-      case 'payment_intent.payment_failed':
+      case 'payment_intent.payment_failed': {
         const failedIntent = event.data.object;
         console.log(`Payment failed: ${failedIntent.id}`);
-        // TODO: Send failure notification email
+        handleFailedPayment(failedIntent).catch(err =>
+          console.error('[FAILED] Unhandled failure-handler error:', err));
         break;
+      }
 
       default:
         console.log(`Unhandled event type: ${event.type}`);
