@@ -156,6 +156,7 @@ app.post('/create-payment-intent', limiter, async (req, res) => {
       amount: Math.round(amount * 100), // Convert to cents
       currency: 'usd',
       receipt_email: customerEmail, // Stripe emails the buyer an itemized receipt
+      statement_descriptor_suffix: 'BUYIASLEADS', // shows as "HORIZON* BUYIASLEADS" on the buyer's statement
       metadata: {
         packageSize: String(packageSize),
         customerEmail: customerEmail,
@@ -291,6 +292,7 @@ app.post('/create-subscription', limiter, async (req, res) => {
     // Copy order details onto the PaymentIntent so the existing webhook
     // fulfillment (welcome + owner emails) fires unchanged on the first payment.
     await stripe.paymentIntents.update(paymentIntent.id, {
+      statement_descriptor_suffix: 'BUYIASLEADS', // shows as "HORIZON* BUYIASLEADS" on the buyer's statement
       metadata: { packageSize: String(packageSize), customerEmail, customerName: customerName || 'N/A' }
     });
 
