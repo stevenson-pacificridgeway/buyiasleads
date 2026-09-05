@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%234f46e5'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='20' font-weight='bold' text-anchor='middle' fill='white'%3EB%3C/text%3E%3C/svg%3E">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%234f46e5'/%3E%3Cpolyline points='7,23 13,15 18,19 25,9' fill='none' stroke='%232dd496' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='25' cy='9' r='2' fill='%232dd496'/%3E%3C/svg%3E">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Securely complete your BuyIASLeads purchase. Choose your exclusive indexed annuity lead package and CRM seat, pay by card via Stripe, and get access to your CRM dashboard.">
     <title>Secure Checkout — BuyIASLeads</title>
@@ -508,14 +508,9 @@ body { background: linear-gradient(180deg, #ffffff 0%, #edeff7 100%) !important;
                         <label>Lead Package *</label>
                         <select id="package" required onchange="updatePrice()">
                             <option value="">Select a package</option>
-                            <option value="test" style="color: #ff6b35;">🧪 TEST — ~$2 (owner testing only)</option>
                             <option value="100">100 Leads — $2,000</option>
                             <option value="200">200 Leads — $3,000</option>
                             <option value="400">400 Leads — $5,000</option>
-                            <option value="crmonly">CRM Seat Only — $100/month (no leads)</option>
-                            <option value="100-renewal">100 Leads Renewal — $2,000 (no CRM)</option>
-                            <option value="200-renewal">200 Leads Renewal — $3,000 (no CRM)</option>
-                            <option value="400-renewal">400 Leads Renewal — $5,000 (no CRM)</option>
                         </select>
                     </div>
 
@@ -559,14 +554,14 @@ body { background: linear-gradient(180deg, #ffffff 0%, #edeff7 100%) !important;
                     <div class="form-group">
                         <label style="display: flex; align-items: center; gap: 10px; font-weight: 400; text-transform: none;">
                             <input type="checkbox" required style="width: auto;">
-                            I understand leads are non-refundable
+                            I understand leads are a one-time purchase — and any undeliverable lead is replaced free within 7 days.
                         </label>
                     </div>
 
                     <button type="submit" class="submit-btn">Complete Purchase</button>
 
                     <div class="trust-notice">
-                        🔒 <span>Secure payment</span> processed via Stripe. Your data is encrypted and protected.
+                        🔒 <span>Secure checkout — powered by Stripe.</span> Your card is encrypted end-to-end; we never see or store your card number.
                     </div>
                 </form>
             </div>
@@ -783,8 +778,37 @@ body { background: linear-gradient(180deg, #ffffff 0%, #edeff7 100%) !important;
             }
         }
 
+        // Pre-select the package straight from the link (?package=200) so buyers land one step closer to done.
+        // Renewal / CRM-only / test links still work even though they're not in the public menu: if the URL asks
+        // for one of those, we add it to the dropdown on the fly so pricing and checkout still function.
+        function preselectPackage() {
+            try {
+                var want = new URLSearchParams(location.search).get('package');
+                if (!want) return;
+                var sel = document.getElementById('package');
+                if (!sel) return;
+                var extraLabels = {
+                    'test': '🧪 TEST — ~$2 (owner testing only)',
+                    'crmonly': 'CRM Seat Only — $100/month (no leads)',
+                    '100-renewal': '100 Leads Renewal — $2,000 (no CRM)',
+                    '200-renewal': '200 Leads Renewal — $3,000 (no CRM)',
+                    '400-renewal': '400 Leads Renewal — $5,000 (no CRM)'
+                };
+                var exists = Array.prototype.some.call(sel.options, function (o) { return o.value === want; });
+                if (!exists && extraLabels[want]) {
+                    var opt = document.createElement('option');
+                    opt.value = want;
+                    opt.textContent = extraLabels[want];
+                    sel.appendChild(opt);
+                    exists = true;
+                }
+                if (exists) { sel.value = want; updatePrice(); }
+            } catch (e) {}
+        }
+
         // Initialize Stripe when page loads
         document.addEventListener('DOMContentLoaded', initializeStripe);
+        document.addEventListener('DOMContentLoaded', preselectPackage);
     </script>
 </body>
 </html>
