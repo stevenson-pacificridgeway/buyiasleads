@@ -427,6 +427,160 @@ async function sendSms(body) {
   }
 }
 
+// =====================================================================
+// AGENT LEAD CAPTURE  (/agents.html)
+// Flow: enter info -> Twilio Verify texts a 6-digit code -> enter code ->
+// ONLY on approval do we save + push the lead into Follow Up Boss.
+// Every key (Twilio, Follow Up Boss) is read from server-side env ONLY.
+// This is a one-way PUSH into Follow Up Boss (no pulling / syncing back).
+// =====================================================================
+const TWILIO_VERIFY_SERVICE_SID = process.env.TWILIO_VERIFY_SERVICE_SID;
+const FUB_API_KEY = process.env.FUB_API_KEY;
+const FUB_SOURCE = process.env.FUB_SOURCE || 'buyiasleads.com/agents';
+const FUB_TAG = process.env.FUB_TAG || 'BuyIASLeads Agents';
+const AGENT_OFFER_URL = process.env.AGENT_OFFER_URL || ''; // public link to the LOA Escape Kit PDF
+
+// Normalize a US number to E.164 (+1XXXXXXXXXX), or null if it can't be one.
+function toE164US(raw) {
+  let d = String(raw || '').replace(/\D/g, '');
+  if (d.length === 11 && d[0] === '1') d = d.slice(1);
+  if (d.length !== 10) return null;
+  return '+1' + d;
+}
+
+// Reject obviously fake numbers BEFORE spending a Twilio Verify text on them.
+function phoneRejectionReason(raw) {
+  let d = String(raw || '').replace(/\D/g, '');
+  if (d.length === 11 && d[0] === '1') d = d.slice(1);
+  if (d.length !== 10) return 'Please enter a 10-digit U.S. mobile number.';
+  if (/^(\d)\1{9}$/.test(d)) return 'That number looks invalid.';          // all same digit
+  if (d === '1234567890' || d === '0123456789') return 'That number looks invalid.';
+  if (d[0] === '0' || d[0] === '1') return 'That area code is not valid.';    // area code 2-9
+  if (d[1] === '1' && d[2] === '1') return 'That area code is not valid.';    // N11 (211,311,...)
+  if (d[3] === '0' || d[3] === '1') return 'That number looks invalid.';      // exchange 2-9
+  return null;
+}
+
+function maskPhone(e164) {
+  const d = String(e164).replace(/\D/g, '').slice(-10);
+  return '(' + d.slice(0, 3) + ') •••-' + d.slice(6);
+}
+
+// Tighter limiter for the SMS-sending endpoint (each send costs money / prevents abuse).
+const verifyLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, max: 5,
+  message: { ok: false, error: 'Too many attempts — please wait a few minutes and try again.' },
+  standardHeaders: true, legacyHeaders: false,
+});
+
+async function twilioVerifyStart(e164) {
+  const creds = Buffer.from(`${TWILIO_ACCOUNT_SID}:${TWILIO_AUTH_TOKEN}`).toString('base64');
+  const params = new URLSearchParams({ To: e164, Channel: 'sms' });
+  return fetch(`https://verify.twilio.com/v2/Services/${TWILIO_VERIFY_SERVICE_SID}/Verifications`, {
+    method: 'POST',
+    headers: { 'Authorization': `Basic ${creds}`, 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: params.toString()
+  });
+}
+
+async function twilioVerifyCheck(e164, code) {
+  const creds = Buffer.from(`${TWILIO_ACCOUNT_SID}:${TWILIO_AUTH_TOKEN}`).toString('base64');
+  const params = new URLSearchParams({ To: e164, Code: code });
+  const resp = await fetch(`https://verify.twilio.com/v2/Services/${TWILIO_VERIFY_SERVICE_SID}/VerificationCheck`, {
+    method: 'POST',
+    headers: { 'Authorization': `Basic ${creds}`, 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: params.toString()
+  });
+  const data = await resp.json().catch(() => ({}));
+  return { ok: resp.ok, status: data.status };
+}
+
+// One-way push of a verified lead into Follow Up Boss via the Events API
+// (FUB dedupes, records the source, applies the tag, and can trigger an Action Plan).
+async function pushLeadToFUB(l) {
+  if (!FUB_API_KEY) { console.warn('[FUB] no API key set - skipping push'); return { ok: false, reason: 'not_configured' }; }
+  const creds = Buffer.from(`${FUB_API_KEY}:`).toString('base64');
+  const payload = {
+    source: FUB_SOURCE,
+    system: 'BuyIASLeads',
+    type: 'Registration',
+    message: 'LOA Escape Kit request (phone verified) from ' + FUB_SOURCE,
+    person: {
+      firstName: l.firstName || '',
+      emails: l.email ? [{ value: l.email }] : [],
+      phones: l.phone ? [{ value: l.phone }] : [],
+      tags: [FUB_TAG]
+    }
+  };
+  try {
+    const resp = await fetch('https://api.followupboss.com/v1/events', {
+      method: 'POST',
+      headers: { 'Authorization': `Basic ${creds}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    if (resp.ok) { console.log('[FUB] lead pushed'); return { ok: true }; }
+    const t = await resp.text();
+    console.error(`[FUB] error ${resp.status}: ${t}`);
+    return { ok: false, reason: `fub_${resp.status}` };
+  } catch (e) {
+    console.error('[FUB] push failed:', e.message);
+    return { ok: false, reason: 'exception' };
+  }
+}
+
+// Step 1: validate the details + fake-number checks, then send the 6-digit code.
+app.post('/agents/start-verify', verifyLimiter, async (req, res) => {
+  try {
+    const { firstName, email, phone } = req.body || {};
+    if (!firstName || !String(firstName).trim()) return res.status(400).json({ ok: false, error: 'First name is required.' });
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return res.status(400).json({ ok: false, error: 'A valid email is required.' });
+    const reason = phoneRejectionReason(phone);
+    if (reason) return res.status(400).json({ ok: false, error: reason });
+    const e164 = toE164US(phone);
+    if (!e164) return res.status(400).json({ ok: false, error: 'Please enter a valid U.S. mobile number.' });
+    if (!TWILIO_ACCOUNT_SID || !TWILIO_AUTH_TOKEN || !TWILIO_VERIFY_SERVICE_SID) {
+      console.warn('[VERIFY] Twilio Verify not configured (need TWILIO_VERIFY_SERVICE_SID)');
+      return res.status(503).json({ ok: false, error: 'Verification is temporarily unavailable. Please call us instead.' });
+    }
+    const resp = await twilioVerifyStart(e164);
+    if (!resp.ok) {
+      const t = await resp.text();
+      console.error(`[VERIFY] start error ${resp.status}: ${t}`);
+      return res.status(400).json({ ok: false, error: 'We could not text that number. Please check it and try again.' });
+    }
+    return res.json({ ok: true, masked: maskPhone(e164) });
+  } catch (e) {
+    console.error('[VERIFY] start exception:', e.message);
+    return res.status(500).json({ ok: false, error: 'Something went wrong. Please try again.' });
+  }
+});
+
+// Step 2: check the code; ONLY on approval do we save + push to Follow Up Boss.
+app.post('/agents/check-verify', verifyLimiter, async (req, res) => {
+  try {
+    const { firstName, email, phone, code } = req.body || {};
+    const e164 = toE164US(phone);
+    if (!e164 || !/^\d{6}$/.test(String(code || ''))) return res.status(400).json({ ok: false, error: 'Enter the 6-digit code from the text.' });
+    const check = await twilioVerifyCheck(e164, String(code));
+    if (!check.ok || check.status !== 'approved') {
+      return res.status(400).json({ ok: false, error: 'That code did not match or has expired. Please try again.' });
+    }
+    // Verified. The push to Follow Up Boss IS the save.
+    const fub = await pushLeadToFUB({ firstName, email, phone: e164 });
+    sendSms(`New verified agent lead: ${firstName || '—'} (${email}, ${e164}) via ${FUB_SOURCE}`).catch(() => {});
+    if (!fub.ok) {
+      // Honest failure: the number verified but the CRM save failed. We already texted the
+      // owner above so the lead isn't lost, but we do NOT report a clean success to the page.
+      console.error('[AGENTS] FUB push failed after verify:', fub.reason);
+      return res.status(502).json({ ok: false, error: 'Your number is verified, but we hit a snag saving you. Please book a call and we will sort it out.' });
+    }
+    return res.json({ ok: true, offerUrl: AGENT_OFFER_URL || undefined });
+  } catch (e) {
+    console.error('[AGENTS] check exception:', e.message);
+    return res.status(500).json({ ok: false, error: 'Something went wrong. Please try again.' });
+  }
+});
+
 async function sendEmail({ to, subject, text }) {
   if (!SENDGRID_API_KEY) {
     console.warn(`[EMAIL] SENDGRID_API_KEY not set - skipping email to ${to} ("${subject}")`);

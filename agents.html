@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%234f46e5'/%3E%3Cpolyline points='7,23 13,15 18,19 25,9' fill='none' stroke='%232dd496' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='25' cy='9' r='2' fill='%232dd496'/%3E%3C/svg%3E">
+    <title>For Agents — Own Your Book, Keep Your Commissions | BuyIASLeads</title>
+    <meta name="description" content="For licensed agents tired of LOA contracts: get true ownership, exclusive FIA leads, and a done-for-you system. Grab the free LOA Escape Kit and book a 15-minute call with Gregory Stevenson.">
+    <link rel="canonical" href="https://buyiasleads.com/agents.html">
+    <meta property="og:title" content="Own Your Book. Keep Your Commissions. — BuyIASLeads for Agents">
+    <meta property="og:description" content="For licensed agents done with LOA contracts. Free LOA Escape Kit + a 15-minute call.">
+    <meta property="og:image" content="https://buyiasleads.com/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://buyiasleads.com/og-image.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --indigo: #4f46e5;
+            --indigo-dark: #4338ca;
+            --green: #17b877;
+            --green-bright: #2dd496;
+            --ink: #17163a;
+            --muted: #4b5563;
+            --line: #e6e8ec;
+            --panel: #f8f9fb;
+        }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: var(--ink);
+            background: #ffffff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        a { color: inherit; }
+        .wrap { max-width: 1120px; margin: 0 auto; padding: 0 22px; }
+
+        /* Header */
+        header {
+            position: sticky; top: 0; z-index: 100;
+            background: rgba(255,255,255,0.92);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--line);
+        }
+        .bar { display: flex; align-items: center; justify-content: space-between; padding: 15px 22px; max-width: 1120px; margin: 0 auto; }
+        .logo { font-family: 'Crimson Text', serif; font-size: 24px; font-weight: 700; letter-spacing: 1.5px; color: var(--indigo); text-decoration: none; }
+        .bar .cta { background: var(--indigo); color: #fff; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 14px; box-shadow: 0 6px 16px rgba(79,70,229,0.25); }
+        .bar .cta:hover { background: var(--indigo-dark); }
+
+        /* Hero */
+        .hero {
+            position: relative; color: #fff; text-align: center;
+            padding: 74px 0 90px;
+            background:
+              radial-gradient(1100px 480px at 50% -10%, #2c2770 0%, #1c1a45 55%, #131229 100%);
+            border-bottom: 3px solid var(--green-bright);
+        }
+        .hero::after {
+            content: ''; position: absolute; inset: 0; opacity: 0.5;
+            background:
+              repeating-linear-gradient(45deg, rgba(255,255,255,0.03) 0 1px, transparent 1px 46px),
+              repeating-linear-gradient(-45deg, rgba(255,255,255,0.03) 0 1px, transparent 1px 46px);
+            pointer-events: none;
+        }
+        .hero .wrap { position: relative; z-index: 1; }
+        .pill { display: inline-block; background: rgba(45,212,150,0.16); border: 1px solid rgba(45,212,150,0.5); color: var(--green-bright); font-size: 13px; font-weight: 700; padding: 7px 16px; border-radius: 30px; margin-bottom: 22px; }
+        .hero h1 { font-family: 'Crimson Text', serif; font-size: 52px; line-height: 1.08; font-weight: 700; margin-bottom: 18px; }
+        .hero h1 .hl { color: var(--green-bright); }
+        .hero .sub { font-size: 19px; color: #cdd0ea; max-width: 720px; margin: 0 auto 30px; }
+        .hero .chips { margin: 26px 0 8px; display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+        .chip { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.14); color: #eef; font-size: 13.5px; font-weight: 600; padding: 8px 15px; border-radius: 30px; }
+        .btn-primary { display: inline-block; background: var(--green); color: #fff; font-weight: 700; font-size: 16px; padding: 16px 34px; border-radius: 10px; text-decoration: none; box-shadow: 0 10px 24px rgba(23,184,119,0.34); transition: transform .15s, background .2s; }
+        .btn-primary:hover { background: #139a63; transform: translateY(-2px); }
+        .hero .btn-primary { margin-top: 12px; }
+        .microtrust { margin-top: 16px; font-size: 13px; color: #aab0d8; }
+
+        /* Sections */
+        section.block { padding: 70px 0; }
+        .block h2 { font-family: 'Crimson Text', serif; font-size: 36px; font-weight: 700; text-align: center; margin-bottom: 14px; }
+        .block .lead { text-align: center; color: var(--muted); font-size: 17px; max-width: 720px; margin: 0 auto 42px; }
+        .alt { background: var(--panel); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+
+        .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+        .card { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 28px; box-shadow: 0 6px 22px rgba(23,22,58,0.06); }
+        .alt .card { background: #fff; }
+        .card .ic { width: 44px; height: 44px; border-radius: 10px; background: rgba(79,70,229,0.1); color: var(--indigo); display: flex; align-items: center; justify-content: center; font-size: 22px; margin-bottom: 16px; }
+        .card h3 { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+        .card p { color: var(--muted); font-size: 14.5px; }
+
+        /* Problem list */
+        .pain { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 34px; max-width: 900px; margin: 0 auto; }
+        .pain .row { display: flex; gap: 12px; align-items: flex-start; font-size: 15.5px; }
+        .pain .x { color: #e5484d; font-weight: 800; flex: 0 0 auto; margin-top: 1px; }
+        .pain .row strong { color: var(--ink); }
+
+        /* Offer + form */
+        .offer-grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: 40px; align-items: center; }
+        .offer-copy h2 { text-align: left; }
+        .offer-copy .lead { text-align: left; margin-left: 0; }
+        .offer-list { list-style: none; margin: 18px 0 8px; }
+        .offer-list li { display: flex; gap: 11px; align-items: flex-start; margin-bottom: 12px; font-size: 15.5px; }
+        .offer-list .ck { color: var(--green); font-weight: 800; flex: 0 0 auto; }
+
+        .form-card { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 30px; box-shadow: 0 16px 44px rgba(23,22,58,0.12); }
+        .form-card h3 { font-family: 'Crimson Text', serif; font-size: 24px; margin-bottom: 6px; }
+        .form-card .fsub { color: var(--muted); font-size: 14px; margin-bottom: 20px; }
+        .field { margin-bottom: 14px; }
+        .field label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; text-transform: uppercase; letter-spacing: .4px; color: var(--ink); }
+        .field input { width: 100%; padding: 13px 15px; border: 1px solid var(--line); border-radius: 9px; font-family: inherit; font-size: 15px; background: #fff; }
+        .field input:focus { outline: none; border-color: var(--indigo); box-shadow: 0 0 0 3px rgba(79,70,229,0.12); }
+        .consent { display: flex; gap: 10px; align-items: flex-start; margin: 6px 0 16px; }
+        .consent input { margin-top: 3px; flex: 0 0 auto; }
+        .consent label { font-size: 11.5px; color: var(--muted); line-height: 1.5; }
+        .btn-block { width: 100%; background: var(--green); color: #fff; border: none; font-family: inherit; font-weight: 700; font-size: 16px; padding: 15px; border-radius: 10px; cursor: pointer; box-shadow: 0 8px 20px rgba(23,184,119,0.3); transition: background .2s; }
+        .btn-block:hover:not(:disabled) { background: #139a63; }
+        .btn-block:disabled { opacity: .6; cursor: not-allowed; }
+        .msg { font-size: 13.5px; margin-top: 12px; padding: 10px 12px; border-radius: 8px; display: none; }
+        .msg.err { display: block; background: #fdecec; border: 1px solid #f5c2c2; color: #b42318; }
+        .msg.ok { display: block; background: #e7f7ee; border: 1px solid #b7e4c7; color: #0f7a4d; }
+        .hidden { display: none !important; }
+        .code-input { letter-spacing: 8px; text-align: center; font-size: 22px !important; font-weight: 700; }
+        .back-link { background: none; border: none; color: var(--indigo); font-size: 13px; cursor: pointer; margin-top: 12px; text-decoration: underline; font-family: inherit; }
+        .spin { display: inline-block; width: 15px; height: 15px; border: 2px solid rgba(255,255,255,0.5); border-top-color: #fff; border-radius: 50%; animation: sp .7s linear infinite; vertical-align: -2px; margin-right: 7px; }
+        @keyframes sp { to { transform: rotate(360deg); } }
+        .success-box { text-align: center; }
+        .success-box .big { font-size: 42px; }
+        .success-box h3 { margin: 8px 0; }
+
+        /* Booking */
+        .book { text-align: center; }
+        .book .btn-primary { background: var(--indigo); box-shadow: 0 10px 24px rgba(79,70,229,0.32); }
+        .book .btn-primary:hover { background: var(--indigo-dark); }
+        .founder { display: flex; gap: 18px; align-items: center; justify-content: center; max-width: 640px; margin: 0 auto 30px; text-align: left; background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 22px; box-shadow: 0 6px 22px rgba(23,22,58,0.06); }
+        .founder .badge { width: 62px; height: 62px; border-radius: 50%; background: var(--indigo); color: #fff; font-family: 'Crimson Text', serif; font-weight: 700; font-size: 26px; display: flex; align-items: center; justify-content: center; flex: 0 0 auto; }
+        .founder p { font-size: 14.5px; color: var(--muted); }
+        .founder strong { color: var(--ink); }
+
+        /* FAQ */
+        .faq { max-width: 780px; margin: 0 auto; }
+        .qa { border: 1px solid var(--line); border-radius: 12px; margin-bottom: 12px; overflow: hidden; background: #fff; }
+        .qa summary { cursor: pointer; padding: 18px 20px; font-weight: 700; font-size: 16px; list-style: none; display: flex; justify-content: space-between; align-items: center; }
+        .qa summary::-webkit-details-marker { display: none; }
+        .qa summary .plus { color: var(--indigo); font-size: 22px; font-weight: 400; }
+        .qa[open] summary .plus { transform: rotate(45deg); }
+        .qa .ans { padding: 0 20px 18px; color: var(--muted); font-size: 15px; }
+
+        /* Footer */
+        footer { background: #131229; color: #aab0d8; padding: 40px 22px; text-align: center; font-size: 13.5px; }
+        footer a { color: var(--green-bright); text-decoration: none; font-weight: 600; }
+        footer .fine { max-width: 820px; margin: 14px auto 0; font-size: 12px; color: #7b81a8; line-height: 1.6; }
+
+        /* Floating mobile call button */
+        .fab { display: none; position: fixed; right: 16px; bottom: 16px; z-index: 200; background: var(--green); color: #fff; text-decoration: none; font-weight: 700; font-size: 15px; padding: 14px 20px; border-radius: 40px; box-shadow: 0 10px 26px rgba(23,184,119,0.45); }
+
+        @media (max-width: 860px) {
+            .hero h1 { font-size: 38px; }
+            .hero .sub { font-size: 17px; }
+            .cards { grid-template-columns: 1fr; }
+            .pain { grid-template-columns: 1fr; }
+            .offer-grid { grid-template-columns: 1fr; gap: 26px; }
+            .offer-copy h2, .block h2 { font-size: 30px; }
+            .bar .cta { display: none; }
+            .fab { display: inline-block; }
+            .founder { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="bar">
+            <a href="index.html" class="logo">BUYIASLEADS</a>
+            <a href="#claim" class="cta">Get the Free Kit &rarr;</a>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="wrap">
+            <span class="pill">&#10003; For licensed agents ready to go independent</span>
+            <h1>Own Your Book.<br>Keep <span class="hl">Your</span> Commissions.</h1>
+            <p class="sub">If you're a licensed agent stuck under an LOA contract &mdash; capped comp, no ownership, recycled leads &mdash; there's a better way. Get true ownership, exclusive annuity leads, and a done-for-you system built by an agent who actually sells.</p>
+            <div class="chips">
+                <span class="chip">&#10003; Own your book &amp; renewals</span>
+                <span class="chip">&#10003; Exclusive FIA leads</span>
+                <span class="chip">&#10003; Real mentorship, not a call center</span>
+            </div>
+            <div><a href="#claim" class="btn-primary">Grab the Free LOA Escape Kit &rarr;</a></div>
+            <p class="microtrust">Trusted by 9 agencies &amp; 200+ licensed agents nationwide.</p>
+        </div>
+    </section>
+
+    <!-- PROBLEM -->
+    <section class="block">
+        <div class="wrap">
+            <h2>The LOA Trap Is Real</h2>
+            <p class="lead">"Licensed Only" contracts are built to keep the upline in control. If any of this sounds familiar, you're not imagining it &mdash; and you're not stuck.</p>
+            <div class="pain">
+                <div class="row"><span class="x">&#10007;</span><span><strong>You don't own your book.</strong> Leave, and your clients and renewals stay behind.</span></div>
+                <div class="row"><span class="x">&#10007;</span><span><strong>Your comp is capped.</strong> The upline keeps the override you earned.</span></div>
+                <div class="row"><span class="x">&#10007;</span><span><strong>The "leads" are recycled.</strong> Shared, aged, and worked by five other agents.</span></div>
+                <div class="row"><span class="x">&#10007;</span><span><strong>Releases are a nightmare.</strong> Getting out can take months &mdash; if they let you.</span></div>
+                <div class="row"><span class="x">&#10007;</span><span><strong>No real training.</strong> A login, a script, and "good luck on the phones."</span></div>
+                <div class="row"><span class="x">&#10007;</span><span><strong>You do the work; they build the asset.</strong> Every case grows their business, not yours.</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHY ME -->
+    <section class="block alt">
+        <div class="wrap">
+            <h2>Why Agents Move Their Business Here</h2>
+            <p class="lead">Run by Gregory Stevenson &mdash; author of <em>Index Annuity Secrets</em> and a producing FIA agent. Not a recruiter who's never written a policy.</p>
+            <div class="cards">
+                <div class="card">
+                    <div class="ic">&#128273;</div>
+                    <h3>You Own What You Build</h3>
+                    <p>Your clients, your renewals, your book. Real ownership and a clear path &mdash; not a contract designed to trap you.</p>
+                </div>
+                <div class="card">
+                    <div class="ic">&#127919;</div>
+                    <h3>Exclusive Annuity Leads</h3>
+                    <p>Prospects introduced under your name the moment they opt in, nurtured for you all year, and delivered to your CRM &mdash; never shared, never resold.</p>
+                </div>
+                <div class="card">
+                    <div class="ic">&#129302;</div>
+                    <h3>A System That Does the Work</h3>
+                    <p>Annuity University, Oscar the AI, a free-book lead magnet, and a 52-week nurture keep educating prospects between your calls.</p>
+                </div>
+                <div class="card">
+                    <div class="ic">&#128176;</div>
+                    <h3>Keep More of Every Case</h3>
+                    <p>Competitive contracts with the override you earned staying in your pocket &mdash; not skimmed off the top.</p>
+                </div>
+                <div class="card">
+                    <div class="ic">&#127891;</div>
+                    <h3>Mentorship That Closes</h3>
+                    <p>One-call-close coaching from producers who sell these products every week &mdash; not a call center reading a script.</p>
+                </div>
+                <div class="card">
+                    <div class="ic">&#128640;</div>
+                    <h3>Plug In and Go</h3>
+                    <p>Licensing help, carrier access, and a CRM already built. Spend your time in front of clients, not fighting your back office.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- OFFER + FORM -->
+    <section class="block" id="claim">
+        <div class="wrap">
+            <div class="offer-grid">
+                <div class="offer-copy">
+                    <h2>Free: The LOA Escape Kit</h2>
+                    <p class="lead">The exact playbook agents use to leave an LOA contract the right way &mdash; and rebuild as an owner. Straight to your inbox.</p>
+                    <ul class="offer-list">
+                        <li><span class="ck">&#10003;</span><span>How LOA vs. true-ownership contracts really compare (side by side).</span></li>
+                        <li><span class="ck">&#10003;</span><span>The clean way to request a release &mdash; and what to do if they stall.</span></li>
+                        <li><span class="ck">&#10003;</span><span>What to look for in a real upline (and the red flags to run from).</span></li>
+                        <li><span class="ck">&#10003;</span><span>How the exclusive-lead + CRM system fills your calendar.</span></li>
+                    </ul>
+                </div>
+
+                <div class="form-card">
+                    <!-- STEP 1: details -->
+                    <div id="step1">
+                        <h3>Get the Kit + a 15-Min Call</h3>
+                        <p class="fsub">Enter your info and we'll text you a quick code to confirm your number.</p>
+                        <div class="field">
+                            <label for="firstName">First name</label>
+                            <input type="text" id="firstName" autocomplete="given-name" placeholder="Jordan">
+                        </div>
+                        <div class="field">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" autocomplete="email" placeholder="you@email.com">
+                        </div>
+                        <div class="field">
+                            <label for="phone">Mobile phone</label>
+                            <input type="tel" id="phone" autocomplete="tel" placeholder="(555) 123-4567">
+                        </div>
+                        <div class="consent">
+                            <input type="checkbox" id="consent">
+                            <label for="consent">By submitting, I agree to receive calls, texts &amp; emails from BuyIASLeads / Pacific Ridgeway Insurance Solutions at the number and email provided, including via automated technology. Consent is not a condition of purchase. Msg &amp; data rates may apply. Reply STOP to opt out. See our <a href="terms.html" target="_blank" style="color:var(--indigo);">Privacy Policy</a>.</label>
+                        </div>
+                        <button class="btn-block" id="btnStart" onclick="startVerify()">Text me my code &rarr;</button>
+                        <div class="msg" id="msg1"></div>
+                    </div>
+
+                    <!-- STEP 2: code -->
+                    <div id="step2" class="hidden">
+                        <h3>Enter Your Code</h3>
+                        <p class="fsub">We texted a 6-digit code to <strong id="phoneEcho"></strong>. Enter it below.</p>
+                        <div class="field">
+                            <label for="code">6-digit code</label>
+                            <input type="text" id="code" class="code-input" inputmode="numeric" maxlength="6" placeholder="000000">
+                        </div>
+                        <button class="btn-block" id="btnVerify" onclick="checkVerify()">Verify &amp; send my kit &rarr;</button>
+                        <div class="msg" id="msg2"></div>
+                        <button class="back-link" onclick="backToStep1()">&larr; Wrong number? Go back</button>
+                    </div>
+
+                    <!-- STEP 3: success -->
+                    <div id="step3" class="hidden success-box">
+                        <div class="big">&#127881;</div>
+                        <h3>You're in!</h3>
+                        <p class="fsub">Your LOA Escape Kit is on its way to your inbox. Next step &mdash; grab a time with Gregory.</p>
+                        <a href="#" id="offerLink" class="btn-block hidden" style="display:none; text-decoration:none; margin-bottom:12px;">&#11015; Download the Kit now</a>
+                        <a href="https://calendly.com/gregorystevenson/1-on-1-with-gregory-stevenson-30-min" class="btn-block" style="text-decoration:none; display:block; background:var(--indigo);">Book your 15-minute call &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BOOKING -->
+    <section class="block alt book" id="book">
+        <div class="wrap">
+            <h2>Rather Just Talk It Through?</h2>
+            <p class="lead">Book a free, no-pressure 15 minutes with Gregory. Bring your questions about contracts, releases, leads, or comp &mdash; you'll leave with a clear next step either way.</p>
+            <div class="founder">
+                <div class="badge">GS</div>
+                <p><strong>Gregory Stevenson</strong> &mdash; author of <em>Index Annuity Secrets</em> and a producing FIA agent. He built this because he was tired of watching good agents get trapped in contracts that never let them win.</p>
+            </div>
+            <a href="https://calendly.com/gregorystevenson/1-on-1-with-gregory-stevenson-30-min" class="btn-primary">Book my 15-minute call &rarr;</a>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="block">
+        <div class="wrap">
+            <h2>Straight Answers</h2>
+            <div class="faq">
+                <details class="qa">
+                    <summary>Do I have to leave my current upline today? <span class="plus">+</span></summary>
+                    <div class="ans">No. Start with the free kit and a 15-minute call. We'll look at your actual contract and situation, and you decide what's right &mdash; on your timeline, with no pressure.</div>
+                </details>
+                <details class="qa">
+                    <summary>What does it cost to work with you? <span class="plus">+</span></summary>
+                    <div class="ans">The kit and the call are free. If you decide to buy exclusive leads or a CRM seat, that pricing is clear and up front on our main site &mdash; no surprises, no hidden fees.</div>
+                </details>
+                <details class="qa">
+                    <summary>Are the leads really exclusive? <span class="plus">+</span></summary>
+                    <div class="ans">Yes. Every lead is generated for one agent &mdash; you &mdash; introduced under your name the moment they opt in, and never shared or resold to anyone else.</div>
+                </details>
+                <details class="qa">
+                    <summary>Why do you text me a code? <span class="plus">+</span></summary>
+                    <div class="ans">To confirm we have a real, working number so Gregory can actually reach you &mdash; and to keep spam and fake sign-ups out. Standard message rates apply, and you can reply STOP anytime.</div>
+                </details>
+                <details class="qa">
+                    <summary>Will you blow up my phone? <span class="plus">+</span></summary>
+                    <div class="ans">No. You'll get your kit, a booking link, and helpful follow-up. Reply STOP and it all ends immediately &mdash; we respect that.</div>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>
+            <a href="mailto:stevenson@pacificridgewayinsurance.com">stevenson@pacificridgewayinsurance.com</a>
+            &nbsp;|&nbsp;
+            <a href="tel:+16193748100">(619) 374-8100</a>
+            &nbsp;|&nbsp;
+            <a href="terms.html">Terms &amp; Privacy</a>
+            &nbsp;|&nbsp;
+            <a href="index.html">Main site</a>
+        </p>
+        <p class="fine">
+            For licensed insurance and financial professionals. BuyIASLeads is operated by Pacific Ridgeway Insurance Solutions. By submitting the form you agree to receive calls, texts, and emails at the contact info you provide, including via automated technology; consent is not a condition of any purchase, message &amp; data rates may apply, and you may reply STOP to opt out at any time. Results vary and are not typical; nothing here is legal, financial, tax, or insurance advice.
+        </p>
+        <p class="fine">&copy; 2026 BuyIASLeads &middot; Pacific Ridgeway Insurance Solutions.</p>
+    </footer>
+
+    <a href="tel:+16193748100" class="fab">&#128222; Call Gregory</a>
+
+    <script>
+        // ---- Config -------------------------------------------------------
+        // The website is static (GitHub Pages). The secure backend lives on Railway
+        // and holds every API key server-side. The browser only ever talks to it.
+        var RAILWAY_BACKEND = 'https://buyiasleads-production.up.railway.app';
+        var BACKEND_URL = (/\.railway\.app$/.test(location.hostname) || location.hostname === 'localhost' || location.hostname === '127.0.0.1')
+            ? '' : RAILWAY_BACKEND;
+
+        var lead = { firstName: '', email: '', phone: '' };
+
+        function $(id) { return document.getElementById(id); }
+        function showMsg(el, text, kind) { el.textContent = text; el.className = 'msg ' + kind; }
+        function clearMsg(el) { el.textContent = ''; el.className = 'msg'; }
+        function digits(s) { return (s || '').replace(/\D/g, ''); }
+
+        // Fast client-side sanity checks (the server re-checks authoritatively).
+        function phoneLooksReal(raw) {
+            var d = digits(raw);
+            if (d.length === 11 && d[0] === '1') d = d.slice(1);
+            if (d.length !== 10) return false;
+            if (/^(\d)\1{9}$/.test(d)) return false;                 // all same digit
+            if (d === '1234567890' || d === '0123456789') return false;
+            if (d[0] === '0' || d[0] === '1') return false;          // area code can't start 0/1
+            if (d[3] === '0' || d[3] === '1') return false;          // exchange can't start 0/1
+            if (d[1] === '1' && d[2] === '1') return false;          // N11 area codes
+            return true;
+        }
+        function emailLooksReal(e) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e); }
+
+        // ---- Step 1: send the code ---------------------------------------
+        async function startVerify() {
+            var btn = $('btnStart'), msg = $('msg1');
+            clearMsg(msg);
+            var firstName = $('firstName').value.trim();
+            var email = $('email').value.trim();
+            var phone = $('phone').value.trim();
+
+            if (!firstName) { showMsg(msg, 'Please enter your first name.', 'err'); return; }
+            if (!emailLooksReal(email)) { showMsg(msg, 'Please enter a valid email address.', 'err'); return; }
+            if (!phoneLooksReal(phone)) { showMsg(msg, 'Please enter a valid U.S. mobile number.', 'err'); return; }
+            if (!$('consent').checked) { showMsg(msg, 'Please check the consent box so we can text your code.', 'err'); return; }
+
+            lead = { firstName: firstName, email: email, phone: phone };
+            btn.disabled = true;
+            btn.innerHTML = '<span class="spin"></span>Sending your code…';
+            try {
+                var r = await fetch(BACKEND_URL + '/agents/start-verify', {
+                    method: 'POST', headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(lead)
+                });
+                var data = await r.json().catch(function () { return {}; });
+                if (!r.ok || !data.ok) {
+                    showMsg(msg, data.error || 'We could not send a code to that number. Please double-check it.', 'err');
+                    btn.disabled = false; btn.textContent = 'Text me my code →';
+                    return;
+                }
+                // Move to code entry
+                $('phoneEcho').textContent = data.masked || phone;
+                $('step1').classList.add('hidden');
+                $('step2').classList.remove('hidden');
+                $('code').focus();
+            } catch (e) {
+                showMsg(msg, 'Network hiccup — please try again in a moment.', 'err');
+                btn.disabled = false; btn.textContent = 'Text me my code →';
+            }
+        }
+
+        // ---- Step 2: check the code, then (server) save + push to CRM -----
+        async function checkVerify() {
+            var btn = $('btnVerify'), msg = $('msg2');
+            clearMsg(msg);
+            var code = digits($('code').value);
+            if (code.length !== 6) { showMsg(msg, 'Enter the 6-digit code from the text.', 'err'); return; }
+
+            btn.disabled = true;
+            btn.innerHTML = '<span class="spin"></span>Verifying…';
+            try {
+                var r = await fetch(BACKEND_URL + '/agents/check-verify', {
+                    method: 'POST', headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ firstName: lead.firstName, email: lead.email, phone: lead.phone, code: code })
+                });
+                var data = await r.json().catch(function () { return {}; });
+                if (!r.ok || !data.ok) {
+                    // Only ever a failure here — do NOT show success unless the lead truly saved.
+                    showMsg(msg, data.error || 'That code did not match. Please try again.', 'err');
+                    btn.disabled = false; btn.textContent = 'Verify & send my kit →';
+                    return;
+                }
+                // Real success: server verified the code, saved the lead, and pushed to FUB.
+                $('step2').classList.add('hidden');
+                if (data.offerUrl) {
+                    var ol = $('offerLink');
+                    ol.href = data.offerUrl;
+                    ol.style.display = 'block';
+                    ol.classList.remove('hidden');
+                }
+                $('step3').classList.remove('hidden');
+            } catch (e) {
+                showMsg(msg, 'Network hiccup — please try again in a moment.', 'err');
+                btn.disabled = false; btn.textContent = 'Verify & send my kit →';
+            }
+        }
+
+        function backToStep1() {
+            $('step2').classList.add('hidden');
+            $('step1').classList.remove('hidden');
+            clearMsg($('msg2'));
+            var b = $('btnStart'); b.disabled = false; b.textContent = 'Text me my code →';
+        }
+    </script>
+</body>
+</html>
