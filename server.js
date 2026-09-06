@@ -438,7 +438,7 @@ const TWILIO_VERIFY_SERVICE_SID = process.env.TWILIO_VERIFY_SERVICE_SID;
 const FUB_API_KEY = process.env.FUB_API_KEY;
 const FUB_SOURCE = process.env.FUB_SOURCE || 'buyiasleads.com/agents';
 const FUB_TAG = process.env.FUB_TAG || 'BuyIASLeads Agents';
-const AGENT_OFFER_URL = process.env.AGENT_OFFER_URL || ''; // public link to the LOA Escape Kit PDF
+const AGENT_OFFER_URL = process.env.AGENT_OFFER_URL || 'https://buyiasleads.com/loa-escape-kit.pdf'; // public link to the LOA Escape Kit PDF
 
 // Normalize a US number to E.164 (+1XXXXXXXXXX), or null if it can't be one.
 function toE164US(raw) {
