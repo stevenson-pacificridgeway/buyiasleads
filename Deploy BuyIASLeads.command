@@ -21,7 +21,18 @@ git commit -m "Deploy: $(date '+%Y-%m-%d %H:%M:%S')" 2>/dev/null || echo "Nothin
 
 echo
 echo "Pushing to GitHub (this updates the site AND the server)..."
-git push origin main
+# Try the normal push first. If a saved GitHub login has expired, GitHub rejects it
+# non-interactively — so if the push fails, clear that stale saved login and try ONCE more,
+# which prompts fresh (Username = your GitHub username, Password = your access token) and then
+# saves the good one for next time. Once a valid token is saved, this never prompts again.
+if ! git push origin main; then
+  echo
+  echo ">> The saved GitHub login didn't work. Clearing it and trying once more..."
+  echo ">> If it asks:  Username = your GitHub username   |   Password = paste your access token"
+  echo
+  printf "protocol=https\nhost=github.com\n\n" | git credential-osxkeychain erase 2>/dev/null
+  git push origin main
+fi
 
 echo
 echo "------------------------------------------------"
