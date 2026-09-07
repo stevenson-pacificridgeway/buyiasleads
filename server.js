@@ -380,6 +380,18 @@ Notes:      ${notes || '-'}`;
     // Text the owner too (primary notification channel).
     await sendSms(`New intake form: ${fullName}, ${phone}, ${email}. Order: ${leadOrder ? (leadOrder === 'test' ? 'Test' : leadOrder + ' leads') : 'n/a'}. Best time: ${bestTime || '-'}`);
 
+    // Persist to Follow Up Boss so the lead is never lost to just a text/email (best-effort).
+    const _parts = String(fullName).trim().split(/\s+/);
+    pushLeadToFUB(
+      { firstName: _parts[0] || fullName, lastName: _parts.slice(1).join(' '), email, phone: (toE164US(phone) || phone) },
+      {
+        tag: 'BuyIASLeads Intake',
+        source: 'buyiasleads.com/intake',
+        type: 'General Inquiry',
+        message: `Post-purchase intake — order: ${leadOrder ? (leadOrder === 'test' ? 'Test' : leadOrder + ' leads') : 'n/a'}; best time: ${bestTime || '-'}; notes: ${notes || '-'}`
+      }
+    ).catch(() => {});
+
     res.json({ success: true });
   } catch (error) {
     console.error('[INTAKE] error:', error);
@@ -497,21 +509,21 @@ async function twilioVerifyCheck(e164, code) {
 
 // One-way push of a verified lead into Follow Up Boss via the Events API
 // (FUB dedupes, records the source, applies the tag, and can trigger an Action Plan).
-async function pushLeadToFUB(l) {
+async function pushLeadToFUB(l, opts = {}) {
   if (!FUB_API_KEY) { console.warn('[FUB] no API key set - skipping push'); return { ok: false, reason: 'not_configured' }; }
   const creds = Buffer.from(`${FUB_API_KEY}:`).toString('base64');
-  const payload = {
-    source: FUB_SOURCE,
-    system: 'BuyIASLeads',
-    type: 'Registration',
-    message: 'LOA Escape Kit request (phone verified) from ' + FUB_SOURCE,
-    person: {
-      firstName: l.firstName || '',
-      emails: l.email ? [{ value: l.email }] : [],
-      phones: l.phone ? [{ value: l.phone }] : [],
-      tags: [FUB_TAG]
-    }
+  const tag = opts.tag || FUB_TAG;
+  const source = opts.source || FUB_SOURCE;
+  const type = opts.type || 'Registration';
+  const message = opts.message || ('Lead from ' + source);
+  const person = {
+    firstName: l.firstName || '',
+    emails: l.email ? [{ value: l.email }] : [],
+    phones: l.phone ? [{ value: l.phone }] : [],
+    tags: [tag]
   };
+  if (l.lastName) person.lastName = l.lastName;
+  const payload = { source, system: 'BuyIASLeads', type, message, person };
   try {
     const resp = await fetch('https://api.followupboss.com/v1/events', {
       method: 'POST',
