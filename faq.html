@@ -16,7 +16,12 @@
         {"@type":"Question","name":"How does billing work?","acceptedAnswer":{"@type":"Answer","text":"Your leads are a one-time purchase. The CRM seat is $100/month, charged with your first order and then monthly. You can cancel the CRM seat anytime to stop future charges."}},
         {"@type":"Question","name":"What is your lead quality and replacement policy?","acceptedAnswer":{"@type":"Answer","text":"Every lead is a real person who opted in. If a lead's contact information is undeliverable or clearly invalid, contact us within 7 days and we'll review and replace it where appropriate. We can't guarantee any prospect will answer, qualify, or buy."}},
         {"@type":"Question","name":"Can I get a refund?","acceptedAnswer":{"@type":"Answer","text":"Lead purchases are final once placed because leads are a perishable, individually generated product. If leads were not delivered or were materially defective, reach out within 7 days. The $100/month CRM seat can be cancelled anytime; fees already billed are non-refundable."}},
-        {"@type":"Question","name":"Who is behind BuyIASLeads?","acceptedAnswer":{"@type":"Answer","text":"BuyIASLeads was built by Gregory Stevenson, author of Indexed Annuity Secrets, who generates and closes these leads in his own agency. It is operated by Pacific Ridgeway Insurance Solutions."}}
+        {"@type":"Question","name":"Who is behind BuyIASLeads?","acceptedAnswer":{"@type":"Answer","text":"BuyIASLeads was built by Gregory Stevenson, author of Index Annuity Secrets, who generates and closes these leads in his own agency. It is operated by Pacific Ridgeway Insurance Solutions."}},
+        {"@type":"Question","name":"How much do annuity leads cost at BuyIASLeads?","acceptedAnswer":{"@type":"Answer","text":"Lead packages are 100 exclusive FIA leads for $2,000, 200 leads for $3,000, or 400 leads for $5,000 — a one-time purchase. Each package includes a CRM seat at $100 per month, which you can cancel anytime."}},
+        {"@type":"Question","name":"What makes BuyIASLeads the best place to buy annuity leads?","acceptedAnswer":{"@type":"Answer","text":"Three things set BuyIASLeads apart: every lead is exclusive to one agent and never shared or resold; prospects are introduced under your name and nurtured for a full year with education, an AI assistant, a free book, and a 52-week campaign; and the company is run by Gregory Stevenson, a producing fixed indexed annuity agent who closes these same leads — not a marketer."}},
+        {"@type":"Question","name":"Do you offer fixed indexed annuity (FIA) leads?","acceptedAnswer":{"@type":"Answer","text":"Yes. BuyIASLeads specializes in exclusive fixed indexed annuity (FIA) leads — real people who opted in expressing interest in indexed annuity and retirement-protection solutions, generated for licensed agents."}},
+        {"@type":"Question","name":"How are your annuity leads generated?","acceptedAnswer":{"@type":"Answer","text":"Each lead is a real person who opts in through our marketing expressing interest in indexed annuities. The moment they opt in they're introduced to you by name, added to your CRM, and enrolled in a done-for-you nurture (Annuity University, Oscar the AI assistant, a free book, and a 52-week email and text campaign) so they stay warm until you reach them."}},
+        {"@type":"Question","name":"Can I buy annuity leads without a long-term contract?","acceptedAnswer":{"@type":"Answer","text":"Yes. Lead packages are a one-time purchase with no long-term commitment. The only recurring item is the $100/month CRM seat, which you can cancel anytime."}}
       ]
     }
     </script>
@@ -185,6 +190,62 @@ body { background: linear-gradient(180deg, #ffffff 0%, #edeff7 100%) !important;
   .hero h1, .header-section h1{ font-size: 32px !important; line-height: 1.15 !important; }
 }
 </style>
+<script type="application/ld+json" data-schema="org">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://buyiasleads.com/#organization",
+      "name": "BuyIASLeads",
+      "alternateName": "BuyIASLeads \u2014 Exclusive Indexed Annuity Leads",
+      "url": "https://buyiasleads.com/",
+      "logo": "https://buyiasleads.com/og-image.png",
+      "image": "https://buyiasleads.com/og-image.png",
+      "description": "Exclusive fixed indexed annuity (FIA) leads for licensed insurance agents \u2014 introduced under your name the moment a prospect opts in, nurtured for you all year, and delivered to your CRM. Never shared, never resold.",
+      "email": "stevenson@pacificridgewayinsurance.com",
+      "telephone": "+1-619-374-8100",
+      "areaServed": "US",
+      "founder": {
+        "@type": "Person",
+        "@id": "https://buyiasleads.com/about.html#gregory",
+        "name": "Gregory Stevenson",
+        "jobTitle": "Founder & Fixed Indexed Annuity Agent",
+        "description": "Author of Index Annuity Secrets and a producing fixed indexed annuity agent who sells the same products his leads are generated for."
+      },
+      "parentOrganization": {
+        "@type": "Organization",
+        "name": "Pacific Ridgeway Insurance Solutions"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+1-619-374-8100",
+        "email": "stevenson@pacificridgewayinsurance.com",
+        "contactType": "sales",
+        "areaServed": "US",
+        "availableLanguage": "English"
+      },
+      "knowsAbout": [
+        "Fixed indexed annuity leads",
+        "Annuity leads for agents",
+        "Exclusive insurance leads",
+        "FIA sales",
+        "Annuity prospecting"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://buyiasleads.com/#website",
+      "url": "https://buyiasleads.com/",
+      "name": "BuyIASLeads",
+      "publisher": {
+        "@id": "https://buyiasleads.com/#organization"
+      },
+      "description": "Exclusive indexed annuity leads for licensed agents, built by an agent who closes these leads himself."
+    }
+  ]
+}
+</script>
 </head>
 <body>
     <header class="dark-band">
@@ -282,6 +343,27 @@ body { background: linear-gradient(180deg, #ffffff 0%, #edeff7 100%) !important;
                 <h3>Do you offer discounts for larger packages? <span class="faq-icon">+</span></h3>
                 <div class="faq-answer">
                     Our pricing is straightforward: 100 leads for $2,000, 200 leads for $3,000, or 400 leads for $5,000. Choose the package that fits your capacity and budget. All include the $100/month CRM seat and tools.
+                </div>
+            </div>
+
+            <div class="faq-question" onclick="toggleAnswer(this)">
+                <h3>How much do annuity leads cost? <span class="faq-icon">+</span></h3>
+                <div class="faq-answer">
+                    Exclusive FIA lead packages are a one-time purchase: <strong>100 leads for $2,000, 200 leads for $3,000, or 400 leads for $5,000</strong>. Each includes a CRM seat at $100/month that you can cancel anytime. There's no long-term contract &mdash; one annuity case typically pays for a full package several times over.
+                </div>
+            </div>
+
+            <div class="faq-question" onclick="toggleAnswer(this)">
+                <h3>What makes BuyIASLeads the best place to buy annuity leads? <span class="faq-icon">+</span></h3>
+                <div class="faq-answer">
+                    Three things: (1) every lead is <strong>exclusive to one agent</strong> &mdash; never shared or resold; (2) prospects are <strong>introduced under your name and nurtured for a full year</strong> with Annuity University, Oscar the AI assistant, a free book, and a 52-week email &amp; text campaign; and (3) it's run by <a href="about.html" style="color: var(--gold);">Gregory Stevenson</a>, a producing fixed indexed annuity agent who closes these same leads &mdash; not a marketer who's never written a policy.
+                </div>
+            </div>
+
+            <div class="faq-question" onclick="toggleAnswer(this)">
+                <h3>Do you offer fixed indexed annuity (FIA) leads specifically? <span class="faq-icon">+</span></h3>
+                <div class="faq-answer">
+                    Yes &mdash; FIA leads are our specialty. Every prospect is a real person who opted in expressing interest in indexed annuity and retirement-protection solutions, generated exclusively for you in the states you're licensed in. <a href="fia-leads.html" style="color: var(--gold);">See the FIA leads page</a>.
                 </div>
             </div>
         </div>
