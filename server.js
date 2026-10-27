@@ -516,11 +516,13 @@ async function pushLeadToFUB(l, opts = {}) {
   const source = opts.source || FUB_SOURCE;
   const type = opts.type || 'Registration';
   const message = opts.message || ('Lead from ' + source);
+  // Base tag + any extra tags (e.g. the licensed/getting-licensed qualifier), de-duped.
+  const tags = [tag].concat(Array.isArray(opts.extraTags) ? opts.extraTags : []).filter(Boolean);
   const person = {
     firstName: l.firstName || '',
     emails: l.email ? [{ value: l.email }] : [],
     phones: l.phone ? [{ value: l.phone }] : [],
-    tags: [tag]
+    tags: Array.from(new Set(tags))
   };
   if (l.lastName) person.lastName = l.lastName;
   const payload = { source, system: 'BuyIASLeads', type, message, person };
@@ -570,16 +572,20 @@ app.post('/agents/start-verify', verifyLimiter, async (req, res) => {
 // Step 2: check the code; ONLY on approval do we save + push to Follow Up Boss.
 app.post('/agents/check-verify', verifyLimiter, async (req, res) => {
   try {
-    const { firstName, email, phone, code } = req.body || {};
+    const { firstName, email, phone, licensed, code } = req.body || {};
     const e164 = toE164US(phone);
     if (!e164 || !/^\d{6}$/.test(String(code || ''))) return res.status(400).json({ ok: false, error: 'Enter the 6-digit code from the text.' });
     const check = await twilioVerifyCheck(e164, String(code));
     if (!check.ok || check.status !== 'approved') {
       return res.status(400).json({ ok: false, error: 'That code did not match or has expired. Please try again.' });
     }
+    // Normalize the qualifier into a FUB tag so licensed, ready-to-buy agents are separable.
+    const licTag = licensed === 'Licensed' ? 'Licensed Agent'
+                 : licensed === 'Getting licensed' ? 'Getting Licensed'
+                 : null;
     // Verified. The push to Follow Up Boss IS the save.
-    const fub = await pushLeadToFUB({ firstName, email, phone: e164 });
-    sendSms(`New verified agent lead: ${firstName || '—'} (${email}, ${e164}) via ${FUB_SOURCE}`).catch(() => {});
+    const fub = await pushLeadToFUB({ firstName, email, phone: e164 }, { extraTags: licTag ? [licTag] : [] });
+    sendSms(`New verified agent lead: ${firstName || '—'} (${email}, ${e164}${licTag ? ', ' + licTag : ''}) via ${FUB_SOURCE}`).catch(() => {});
     if (!fub.ok) {
       // Honest failure: the number verified but the CRM save failed. We already texted the
       // owner above so the lead isn't lost, but we do NOT report a clean success to the page.

@@ -351,6 +351,14 @@ window.addEventListener('message',function(e){if(e.data&&e.data.event==='calendl
                             <label for="phone">Mobile phone</label>
                             <input type="tel" id="phone" autocomplete="tel" placeholder="(555) 123-4567">
                         </div>
+                        <div class="field">
+                            <label for="licensed">Are you currently licensed to sell life/annuity?</label>
+                            <select id="licensed">
+                                <option value="">Select one&hellip;</option>
+                                <option value="Licensed">Yes, I'm licensed</option>
+                                <option value="Getting licensed">Not yet &mdash; getting licensed</option>
+                            </select>
+                        </div>
                         <div class="consent">
                             <input type="checkbox" id="consent">
                             <label for="consent">By submitting, I agree to receive calls, texts &amp; emails from BuyIASLeads / Pacific Ridgeway Insurance Solutions at the number and email provided, including via automated technology. Consent is not a condition of purchase. Msg &amp; data rates may apply. Reply STOP to opt out. See our <a href="terms.html" target="_blank" style="color:var(--indigo);">Privacy Policy</a>.</label>
@@ -453,7 +461,7 @@ window.addEventListener('message',function(e){if(e.data&&e.data.event==='calendl
         var BACKEND_URL = (/\.railway\.app$/.test(location.hostname) || location.hostname === 'localhost' || location.hostname === '127.0.0.1')
             ? '' : RAILWAY_BACKEND;
 
-        var lead = { firstName: '', email: '', phone: '' };
+        var lead = { firstName: '', email: '', phone: '', licensed: '' };
 
         function $(id) { return document.getElementById(id); }
         function showMsg(el, text, kind) { el.textContent = text; el.className = 'msg ' + kind; }
@@ -481,13 +489,15 @@ window.addEventListener('message',function(e){if(e.data&&e.data.event==='calendl
             var firstName = $('firstName').value.trim();
             var email = $('email').value.trim();
             var phone = $('phone').value.trim();
+            var licensed = $('licensed').value;
 
             if (!firstName) { showMsg(msg, 'Please enter your first name.', 'err'); return; }
             if (!emailLooksReal(email)) { showMsg(msg, 'Please enter a valid email address.', 'err'); return; }
             if (!phoneLooksReal(phone)) { showMsg(msg, 'Please enter a valid U.S. mobile number.', 'err'); return; }
+            if (!licensed) { showMsg(msg, 'Please let us know if you are licensed yet.', 'err'); return; }
             if (!$('consent').checked) { showMsg(msg, 'Please check the consent box so we can text your code.', 'err'); return; }
 
-            lead = { firstName: firstName, email: email, phone: phone };
+            lead = { firstName: firstName, email: email, phone: phone, licensed: licensed };
             btn.disabled = true;
             btn.innerHTML = '<span class="spin"></span>Sending your code…';
             try {
@@ -524,7 +534,7 @@ window.addEventListener('message',function(e){if(e.data&&e.data.event==='calendl
             try {
                 var r = await fetch(BACKEND_URL + '/agents/check-verify', {
                     method: 'POST', headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ firstName: lead.firstName, email: lead.email, phone: lead.phone, code: code })
+                    body: JSON.stringify({ firstName: lead.firstName, email: lead.email, phone: lead.phone, licensed: lead.licensed, code: code })
                 });
                 var data = await r.json().catch(function () { return {}; });
                 if (!r.ok || !data.ok) {
@@ -534,6 +544,12 @@ window.addEventListener('message',function(e){if(e.data&&e.data.event==='calendl
                     return;
                 }
                 // Real success: server verified the code, saved the lead, and pushed to FUB.
+                // Fire the conversion HERE (verified real agent) — not on raw submit — so the ads
+                // optimize for agents who give a real number and verify, not form-fills/fakes.
+                try { if (window.fbq) fbq('track','Lead',{content_name:'buyiasleads-agent-verified',content_category:'agent'}); } catch(x){}
+                try { if (window.fbq) fbq('trackCustom','AgentVerified',{source:'buyiasleads-agents'}); } catch(x){}
+                try { if (window.gtag) gtag('event','agent_verified',{event_category:'lead',event_label:'buyiasleads-agents'}); } catch(x){}
+                try { if (window.prTrack) window.prTrack('generate_lead',{lead_source:'buyiasleads-agent-verified',site:location.hostname}); } catch(x){}
                 $('step2').classList.add('hidden');
                 if (data.offerUrl) {
                     var ol = $('offerLink');
