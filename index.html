@@ -398,6 +398,16 @@ window.addEventListener('message',function(e){if(e.data&&e.data.event==='calendl
         </div>
         </section>
 
+        <!-- TRUST STRIP -->
+        <section style="background:#f8f9fb; border-top:1px solid var(--border-color); border-bottom:1px solid var(--border-color); padding:18px 20px;">
+            <div style="max-width:1100px; margin:0 auto; display:flex; flex-wrap:wrap; justify-content:center; gap:14px 34px; font-size:14px; color:var(--text-secondary); font-weight:600;">
+                <span>&#10003; One agent per lead &mdash; exclusive</span>
+                <span>&#10003; 100% opt-in, consent on every lead</span>
+                <span>&#128274; Secure checkout by Stripe</span>
+                <span>&#10003; Operated by Pacific Ridgeway (Horizon Inc)</span>
+            </div>
+        </section>
+
         <!-- WHY: pick two -->
         <section id="why" style="max-width:1200px; margin:0 auto; padding:80px 40px 10px;">
             <div style="text-align:center; margin-bottom:38px;">
@@ -528,6 +538,60 @@ window.addEventListener('message',function(e){if(e.data&&e.data.event==='calendl
                 <p style="font-size:16px; color:var(--text-secondary); max-width:740px; margin:0 auto;">Every lead is exclusive to one agent and never shared or resold. If a lead comes through with a disconnected or invalid number, we replace it &mdash; so you only pay for real, reachable prospects. No long-term contract; your CRM seat can be cancelled anytime.</p>
             </div>
         </section>
+
+        <!-- ROI CALCULATOR -->
+        <section style="max-width:920px; margin:0 auto; padding:50px 40px 10px;">
+            <div style="text-align:center; margin-bottom:24px;">
+                <div style="font-size:13px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--gold); margin-bottom:10px;">Run your numbers</div>
+                <h2 style="font-family:'Crimson Text',serif; font-size:32px; margin-bottom:10px; color:var(--text-primary);">See what exclusive leads can return.</h2>
+                <p style="font-size:15px; color:var(--text-secondary); max-width:640px; margin:0 auto;">Set these to your business. Figures are estimates for illustration only &mdash; results vary and are not typical.</p>
+            </div>
+            <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:22px; align-items:stretch;">
+                <div style="background:#f8f9fb; border:1px solid var(--border-color); border-radius:14px; padding:26px;">
+                    <label for="roiPkg" style="display:block; font-weight:700; font-size:14px; color:var(--text-primary); margin-bottom:6px;">Lead package</label>
+                    <select id="roiPkg" style="width:100%; padding:10px; border:1px solid var(--border-color); border-radius:8px; margin-bottom:18px;">
+                        <option value="100">100 leads &mdash; $2,000</option>
+                        <option value="200" selected>200 leads &mdash; $3,000</option>
+                        <option value="400">400 leads &mdash; $5,000</option>
+                    </select>
+                    <label for="roiComm" style="display:block; font-weight:700; font-size:14px; color:var(--text-primary); margin-bottom:6px;">Your average commission per issued annuity ($)</label>
+                    <input id="roiComm" type="number" value="5000" min="0" step="500" style="width:100%; padding:10px; border:1px solid var(--border-color); border-radius:8px; margin-bottom:18px;">
+                    <label for="roiClose" style="display:block; font-weight:700; font-size:14px; color:var(--text-primary); margin-bottom:6px;">Your close rate: <span id="roiCloseVal" style="color:var(--gold);">4%</span></label>
+                    <input id="roiClose" type="range" min="1" max="15" value="4" style="width:100%;">
+                </div>
+                <div style="background:var(--navy,#17173a); border-radius:14px; padding:26px; color:#ffffff;">
+                    <div style="display:flex; justify-content:space-between; padding:9px 0; border-bottom:1px solid rgba(255,255,255,0.12);"><span style="color:#cdd0ea;">Estimated issued cases</span><b id="roiCases">8</b></div>
+                    <div style="display:flex; justify-content:space-between; padding:9px 0; border-bottom:1px solid rgba(255,255,255,0.12);"><span style="color:#cdd0ea;">Estimated commission</span><b id="roiRev">$40,000</b></div>
+                    <div style="display:flex; justify-content:space-between; padding:9px 0; border-bottom:1px solid rgba(255,255,255,0.12);"><span style="color:#cdd0ea;">Your lead cost</span><b id="roiCost">$3,000</b></div>
+                    <div style="display:flex; justify-content:space-between; padding:9px 0; border-bottom:1px solid rgba(255,255,255,0.12);"><span style="color:#cdd0ea;">Estimated net</span><b id="roiNet" style="color:#2dd496;">$37,000</b></div>
+                    <div style="display:flex; justify-content:space-between; padding:14px 0 2px; font-size:18px;"><span>Return on spend</span><b id="roiX" style="color:#2dd496;">13.3x</b></div>
+                    <a href="#pricing" style="display:block; text-align:center; margin-top:16px; background:#2dd496; color:#0e2a1f; padding:12px; border-radius:8px; text-decoration:none; font-weight:700;">Get these leads &rarr;</a>
+                </div>
+            </div>
+        </section>
+        <script>
+        (function(){
+            var pkg={"100":{leads:100,cost:2000},"200":{leads:200,cost:3000},"400":{leads:400,cost:5000}};
+            function money(n){return "$"+Math.round(n).toLocaleString();}
+            function el(id){return document.getElementById(id);}
+            function calc(){
+                var p=pkg[el('roiPkg').value]||pkg["200"];
+                var comm=parseFloat(el('roiComm').value)||0;
+                var close=parseFloat(el('roiClose').value)||0;
+                el('roiCloseVal').textContent=close+'%';
+                var cases=p.leads*close/100;
+                var rev=cases*comm;
+                var net=rev-p.cost;
+                el('roiCases').textContent=(cases<10?cases.toFixed(1):Math.round(cases));
+                el('roiRev').textContent=money(rev);
+                el('roiCost').textContent=money(p.cost);
+                el('roiNet').textContent=money(net);
+                el('roiX').textContent=(p.cost>0?(rev/p.cost).toFixed(1):'0')+'x';
+            }
+            ['roiPkg','roiComm','roiClose'].forEach(function(id){var e=el(id);if(e){e.addEventListener('input',calc);e.addEventListener('change',calc);}});
+            calc();
+        })();
+        </script>
 
         <section style="max-width: 1400px; margin: 0 auto; padding: 80px 40px;">
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
