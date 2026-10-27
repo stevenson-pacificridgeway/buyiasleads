@@ -377,6 +377,12 @@ window.addEventListener('message',function(e){if(e.data&&e.data.event==='calendl
                     fbq('track', 'Purchase', { value: (values[pkg] || 0), currency: 'USD' });
                 }
             } catch (e) {}
+            // GA4 purchase event alongside the Meta Purchase.
+            try {
+                var gvalues = { test: 2, crmonly: 103, '100': 2163, '200': 3193, '400': 5253,
+                                '100-renewal': 2060, '200-renewal': 3090, '400-renewal': 5150 };
+                if (window.gtag) gtag('event', 'purchase', { value: (gvalues[pkg] || 0), currency: 'USD', transaction_id: (pkg || 'order') + '-' + Date.now(), items: [{ item_id: 'leads-' + (pkg || '') }] });
+            } catch (e) {}
         })();
     </script>
 </body>

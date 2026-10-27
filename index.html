@@ -741,5 +741,23 @@ body{padding-bottom:70px;}
     <a href="#pricing" class="sc-primary">Get Leads</a>
     <a href="https://calendly.com/gregorystevenson/1-on-1-with-gregory-stevenson-30-min" class="sc-secondary">Book a Call</a>
 </div>
+<script>
+/* Funnel events: powers ad optimization toward buyers + the retargeting audience (viewed pricing / started checkout, didn't buy). Purchase fires on success.html. */
+(function(){
+    var vals={"100":2000,"200":3000,"400":5000};
+    document.addEventListener('click',function(e){
+        var a=e.target&&e.target.closest?e.target.closest('a[href*="checkout.html"]'):null;
+        if(!a)return;
+        var m=(a.getAttribute('href')||'').match(/package=(\w+)/);var pkg=m?m[1]:'';
+        try{if(window.fbq)fbq('track','InitiateCheckout',{value:(vals[pkg]||0),currency:'USD',content_name:'package-'+pkg});}catch(x){}
+        try{if(window.gtag)gtag('event','begin_checkout',{value:(vals[pkg]||0),currency:'USD',items:[{item_id:'leads-'+pkg}]});}catch(x){}
+    },true);
+    var fired=false,pr=document.getElementById('pricing');
+    if(pr&&'IntersectionObserver' in window){
+        var io=new IntersectionObserver(function(ents){ents.forEach(function(en){if(en.isIntersecting&&!fired){fired=true;try{if(window.fbq)fbq('track','ViewContent',{content_name:'pricing',content_category:'buyiasleads'});}catch(x){}try{if(window.gtag)gtag('event','view_pricing');}catch(x){}io.disconnect();}});},{threshold:0.4});
+        io.observe(pr);
+    }
+})();
+</script>
 </body>
 </html>
