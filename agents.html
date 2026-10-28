@@ -511,6 +511,15 @@ window.addEventListener('message',function(e){if(e.data&&e.data.event==='calendl
                     btn.disabled = false; btn.textContent = 'Text me my code →';
                     return;
                 }
+                // No SMS code needed (server saved the lead right away) -> straight to success.
+                if (data.verified) {
+                    try { if (window.fbq) fbq('track','Lead',{content_name:'buyiasleads-agent',content_category:'agent'}); } catch(x){}
+                    try { if (window.gtag) gtag('event','generate_lead',{event_category:'lead',event_label:'buyiasleads-agents'}); } catch(x){}
+                    $('step1').classList.add('hidden');
+                    if (data.offerUrl) { var ol0 = $('offerLink'); ol0.href = data.offerUrl; ol0.style.display = 'block'; ol0.classList.remove('hidden'); }
+                    $('step3').classList.remove('hidden');
+                    return;
+                }
                 // Move to code entry
                 $('phoneEcho').textContent = data.masked || phone;
                 $('step1').classList.add('hidden');

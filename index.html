@@ -530,6 +530,55 @@ window.addEventListener('message',function(e){if(e.data&&e.data.event==='calendl
             </div>
         </section>
 
+        <!-- GET PRICING / SAMPLE LEADS (lead-buyer capture -> Lead Hub -> Follow Up Boss #170) -->
+        <section id="get-pricing" style="max-width:760px; margin:10px auto 0; padding:40px 24px;">
+            <div style="background:#fff; border:2px solid var(--gold,#C9A227); border-radius:14px; padding:30px 26px; box-shadow:0 6px 24px rgba(11,37,69,.08);">
+                <h2 style="margin:0 0 6px; text-align:center;">Not ready to buy yet? Get pricing &amp; sample leads.</h2>
+                <p style="margin:0 0 18px; text-align:center; color:#555;">Tell us where you're licensed and we'll send the full breakdown, a sample lead, and agency / custom pricing. No setup fee. No obligation.</p>
+                <form id="buyerForm" novalidate style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+                    <input name="firstName" placeholder="First name" autocomplete="given-name" required style="padding:12px; border:1px solid #d9dee5; border-radius:8px; font-size:15px;">
+                    <input name="lastName" placeholder="Last name" autocomplete="family-name" style="padding:12px; border:1px solid #d9dee5; border-radius:8px; font-size:15px;">
+                    <input name="email" type="email" placeholder="Email" autocomplete="email" required style="padding:12px; border:1px solid #d9dee5; border-radius:8px; font-size:15px;">
+                    <input name="phone" type="tel" placeholder="Mobile phone" autocomplete="tel" required style="padding:12px; border:1px solid #d9dee5; border-radius:8px; font-size:15px;">
+                    <input name="state" placeholder="State(s) you're licensed in" style="padding:12px; border:1px solid #d9dee5; border-radius:8px; font-size:15px;">
+                    <select name="volume" style="padding:12px; border:1px solid #d9dee5; border-radius:8px; font-size:15px; background:#fff;">
+                        <option value="">How many leads?</option>
+                        <option>100 leads</option><option>200 leads</option><option>400 leads</option>
+                        <option>Agency / team pricing</option><option>Custom-built leads</option>
+                    </select>
+                    <input name="website" tabindex="-1" autocomplete="off" style="position:absolute; left:-9999px;" aria-hidden="true">
+                    <label style="grid-column:1/-1; font-size:12px; color:#666; display:flex; gap:8px; align-items:flex-start;">
+                        <input type="checkbox" name="consent" style="margin-top:2px;">
+                        <span>I agree to receive calls, texts &amp; emails from BuyIASLeads / Pacific Ridgeway Insurance Solutions at the number and email provided, including via automated technology. Consent is not a condition of purchase. Msg &amp; data rates may apply. Reply STOP to opt out.</span>
+                    </label>
+                    <button type="submit" id="buyerBtn" style="grid-column:1/-1; padding:14px; font-size:16px; font-weight:700; border:0; border-radius:8px; background:var(--navy,#17173a); color:#fff; cursor:pointer;">Send me pricing &amp; a sample lead &rarr;</button>
+                    <div id="buyerMsg" style="grid-column:1/-1; text-align:center; font-size:14px;"></div>
+                </form>
+            </div>
+        </section>
+        <script>
+        (function(){
+          var f=document.getElementById('buyerForm'); if(!f) return;
+          var API=(/\.railway\.app$/.test(location.hostname)||location.hostname==='localhost')?'':'https://buyiasleads-production.up.railway.app';
+          f.addEventListener('submit', async function(e){
+            e.preventDefault();
+            var m=document.getElementById('buyerMsg'), b=document.getElementById('buyerBtn');
+            var d={}; new FormData(f).forEach(function(v,k){d[k]=v;}); d.consent=f.consent.checked;
+            if(!d.firstName||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(d.email||'')||String(d.phone||'').replace(/\D/g,'').length<10){m.style.color='#b42318';m.textContent='Please add your first name, a valid email and a 10-digit mobile number.';return;}
+            if(!d.consent){m.style.color='#b42318';m.textContent='Please check the consent box so we can send your pricing.';return;}
+            b.disabled=true; b.textContent='Sending…';
+            try{
+              var r=await fetch(API+'/buyer-lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(d)});
+              var j=await r.json().catch(function(){return {};});
+              if(!r.ok||!j.ok) throw new Error(j.error||'error');
+              try{ if(window.fbq) fbq('track','Lead',{content_name:'buyiasleads-buyer',content_category:'lead-buyer'}); }catch(x){}
+              try{ if(window.gtag) gtag('event','generate_lead',{event_category:'lead',event_label:'buyiasleads-buyer'}); }catch(x){}
+              f.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:10px 0;"><h3 style="margin:0 0 8px;">Got it — check your email.</h3><p style="margin:0 0 14px;color:#555;">Your pricing and package details are on the way. Want to talk now?</p><a href="https://calendly.com/gregorystevenson/1-on-1-with-greg" style="display:inline-block;background:var(--gold,#C9A227);color:#0B2545;padding:12px 22px;border-radius:8px;font-weight:700;text-decoration:none;">Book a call with Gregory Stevenson &rarr;</a></div>';
+            }catch(err){ b.disabled=false; b.innerHTML='Send me pricing &amp; a sample lead &rarr;'; m.style.color='#b42318'; m.textContent=(err&&err.message&&err.message!=='error')?err.message:'Something went wrong — please try again or call 619-374-8100.'; }
+          });
+        })();
+        </script>
+
         <!-- GUARANTEE -->
         <section style="max-width:1000px; margin:0 auto; padding:40px 40px 10px;">
             <div style="background:#f3fbf7; border:1px solid #2dd496; border-radius:14px; padding:34px; text-align:center;">

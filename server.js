@@ -509,8 +509,39 @@ async function twilioVerifyCheck(e164, code) {
 
 // One-way push of a verified lead into Follow Up Boss via the Events API
 // (FUB dedupes, records the source, applies the tag, and can trigger an Action Plan).
+// Lead Hub intake (no API key needed). The hub creates/updates the person in Follow Up Boss,
+// applies its source tags + the tags we pass, alerts Gregory, and logs the lead. Used whenever
+// FUB_API_KEY is not set on this server (it isn't, as of 27 Oct 2026).
+const HUB_INTAKE_URL = process.env.HUB_INTAKE_URL || 'https://lead-hub-production-afbe.up.railway.app/intake';
+async function pushLeadToHub(l, opts = {}) {
+  const body = {
+    first_name: l.firstName || '', last_name: l.lastName || '',
+    email: l.email || '', phone: l.phone || '',
+    source: opts.hubSource || 'buyiasleads',
+    site: 'buyiasleads.com',
+    page_url: opts.pageUrl || 'https://buyiasleads.com/',
+    tags: Array.from(new Set((opts.tags || []).filter(Boolean))),
+    message: opts.message || '',
+    consent: opts.consent ? 'yes' : undefined,
+    consent_source: opts.consent ? (opts.consentSource || 'buyiasleads.com form') : undefined
+  };
+  try {
+    const resp = await fetch(HUB_INTAKE_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+    const data = await resp.json().catch(() => ({}));
+    if (resp.ok && data.ok) { console.log('[HUB] lead pushed', data.source || '', data.fub_status || ''); return { ok: true }; }
+    console.error(`[HUB] error ${resp.status}: ${JSON.stringify(data).slice(0, 300)}`);
+    return { ok: false, reason: `hub_${resp.status}` };
+  } catch (e) {
+    console.error('[HUB] push failed:', e.message);
+    return { ok: false, reason: 'hub_exception' };
+  }
+}
+
 async function pushLeadToFUB(l, opts = {}) {
-  if (!FUB_API_KEY) { console.warn('[FUB] no API key set - skipping push'); return { ok: false, reason: 'not_configured' }; }
+  if (!FUB_API_KEY) {
+    const tags = [opts.tag || FUB_TAG].concat(Array.isArray(opts.extraTags) ? opts.extraTags : []);
+    return pushLeadToHub(l, { hubSource: opts.hubSource, tags, message: opts.message, consent: opts.consent, pageUrl: opts.pageUrl });
+  }
   const creds = Buffer.from(`${FUB_API_KEY}:`).toString('base64');
   const tag = opts.tag || FUB_TAG;
   const source = opts.source || FUB_SOURCE;
@@ -542,6 +573,46 @@ async function pushLeadToFUB(l, opts = {}) {
   }
 }
 
+// Kit (recruiting) leads: route to the LOA recruiting bucket so they get the LOA Escape Kit
+// + 10-email recruiting sequence in Follow Up Boss (FUB automations trigger on tag 'LOA Website').
+function AGENT_KIT_OPTS(licTag) {
+  return { hubSource: 'loastayaway', extraTags: ['LOA Website', 'BuyIASLeads Agents'].concat(licTag ? [licTag] : []),
+           message: 'LOA Escape Kit request from buyiasleads.com/agents' + (licTag ? ' (' + licTag + ')' : ''),
+           consent: true, pageUrl: 'https://buyiasleads.com/agents.html' };
+}
+
+// Lead BUYERS: "Get pricing & sample leads" form on the home page. Goes to the Lead Hub with
+// source buyiasleads + tag 'BuyIASLeads' -> starts FUB automation #170 (10 emails / 21 days).
+app.post('/buyer-lead', verifyLimiter, async (req, res) => {
+  try {
+    const b = req.body || {};
+    if (b.website || b._hp) return res.json({ ok: true }); // honeypot
+    const firstName = String(b.firstName || '').trim().slice(0, 80);
+    const lastName = String(b.lastName || '').trim().slice(0, 80);
+    const email = String(b.email || '').trim().slice(0, 200);
+    const phone = String(b.phone || '').trim();
+    if (!firstName) return res.status(400).json({ ok: false, error: 'First name is required.' });
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return res.status(400).json({ ok: false, error: 'A valid email is required.' });
+    const reason = phoneRejectionReason(phone);
+    if (reason) return res.status(400).json({ ok: false, error: reason });
+    const e164 = toE164US(phone);
+    const state = String(b.state || '').trim().slice(0, 40);
+    const volume = String(b.volume || '').trim().slice(0, 40);
+    const consent = b.consent === true || b.consent === 'yes' || b.consent === 'on';
+    const msg = ['Website lead-buyer request (buyiasleads.com)', state && ('State(s): ' + state), volume && ('Interested in: ' + volume)].filter(Boolean).join('\n');
+    const r = await pushLeadToHub({ firstName, lastName, email, phone: e164 }, {
+      hubSource: 'buyiasleads', tags: ['BuyIASLeads', 'BuyIASLeads Website', 'Lead Buyer'],
+      message: msg, consent, consentSource: 'buyiasleads.com pricing form', pageUrl: 'https://buyiasleads.com/#get-pricing'
+    });
+    sendSms(`New lead-buyer (website): ${firstName} ${lastName} (${email}, ${e164}) ${state} ${volume}`).catch(() => {});
+    if (!r.ok) return res.status(502).json({ ok: false, error: 'We hit a snag saving your info. Please call 619-374-8100.' });
+    return res.json({ ok: true });
+  } catch (e) {
+    console.error('[BUYER] exception:', e.message);
+    return res.status(500).json({ ok: false, error: 'Something went wrong. Please try again.' });
+  }
+});
+
 // Step 1: validate the details + fake-number checks, then send the 6-digit code.
 app.post('/agents/start-verify', verifyLimiter, async (req, res) => {
   try {
@@ -553,8 +624,17 @@ app.post('/agents/start-verify', verifyLimiter, async (req, res) => {
     const e164 = toE164US(phone);
     if (!e164) return res.status(400).json({ ok: false, error: 'Please enter a valid U.S. mobile number.' });
     if (!TWILIO_ACCOUNT_SID || !TWILIO_AUTH_TOKEN || !TWILIO_VERIFY_SERVICE_SID) {
-      console.warn('[VERIFY] Twilio Verify not configured (need TWILIO_VERIFY_SERVICE_SID)');
-      return res.status(503).json({ ok: false, error: 'Verification is temporarily unavailable. Please call us instead.' });
+      // No SMS-code service configured: don't block the visitor — save the lead now
+      // (the number already passed the fake-number checks above).
+      const { licensed } = req.body || {};
+      const licTag = licensed === 'Licensed' ? 'Licensed Agent' : licensed === 'Getting licensed' ? 'Getting Licensed' : null;
+      const fub = await pushLeadToFUB({ firstName, email, phone: e164 }, AGENT_KIT_OPTS(licTag));
+      sendSms(`New agent lead (kit): ${firstName || '—'} (${email}, ${e164}${licTag ? ', ' + licTag : ''}) via buyiasleads.com/agents`).catch(() => {});
+      if (!fub.ok) {
+        console.error('[AGENTS] save failed (no-verify path):', fub.reason);
+        return res.status(502).json({ ok: false, error: 'We hit a snag saving your info. Please book a call or call 619-374-8100.' });
+      }
+      return res.json({ ok: true, verified: true, offerUrl: AGENT_OFFER_URL || undefined });
     }
     const resp = await twilioVerifyStart(e164);
     if (!resp.ok) {
@@ -584,7 +664,7 @@ app.post('/agents/check-verify', verifyLimiter, async (req, res) => {
                  : licensed === 'Getting licensed' ? 'Getting Licensed'
                  : null;
     // Verified. The push to Follow Up Boss IS the save.
-    const fub = await pushLeadToFUB({ firstName, email, phone: e164 }, { extraTags: licTag ? [licTag] : [] });
+    const fub = await pushLeadToFUB({ firstName, email, phone: e164 }, AGENT_KIT_OPTS(licTag));
     sendSms(`New verified agent lead: ${firstName || '—'} (${email}, ${e164}${licTag ? ', ' + licTag : ''}) via ${FUB_SOURCE}`).catch(() => {});
     if (!fub.ok) {
       // Honest failure: the number verified but the CRM save failed. We already texted the
