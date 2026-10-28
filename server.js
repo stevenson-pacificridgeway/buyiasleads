@@ -518,8 +518,10 @@ async function pushLeadToHub(l, opts = {}) {
     first_name: l.firstName || '', last_name: l.lastName || '',
     email: l.email || '', phone: l.phone || '',
     source: opts.hubSource || 'buyiasleads',
-    site: 'buyiasleads.com',
-    page_url: opts.pageUrl || 'https://buyiasleads.com/',
+    // The hub picks the bucket from the page/site domain first, so recruit (LOA kit) leads
+    // must carry a loastayaway.com address or they get filed as lead buyers + sent the pricing text.
+    site: opts.hubSource === 'loastayaway' ? 'loastayaway.com' : 'buyiasleads.com',
+    page_url: opts.hubSource === 'loastayaway' ? 'https://loastayaway.com/?via=agents-page' : (opts.pageUrl || 'https://buyiasleads.com/'),
     tags: Array.from(new Set((opts.tags || []).filter(Boolean))),
     message: opts.message || '',
     consent: opts.consent ? 'yes' : undefined,
@@ -540,7 +542,7 @@ async function pushLeadToHub(l, opts = {}) {
 async function pushLeadToFUB(l, opts = {}) {
   if (!FUB_API_KEY) {
     const tags = [opts.tag || FUB_TAG].concat(Array.isArray(opts.extraTags) ? opts.extraTags : []);
-    return pushLeadToHub(l, { hubSource: opts.hubSource, tags, message: opts.message, consent: opts.consent, pageUrl: opts.pageUrl });
+    return pushLeadToHub(l, { hubSource: opts.hubSource, tags, message: opts.message, consent: opts.consent, consentSource: opts.consentSource, pageUrl: opts.pageUrl });
   }
   const creds = Buffer.from(`${FUB_API_KEY}:`).toString('base64');
   const tag = opts.tag || FUB_TAG;
@@ -576,9 +578,11 @@ async function pushLeadToFUB(l, opts = {}) {
 // Kit (recruiting) leads: route to the LOA recruiting bucket so they get the LOA Escape Kit
 // + 10-email recruiting sequence in Follow Up Boss (FUB automations trigger on tag 'LOA Website').
 function AGENT_KIT_OPTS(licTag) {
-  return { hubSource: 'loastayaway', extraTags: ['LOA Website', 'BuyIASLeads Agents'].concat(licTag ? [licTag] : []),
-           message: 'LOA Escape Kit request from buyiasleads.com/agents' + (licTag ? ' (' + licTag + ')' : ''),
-           consent: true, pageUrl: 'https://buyiasleads.com/agents.html' };
+  // NOTE: the Lead Hub files ANY lead whose details mention "buyias" under the BuyIASLeads (lead-buyer)
+  // bucket, which sends the pricing text. So nothing in a kit lead may contain that word.
+  return { hubSource: 'loastayaway', tag: 'Agents Page Kit', extraTags: ['LOA Website'].concat(licTag ? [licTag] : []),
+           message: 'LOA Escape Kit request from the agents page' + (licTag ? ' (' + licTag + ')' : ''),
+           consent: true, consentSource: 'agents page kit form' };
 }
 
 // Lead BUYERS: "Get pricing & sample leads" form on the home page. Goes to the Lead Hub with
